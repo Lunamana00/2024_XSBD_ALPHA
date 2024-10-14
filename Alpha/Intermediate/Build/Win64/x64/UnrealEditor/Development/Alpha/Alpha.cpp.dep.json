@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "c:\\git\\2024_xsbd_alpha\\alpha\\source\\alpha\\alpha.cpp",
+        "ProvidedModule": "",
+        "PCH": "c:\\git\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\alphaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "c:\\git\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\alpha\\definitions.alpha.h",
+            "c:\\git\\2024_xsbd_alpha\\alpha\\source\\alpha\\alpha.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
