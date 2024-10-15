@@ -1,0 +1,14 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\unrealeditor\\inc\\alpha\\uht\\fractelementtype.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\alphaeditor\\debuggame\\unrealed\\sharedpch.unrealed.project.nonoptimized.valapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\unrealeditor\\debuggame\\alpha\\definitions.alpha.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\enums\\fractelementtype.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

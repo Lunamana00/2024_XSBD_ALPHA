@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define ALPHA_AlphaGameMode_generated_h
 
-#define FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_12_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_AlphaGameMode_h_12_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAAlphaGameMode(); \
 	friend struct Z_Construct_UClass_AAlphaGameMode_Statics; \
@@ -23,7 +23,7 @@ public: \
 	DECLARE_SERIALIZER(AAlphaGameMode)
 
 
-#define FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_12_ENHANCED_CONSTRUCTORS \
+#define FID_Alpha_Source_Alpha_AlphaGameMode_h_12_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AAlphaGameMode(AAlphaGameMode&&); \
@@ -35,12 +35,12 @@ public: \
 	ALPHA_API virtual ~AAlphaGameMode();
 
 
-#define FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_9_PROLOG
-#define FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_12_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_AlphaGameMode_h_9_PROLOG
+#define FID_Alpha_Source_Alpha_AlphaGameMode_h_12_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_12_INCLASS_NO_PURE_DECLS \
-	FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_12_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_AlphaGameMode_h_12_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_AlphaGameMode_h_12_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
@@ -48,7 +48,7 @@ PRAGMA_ENABLE_DEPRECATION_WARNINGS
 template<> ALPHA_API UClass* StaticClass<class AAlphaGameMode>();
 
 #undef CURRENT_FILE_ID
-#define CURRENT_FILE_ID FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h
+#define CURRENT_FILE_ID FID_Alpha_Source_Alpha_AlphaGameMode_h
 
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

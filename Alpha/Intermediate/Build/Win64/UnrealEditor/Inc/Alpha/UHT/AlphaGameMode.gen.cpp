@@ -78,14 +78,14 @@ AAlphaGameMode::~AAlphaGameMode() {}
 // End Class AAlphaGameMode
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_Statics
+struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_AlphaGameMode_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_AAlphaGameMode, AAlphaGameMode::StaticClass, TEXT("AAlphaGameMode"), &Z_Registration_Info_UClass_AAlphaGameMode, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAlphaGameMode), 3253640805U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_4117978277(TEXT("/Script/Alpha"),
-	Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaGameMode_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_AlphaGameMode_h_4117978277(TEXT("/Script/Alpha"),
+	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_AlphaGameMode_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_AlphaGameMode_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

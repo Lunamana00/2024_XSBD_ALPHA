@@ -11,6 +11,7 @@
     <None Include="..\..\Source\AlphaEditor.Target.cs">
       <Filter>Source</Filter>
     </None>
+    <None Include="..\..\.vsconfig" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -52,6 +53,36 @@
     </ClCompile>
     <ClInclude Include="..\..\Source\Alpha\AlphaGameMode.h">
       <Filter>Source\Alpha</Filter>
+    </ClInclude>
+    <Filter Include="Source\Alpha\Private">
+      <UniqueIdentifier>{C3C2F8E8-1ABE-3970-A93A-36D435FFF442}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Alpha\Private\Components">
+      <UniqueIdentifier>{6606B765-C425-372F-ACDF-B09D7A20F796}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Alpha\Private\Components\FractAttributeComponent.cpp">
+      <Filter>Source\Alpha\Private\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttributeComponent.cpp">
+      <Filter>Source\Alpha\Private\Components</Filter>
+    </ClCompile>
+    <Filter Include="Source\Alpha\Public">
+      <UniqueIdentifier>{3573188E-76DE-30EB-BED4-216A3CC062D5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source\Alpha\Public\Components">
+      <UniqueIdentifier>{6A84959E-571D-3840-8073-BC0A1203D9FD}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Alpha\Public\Components\FractAttributeComponent.h">
+      <Filter>Source\Alpha\Public\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Alpha\Public\Components\FractPlayerAttributeComponent.h">
+      <Filter>Source\Alpha\Public\Components</Filter>
+    </ClInclude>
+    <Filter Include="Source\Alpha\Public\Enums">
+      <UniqueIdentifier>{883ECF06-06E5-394D-8AAB-FCAD6E5C38A6}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractElementType.h">
+      <Filter>Source\Alpha\Public\Enums</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
