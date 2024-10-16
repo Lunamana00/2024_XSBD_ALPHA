@@ -13,94 +13,36 @@
   <component name="ChangeListManager">
     <list default="true" id="3799a1e6-05e0-4f56-a9dc-42f99a0e8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Alpha/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Alpha/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Alpha.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/Alpha.uproject" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Binaries/Win64/AlphaEditor.target" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/AlphaEditor.target" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.patch_0.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.patch_0.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRules/AlphaModuleRules.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRules/AlphaModuleRules.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRules/AlphaModuleRulesManifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRules/AlphaModuleRulesManifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/AlphaModuleRules.csproj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/AlphaModuleRules.csproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/AlphaModuleRules.csproj.nuget.dgspec.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/AlphaModuleRules.csproj.nuget.dgspec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/AlphaModuleRules.csproj.nuget.g.props" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/AlphaModuleRules.csproj.nuget.g.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.GeneratedMSBuildEditorConfig.editorconfig" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.GeneratedMSBuildEditorConfig.editorconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.assets.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.assets.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.csproj.AssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.csproj.AssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/project.assets.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/project.assets.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/project.nuget.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/project.nuget.cache" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/ActionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/ActionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/AlphaEditor/Development/AlphaEditor.uhtmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/AlphaEditor/Development/AlphaEditor.uhtmanifest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Alpha.init.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Alpha.init.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaCharacter.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaCharacter.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaCharacter.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaCharacter.generated.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaGameMode.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaGameMode.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaGameMode.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/AlphaGameMode.generated.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Timestamp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Timestamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/ActionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/ActionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Core/SharedPCH.Core.RTTI.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/CoreUObject/SharedPCH.CoreUObject.RTTI.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Engine/SharedPCH.Engine.Project.ValApi.Cpp20.h.obj.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/DependencyCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/DependencyCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Makefile.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Makefile.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Slate/SharedPCH.Slate.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/TargetMetadata.dat" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/TargetMetadata.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.h.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/UnrealEd/SharedPCH.UnrealEd.RTTI.Cpp20.h.obj.rsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/ActionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/ActionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.Shared.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.Shared.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.init.gen.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.init.gen.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.init.gen.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Alpha.init.gen.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.gen.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.gen.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.gen.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaCharacter.gen.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.gen.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.gen.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.gen.cpp.obj.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/AlphaGameMode.gen.cpp.obj.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Default.rc2.res.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Default.rc2.res.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Definitions.Alpha.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/Definitions.Alpha.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.exp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.sup.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.sup.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/XmlConfigCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/XmlConfigCache.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/DebugGame/Editor/Alpha.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/DebugGame/Editor/UE5.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/Development/Editor/Alpha.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/Development/Editor/Alpha.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj.filters" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/UE5.vcxproj.filters" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/UECommon.props" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/UECommon.props" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/AutoScreenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/AutoScreenshot.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-6D62895A446BAE883D960DB3B5875392/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/WindowsEditor/Editor.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Config/WindowsEditor/Editor.ini" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.14-17.42.10.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/Alpha.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -115,11 +57,15 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="cidr-memory-view://0" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/Components/PrimitiveComponent.h" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://C:/Program Files/Epic Games/UE_5.4/Engine/Source/Runtime/Engine/Classes/GameFramework/Character.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Alpha/Private/Components/FractAttributeComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Alpha/Private/Components/FractPlayerAttributeComponent.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Alpha/Public/Components/FractAttributeComponent.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Alpha/Public/Components/FractPlayerAttributeComponent.h" root0="FORCE_HIGHLIGHTING" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
@@ -129,20 +75,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "C++ Project.Alpha.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "features/AttributesAndAttack",
-    "ignore.virus.scanning.warn.message": "true",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;C++ Project.Alpha.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;features/AttributesAndAttack&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;UnrealLogSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
+  <component name="RecentsManager">
+    <key name="CidrLocalAttachDebugger.recentlyUsed">
+      <recent name="com.jetbrains.rider.cpp.debugger.RiderCppLLDBDriverConfiguration" />
+    </key>
+  </component>
   <component name="RunManager" selected="C++ Project.Alpha">
     <configuration name="Alpha" type="CppProject" factoryName="C++ Project">
       <configuration_1>
@@ -580,7 +532,11 @@
       <updated>1728920580693</updated>
       <workItem from="1728920581833" duration="4810000" />
       <workItem from="1728953338260" duration="210000" />
-      <workItem from="1728953576044" duration="1873000" />
+      <workItem from="1728953576044" duration="2147000" />
+      <workItem from="1728997838774" duration="14000" />
+      <workItem from="1728997906270" duration="1459000" />
+      <workItem from="1729051174322" duration="153000" />
+      <workItem from="1729088920266" duration="3506000" />
     </task>
     <servers />
   </component>
@@ -590,5 +546,9 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

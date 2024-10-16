@@ -12,6 +12,7 @@
       <Filter>Source</Filter>
     </None>
     <None Include="..\..\.vsconfig" />
+    <None Include="..\..\Alpha.sln.DotSettings.user" />
     <Filter Include="Config">
       <UniqueIdentifier>{FA535FFB-25E1-3D20-B416-52F9BE21E06E}</UniqueIdentifier>
     </Filter>
@@ -66,6 +67,18 @@
     <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttributeComponent.cpp">
       <Filter>Source\Alpha\Private\Components</Filter>
     </ClCompile>
+    <Filter Include="Source\Alpha\Private\Test">
+      <UniqueIdentifier>{017A19D2-F7AF-3EDA-8ED4-C42053B41C1B}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Alpha\Private\Test\FractTestCharacter.cpp">
+      <Filter>Source\Alpha\Private\Test</Filter>
+    </ClCompile>
+    <Filter Include="Source\Alpha\Private\Weapons">
+      <UniqueIdentifier>{E4CCFAFA-944D-3739-BED9-6C4200C9E3EF}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Alpha\Private\Weapons\FractPlayerWeapon.cpp">
+      <Filter>Source\Alpha\Private\Weapons</Filter>
+    </ClCompile>
     <Filter Include="Source\Alpha\Public">
       <UniqueIdentifier>{3573188E-76DE-30EB-BED4-216A3CC062D5}</UniqueIdentifier>
     </Filter>
@@ -83,6 +96,18 @@
     </Filter>
     <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractElementType.h">
       <Filter>Source\Alpha\Public\Enums</Filter>
+    </ClInclude>
+    <Filter Include="Source\Alpha\Public\Test">
+      <UniqueIdentifier>{C7A194D5-E949-354D-ACA1-B8C60C2F8037}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Alpha\Public\Test\FractTestCharacter.h">
+      <Filter>Source\Alpha\Public\Test</Filter>
+    </ClInclude>
+    <Filter Include="Source\Alpha\Public\Weapons">
+      <UniqueIdentifier>{ABA152E5-8B8E-3EAB-B502-B7EA6C54A9B9}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Alpha\Public\Weapons\FractPlayerWeapon.h">
+      <Filter>Source\Alpha\Public\Weapons</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

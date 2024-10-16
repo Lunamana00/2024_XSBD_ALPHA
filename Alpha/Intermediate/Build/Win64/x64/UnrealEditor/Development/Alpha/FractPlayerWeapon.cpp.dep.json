@@ -1,0 +1,19 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\private\\weapons\\fractplayerweapon.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\alphaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\alpha\\definitions.alpha.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\weapons\\fractplayerweapon.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\boxcomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\source\\runtime\\engine\\classes\\components\\shapecomponent.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\shapecomponent.generated.h",
+            "c:\\program files\\epic games\\ue_5.4\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\uht\\boxcomponent.generated.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\unrealeditor\\inc\\alpha\\uht\\fractplayerweapon.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
