@@ -26,7 +26,10 @@ private:
 	float MaxMana;
 
 public:
-	float GetStamina() const;
-	float GetMana() const;
+	FORCEINLINE float GetStamina() const;
+	FORCEINLINE float GetMana() const;
+	void UseStamina(const float StaminaAmount);
+	void UseMana(const float ManaAmount);
+	void ChangeElementType(EFractElementType NewType);
 	
 };

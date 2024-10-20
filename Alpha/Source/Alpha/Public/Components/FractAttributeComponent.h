@@ -35,10 +35,11 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	void ReceiveDamage(float DamageAmount);
-	float GetHealth() const;
-	float GetAttackDamage() const;
-	EFractElementType GetElementType() const;
+	void ReceiveDamage(const float DamageAmount);
+	void HealHealth(const float HealAmount);
+	FORCEINLINE float GetHealth() const;
+	FORCEINLINE float GetAttackDamage() const;
+	FORCEINLINE EFractElementType GetElementType() const;
 	bool IsAlive() const;
 	
 		

@@ -32,9 +32,14 @@ void UFractAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 	// ...
 }
 
-void UFractAttributeComponent::ReceiveDamage(float DamageAmount)
+void UFractAttributeComponent::ReceiveDamage(const float DamageAmount)
 {
 	Health = FMath::Clamp(Health - DamageAmount, 0.f, MaxHealth);
+}
+
+void UFractAttributeComponent::HealHealth(const float HealAmount)
+{
+	Health = FMath::Clamp(Health + HealAmount, 0.f, MaxHealth);
 }
 
 float UFractAttributeComponent::GetHealth() const
