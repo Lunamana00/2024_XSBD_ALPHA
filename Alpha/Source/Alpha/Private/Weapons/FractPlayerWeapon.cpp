@@ -3,6 +3,7 @@
 
 #include "Weapons/FractPlayerWeapon.h"
 
+#include "Interfaces/FractHitInterface.h"
 #include "Kismet/KismetSystemLibrary.h"
 
 // Sets default values
@@ -44,11 +45,17 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
-	TArray<FHitResult> WeaponHits;
-	// 하나의 적만 공격하게 할 거면 BoxTraceSingle로 바꿔야 함
-	UKismetSystemLibrary::BoxTraceMulti(this, Start, End, FVector(5.f, 5.f, 5.f),
+	FHitResult WeaponHit;
+	UKismetSystemLibrary::BoxTraceSingle(this, Start, End, FVector(5.f, 5.f, 5.f),
 		BoxTraceStart->GetComponentRotation(), ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore,
-		EDrawDebugTrace::ForDuration, WeaponHits, true);
+		EDrawDebugTrace::ForDuration, WeaponHit, true);
+	if (WeaponHit.GetActor())
+	{
+		if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(WeaponHit.GetActor()))
+		{
+			HitInterface->GetHit(WeaponHit.ImpactPoint);
+		}
+	}
 }
 
 void AFractPlayerWeapon::OnWeaponBoxEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,

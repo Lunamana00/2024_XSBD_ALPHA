@@ -67,10 +67,19 @@
     <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttributeComponent.cpp">
       <Filter>Source\Alpha\Private\Components</Filter>
     </ClCompile>
+    <Filter Include="Source\Alpha\Private\Interfaces">
+      <UniqueIdentifier>{CFA33B4A-D732-380D-839F-62E2C8BEBC72}</UniqueIdentifier>
+    </Filter>
+    <ClCompile Include="..\..\Source\Alpha\Private\Interfaces\FractHitInterface.cpp">
+      <Filter>Source\Alpha\Private\Interfaces</Filter>
+    </ClCompile>
     <Filter Include="Source\Alpha\Private\Test">
       <UniqueIdentifier>{017A19D2-F7AF-3EDA-8ED4-C42053B41C1B}</UniqueIdentifier>
     </Filter>
     <ClCompile Include="..\..\Source\Alpha\Private\Test\FractTestCharacter.cpp">
+      <Filter>Source\Alpha\Private\Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Test\FractTestEnemy.cpp">
       <Filter>Source\Alpha\Private\Test</Filter>
     </ClCompile>
     <Filter Include="Source\Alpha\Private\Weapons">
@@ -97,10 +106,19 @@
     <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractElementType.h">
       <Filter>Source\Alpha\Public\Enums</Filter>
     </ClInclude>
+    <Filter Include="Source\Alpha\Public\Interfaces">
+      <UniqueIdentifier>{163939DE-36C2-3570-A0D8-D10C4C23E4B4}</UniqueIdentifier>
+    </Filter>
+    <ClInclude Include="..\..\Source\Alpha\Public\Interfaces\FractHitInterface.h">
+      <Filter>Source\Alpha\Public\Interfaces</Filter>
+    </ClInclude>
     <Filter Include="Source\Alpha\Public\Test">
       <UniqueIdentifier>{C7A194D5-E949-354D-ACA1-B8C60C2F8037}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\Alpha\Public\Test\FractTestCharacter.h">
+      <Filter>Source\Alpha\Public\Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Alpha\Public\Test\FractTestEnemy.h">
       <Filter>Source\Alpha\Public\Test</Filter>
     </ClInclude>
     <Filter Include="Source\Alpha\Public\Weapons">

@@ -286,7 +286,13 @@
     <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttributeComponent.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Interfaces\FractHitInterface.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Alpha\Private\Test\FractTestCharacter.cpp">
+      <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Test\FractTestEnemy.cpp">
       <AdditionalIncludeDirectories>$(ClCompile_AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <ClCompile Include="..\..\Source\Alpha\Private\Weapons\FractPlayerWeapon.cpp">
@@ -295,7 +301,9 @@
     <ClInclude Include="..\..\Source\Alpha\Public\Components\FractAttributeComponent.h"/>
     <ClInclude Include="..\..\Source\Alpha\Public\Components\FractPlayerAttributeComponent.h"/>
     <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractElementType.h"/>
+    <ClInclude Include="..\..\Source\Alpha\Public\Interfaces\FractHitInterface.h"/>
     <ClInclude Include="..\..\Source\Alpha\Public\Test\FractTestCharacter.h"/>
+    <ClInclude Include="..\..\Source\Alpha\Public\Test\FractTestEnemy.h"/>
     <ClInclude Include="..\..\Source\Alpha\Public\Weapons\FractPlayerWeapon.h"/>
   </ItemGroup>
   <PropertyGroup>
