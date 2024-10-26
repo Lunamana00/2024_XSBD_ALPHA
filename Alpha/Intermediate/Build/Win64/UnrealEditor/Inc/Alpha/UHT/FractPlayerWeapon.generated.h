@@ -17,12 +17,12 @@ struct FHitResult;
 #endif
 #define ALPHA_FractPlayerWeapon_generated_h
 
-#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execOnWeaponBoxEndOverlap); \
 	DECLARE_FUNCTION(execOnWeaponBoxOverlap);
 
 
-#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAFractPlayerWeapon(); \
 	friend struct Z_Construct_UClass_AFractPlayerWeapon_Statics; \
@@ -31,7 +31,7 @@ public: \
 	DECLARE_SERIALIZER(AFractPlayerWeapon)
 
 
-#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_ENHANCED_CONSTRUCTORS \
+#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AFractPlayerWeapon(AFractPlayerWeapon&&); \
@@ -43,13 +43,13 @@ public: \
 	NO_API virtual ~AFractPlayerWeapon();
 
 
-#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_12_PROLOG
-#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_13_PROLOG
+#define FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_INCLASS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_15_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_16_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

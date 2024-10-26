@@ -3,8 +3,11 @@
 
 #include "Weapons/FractPlayerWeapon.h"
 
+#include "Components/FractPlayerAttributeComponent.h"
 #include "Interfaces/FractHitInterface.h"
+#include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "Test/FractTestCharacter.h"
 
 // Sets default values
 AFractPlayerWeapon::AFractPlayerWeapon()
@@ -25,7 +28,7 @@ AFractPlayerWeapon::AFractPlayerWeapon()
 	BoxTraceStart->SetupAttachment(WeaponMesh);
 	BoxTraceEnd = CreateDefaultSubobject<USceneComponent>(TEXT("BoxTraceEnd"));
 	BoxTraceEnd->SetupAttachment(WeaponMesh);
-
+	
 }
 
 // Called when the game starts or when spawned
@@ -34,6 +37,8 @@ void AFractPlayerWeapon::BeginPlay()
 	Super::BeginPlay();
 	WeaponBox->OnComponentBeginOverlap.AddDynamic(this, &AFractPlayerWeapon::OnWeaponBoxOverlap);
 	WeaponBox->OnComponentEndOverlap.AddDynamic(this, &AFractPlayerWeapon::OnWeaponBoxEndOverlap);
+	this->SetOwner(Cast<AFractTestCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)));
+	this->SetInstigator(Cast<AFractTestCharacter>(UGameplayStatics::GetPlayerCharacter(GetWorld(), 0)));
 	
 }
 
@@ -45,6 +50,12 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 
 	TArray<AActor*> ActorsToIgnore;
 	ActorsToIgnore.Add(this);
+
+	for (AActor* Actor : IgnoreActors)
+	{
+		ActorsToIgnore.AddUnique(Actor);
+	}
+	
 	FHitResult WeaponHit;
 	UKismetSystemLibrary::BoxTraceSingle(this, Start, End, FVector(5.f, 5.f, 5.f),
 		BoxTraceStart->GetComponentRotation(), ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore,
@@ -55,6 +66,15 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 		{
 			HitInterface->GetHit(WeaponHit.ImpactPoint);
 		}
+		IgnoreActors.AddUnique(WeaponHit.GetActor());
+		if (AFractTestCharacter* PlayerCharacter = Cast<AFractTestCharacter>(GetInstigator()))
+		{
+			UGameplayStatics::ApplyDamage(WeaponHit.GetActor(),
+				PlayerCharacter->GetAttribute()->GetAttackDamage(),
+				GetInstigator()->GetController(),
+				this, UDamageType::StaticClass());
+		}
+		
 	}
 }
 

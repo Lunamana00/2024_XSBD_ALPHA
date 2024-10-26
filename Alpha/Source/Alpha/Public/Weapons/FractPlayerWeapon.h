@@ -8,6 +8,7 @@
 #include "FractPlayerWeapon.generated.h"
 
 
+class UFractPlayerAttributeComponent;
 
 UCLASS()
 class ALPHA_API AFractPlayerWeapon : public AActor
@@ -17,6 +18,8 @@ class ALPHA_API AFractPlayerWeapon : public AActor
 public:	
 	// Sets default values for this actor's properties
 	AFractPlayerWeapon();
+
+	TArray<AActor*> IgnoreActors;
 
 protected:
 	// Called when the game starts or when spawned
@@ -43,6 +46,8 @@ private:
 	USceneComponent* BoxTraceStart;
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	USceneComponent* BoxTraceEnd;
+
+	
 
 public:
 

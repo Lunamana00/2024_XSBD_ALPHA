@@ -14,7 +14,7 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define ALPHA_FractTestEnemy_generated_h
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_13_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_15_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAFractTestEnemy(); \
 	friend struct Z_Construct_UClass_AFractTestEnemy_Statics; \
@@ -24,7 +24,7 @@ public: \
 	virtual UObject* _getUObject() const override { return const_cast<AFractTestEnemy*>(this); }
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_13_ENHANCED_CONSTRUCTORS \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AFractTestEnemy(AFractTestEnemy&&); \
@@ -36,12 +36,12 @@ public: \
 	NO_API virtual ~AFractTestEnemy();
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_10_PROLOG
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_13_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_12_PROLOG
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_15_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_13_INCLASS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_13_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_15_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestEnemy_h_15_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 
