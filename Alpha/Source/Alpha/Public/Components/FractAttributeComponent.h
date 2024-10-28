@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "Enums/FractElementType.h"
+#include "Enums/FractTypes.h"
 #include "FractAttributeComponent.generated.h"
 
 
@@ -23,7 +23,7 @@ protected:
 
 	// Health is current health
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
-	float Health;
+	float CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
 	float MaxHealth;
 	
@@ -37,7 +37,7 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void ReceiveDamage(const float DamageAmount);
 	void HealHealth(const float HealAmount);
-	FORCEINLINE float GetHealth() const;
+	FORCEINLINE float GetCurrentHealth() const;
 	FORCEINLINE float GetAttackDamage() const;
 	FORCEINLINE EFractElementType GetElementType() const;
 	bool IsAlive() const;

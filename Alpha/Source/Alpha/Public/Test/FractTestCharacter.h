@@ -19,6 +19,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Attributes)
 	UFractPlayerAttributeComponent* Attribute;
 
+	
+
 public:
 	UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
 	

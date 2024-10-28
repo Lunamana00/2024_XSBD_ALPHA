@@ -16,18 +16,18 @@ class ALPHA_API UFractPlayerAttributeComponent : public UFractAttributeComponent
 
 private:
 	UPROPERTY(EditAnywhere, Category="Attributes")
-	float Stamina;
+	float CurrentStamina;
 	UPROPERTY(EditAnywhere, Category="Attributes")
 	float MaxStamina;
 
 	UPROPERTY(EditAnywhere, Category="Attributes")
-	float Mana;
+	float CurrentMana;
 	UPROPERTY(EditAnywhere, Category="Attributes")
 	float MaxMana;
 
 public:
-	FORCEINLINE float GetStamina() const;
-	FORCEINLINE float GetMana() const;
+	FORCEINLINE float GetCurrentStamina() const;
+	FORCEINLINE float GetCurrentMana() const;
 	void UseStamina(const float StaminaAmount);
 	void UseMana(const float ManaAmount);
 	void ChangeElementType(EFractElementType NewType);

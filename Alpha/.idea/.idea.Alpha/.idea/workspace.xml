@@ -13,68 +13,31 @@
   <component name="ChangeListManager">
     <list default="true" id="3799a1e6-05e0-4f56-a9dc-42f99a0e8d7d" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Alpha/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Alpha/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha-Win64-DebugGame.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha-Win64-DebugGame.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.patch_0.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/Binaries/Win64/UnrealEditor-Alpha.patch_0.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultEngine.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultEngine.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Test/BP_FractTestCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Test/BP_FractTestCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Characters/Mannequins/Rigs/CR_Mannequin_BasicFootIK.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Characters/Mannequins/Rigs/CR_Mannequin_BasicFootIK.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfo.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfo.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfoInputs.cache" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/BuildRulesProjects/AlphaModuleRules/obj/Development/AlphaModuleRules.AssemblyInfoInputs.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/SourceFileCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/AlphaEditor/DebugGame/AlphaEditor.uhtmanifest" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/AlphaEditor/DebugGame/AlphaEditor.uhtmanifest" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Alpha.init.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Alpha.init.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractPlayerWeapon.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractPlayerWeapon.generated.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestCharacter.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestCharacter.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestCharacter.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestCharacter.generated.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestEnemy.gen.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestEnemy.gen.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestEnemy.generated.h" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/FractTestEnemy.generated.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Timestamp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/UnrealEditor/Inc/Alpha/UHT/Timestamp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/DebugGame/DependencyCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/DebugGame/DependencyCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/DebugGame/Makefile.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/DebugGame/Makefile.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/DependencyCache.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/DependencyCache.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Makefile.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/AlphaEditor/Development/Makefile.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/ActionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/ActionHistory.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractPlayerWeapon.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractPlayerWeapon.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractTestEnemy.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractTestEnemy.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractTestEnemy.gen.cpp.dep.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/FractTestEnemy.gen.cpp.dep.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.dll.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.dll.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.dll.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.dll.rsp.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.lib.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.lib.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.lib.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.lib.rsp.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.sup.exp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/DebugGame/Alpha/UnrealEditor-Alpha-Win64-DebugGame.sup.exp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractAttributeComponent.cpp.obj.rsp.lc" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractAttributeComponent.cpp.obj.rsp.lc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractAttributeComponent.gen.cpp.dep.lc.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractAttributeComponent.gen.cpp.dep.lc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractPlayerWeapon.cpp.dep.lc.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractPlayerWeapon.cpp.dep.lc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractPlayerWeapon.gen.cpp.dep.lc.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/FractPlayerWeapon.gen.cpp.dep.lc.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.dll.rsp.old" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp.old" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/Build/Win64/x64/UnrealEditor/Development/Alpha/UnrealEditor-Alpha.lib.rsp.old" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/CachedAssetRegistry_0.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/DebugGame/Editor/Alpha.json" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/.Rider/Win64/DebugGame/Editor/Alpha.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj" beforeDir="false" afterPath="$PROJECT_DIR$/Intermediate/ProjectFiles/Alpha.vcxproj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/AutoScreenshot.png" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/AutoScreenshot.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-25D820DE4B63C1331476A3B4297E70B8/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-3700DD414A0191559BD24DA308AD57FD/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-37BD4C46469A6B58325C1792D9A2C2B9/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-528A88FD477561D23115FC905AB2E5BB/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-9ED527784ED49FE1F10D518DC9CB67EE/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-AD7E71384498BC3BA7F223892805D454/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-C9B2DB1644B3C0167B0AE3819DABA0F8/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-CC3BF0E845F8198D6F6E0CBD47DCBEB4/CrashReportClient.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-F54D8555464AE00ED0979381316E4C76/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Autosaves/Game/Blueprints/Test/BP_FractTestCharacter_Auto2.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Autosaves/Game/Blueprints/Test/BP_FractTestCharacter_Auto2.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-1294EF204D676059416519B7EFD1FAEF/CrashReportClient.ini" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Config/CrashReportClient/UECC-Windows-BB97A2EC4CA07814719184A021097988/CrashReportClient.ini" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Config/WindowsEditor/EditorPerProjectUserSettings.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.16-15.14.39.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.16-15.26.49.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.20-07.11.38.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.20-07.19.55.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.20-07.20.21.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.20-07.21.11.log" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.20-07.26.29.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.21-13.18.47.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.21-13.43.00.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.21-13.50.21.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha-backup-2024.10.21-15.12.55.log" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Logs/Alpha.log" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Logs/Alpha.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/SourceControl/UncontrolledChangelists.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" beforeDir="false" afterPath="$PROJECT_DIR$/Saved/Telemetry/Telemetry.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Alpha/Private/Test/FractTestEnemy.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Private/Test/FractTestEnemy.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Alpha/Private/Weapons/FractPlayerWeapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Private/Weapons/FractPlayerWeapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Alpha/Private/Components/FractAttributeComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Private/Components/FractAttributeComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Alpha/Private/Components/FractPlayerAttributeComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Private/Components/FractPlayerAttributeComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Components/FractAttributeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Components/FractAttributeComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Components/FractPlayerAttributeComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Components/FractPlayerAttributeComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Enums/FractElementType.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Enums/FractTypes.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Test/FractTestCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Test/FractTestCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Test/FractTestEnemy.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Test/FractTestEnemy.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Alpha/Public/Weapons/FractPlayerWeapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Alpha/Public/Weapons/FractPlayerWeapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -575,6 +538,8 @@
       <workItem from="1729405593660" duration="6844000" />
       <workItem from="1729516724277" duration="4524000" />
       <workItem from="1729936333531" duration="8491000" />
+      <workItem from="1730031739091" duration="918000" />
+      <workItem from="1730096527296" duration="1358000" />
     </task>
     <servers />
   </component>
@@ -584,6 +549,17 @@
   <component name="UnityProjectConfiguration" hasMinimizedUI="false" />
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/Source/Alpha/Public/Components/FractPlayerAttributeComponent.h</url>
+          <line>4</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

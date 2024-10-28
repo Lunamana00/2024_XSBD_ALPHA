@@ -3,25 +3,25 @@
 
 #include "Components/FractPlayerAttributeComponent.h"
 
-float UFractPlayerAttributeComponent::GetStamina() const
+float UFractPlayerAttributeComponent::GetCurrentStamina() const
 {
-	return Stamina;
+	return CurrentStamina;
 }
 
-float UFractPlayerAttributeComponent::GetMana() const
+float UFractPlayerAttributeComponent::GetCurrentMana() const
 {
-	return Mana;
+	return CurrentMana;
 }
 
 void UFractPlayerAttributeComponent::UseStamina(const float StaminaAmount)
 {
-	Stamina = FMath::Clamp(Stamina - StaminaAmount, 0.f, MaxStamina);
+	CurrentStamina = FMath::Clamp(CurrentStamina - StaminaAmount, 0.f, MaxStamina);
 }
 
 
 void UFractPlayerAttributeComponent::UseMana(const float ManaAmount)
 {
-	Mana = FMath::Clamp(Mana - ManaAmount, 0.f, MaxMana);
+	CurrentMana = FMath::Clamp(CurrentMana - ManaAmount, 0.f, MaxMana);
 }
 
 
