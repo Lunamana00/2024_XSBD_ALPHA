@@ -18,6 +18,7 @@ AFractTestEnemy::AFractTestEnemy()
 	GetMesh()->SetGenerateOverlapEvents(true);
 	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 
+	Attribute = CreateDefaultSubobject<UFractAttributeComponent>(TEXT("Attribute Component"));
 }
 
 float AFractTestEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,

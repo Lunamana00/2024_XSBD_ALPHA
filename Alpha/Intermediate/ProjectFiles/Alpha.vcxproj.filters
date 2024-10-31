@@ -64,6 +64,9 @@
     <ClCompile Include="..\..\Source\Alpha\Private\Components\FractAttributeComponent.cpp">
       <Filter>Source\Alpha\Private\Components</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttackComponent.cpp">
+      <Filter>Source\Alpha\Private\Components</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Source\Alpha\Private\Components\FractPlayerAttributeComponent.cpp">
       <Filter>Source\Alpha\Private\Components</Filter>
     </ClCompile>
@@ -97,13 +100,16 @@
     <ClInclude Include="..\..\Source\Alpha\Public\Components\FractAttributeComponent.h">
       <Filter>Source\Alpha\Public\Components</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\Source\Alpha\Public\Components\FractPlayerAttackComponent.h">
+      <Filter>Source\Alpha\Public\Components</Filter>
+    </ClInclude>
     <ClInclude Include="..\..\Source\Alpha\Public\Components\FractPlayerAttributeComponent.h">
       <Filter>Source\Alpha\Public\Components</Filter>
     </ClInclude>
     <Filter Include="Source\Alpha\Public\Enums">
       <UniqueIdentifier>{883ECF06-06E5-394D-8AAB-FCAD6E5C38A6}</UniqueIdentifier>
     </Filter>
-    <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractElementType.h">
+    <ClInclude Include="..\..\Source\Alpha\Public\Enums\FractTypes.h">
       <Filter>Source\Alpha\Public\Enums</Filter>
     </ClInclude>
     <Filter Include="Source\Alpha\Public\Interfaces">

@@ -14,7 +14,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define ALPHA_FractTestCharacter_generated_h
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSetWeaponCollisionEnabled);
+
+
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAFractTestCharacter(); \
 	friend struct Z_Construct_UClass_AFractTestCharacter_Statics; \
@@ -23,9 +27,7 @@ public: \
 	DECLARE_SERIALIZER(AFractTestCharacter)
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_ENHANCED_CONSTRUCTORS \
-	/** Standard constructor, called after all reflected properties have been initialized */ \
-	NO_API AFractTestCharacter(); \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AFractTestCharacter(AFractTestCharacter&&); \
@@ -37,12 +39,13 @@ public: \
 	NO_API virtual ~AFractTestCharacter();
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_13_PROLOG
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_PROLOG
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_INCLASS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

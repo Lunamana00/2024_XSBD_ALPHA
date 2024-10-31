@@ -42,21 +42,6 @@ void UFractAttributeComponent::HealHealth(const float HealAmount)
 	CurrentHealth = FMath::Clamp(CurrentHealth + HealAmount, 0.f, MaxHealth);
 }
 
-float UFractAttributeComponent::GetCurrentHealth() const
-{
-	return CurrentHealth;
-}
-
-float UFractAttributeComponent::GetAttackDamage() const
-{
-	return AttackDamage;
-}
-
-EFractElementType UFractAttributeComponent::GetElementType() const
-{
-	return ElementType;
-}
-
 bool UFractAttributeComponent::IsAlive() const
 {
 	return CurrentHealth > 0.f;

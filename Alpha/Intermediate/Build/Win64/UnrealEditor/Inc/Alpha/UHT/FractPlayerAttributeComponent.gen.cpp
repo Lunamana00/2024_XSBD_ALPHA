@@ -35,7 +35,7 @@ struct Z_Construct_UClass_UFractPlayerAttributeComponent_Statics
 		{ "IncludePath", "Components/FractPlayerAttributeComponent.h" },
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttributeComponent.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Stamina_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentStamina_MetaData[] = {
 		{ "Category", "Attributes" },
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttributeComponent.h" },
 	};
@@ -43,7 +43,7 @@ struct Z_Construct_UClass_UFractPlayerAttributeComponent_Statics
 		{ "Category", "Attributes" },
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttributeComponent.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_Mana_MetaData[] = {
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentMana_MetaData[] = {
 		{ "Category", "Attributes" },
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttributeComponent.h" },
 	};
@@ -52,9 +52,9 @@ struct Z_Construct_UClass_UFractPlayerAttributeComponent_Statics
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttributeComponent.h" },
 	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_Stamina;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentStamina;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxStamina;
-	static const UECodeGen_Private::FFloatPropertyParams NewProp_Mana;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_CurrentMana;
 	static const UECodeGen_Private::FFloatPropertyParams NewProp_MaxMana;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
@@ -63,14 +63,14 @@ struct Z_Construct_UClass_UFractPlayerAttributeComponent_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_Stamina = { "Stamina", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, Stamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Stamina_MetaData), NewProp_Stamina_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_CurrentStamina = { "CurrentStamina", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, CurrentStamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentStamina_MetaData), NewProp_CurrentStamina_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_MaxStamina = { "MaxStamina", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, MaxStamina), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxStamina_MetaData), NewProp_MaxStamina_MetaData) };
-const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_Mana = { "Mana", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, Mana), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Mana_MetaData), NewProp_Mana_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_CurrentMana = { "CurrentMana", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, CurrentMana), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentMana_MetaData), NewProp_CurrentMana_MetaData) };
 const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_MaxMana = { "MaxMana", nullptr, (EPropertyFlags)0x0040000000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttributeComponent, MaxMana), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MaxMana_MetaData), NewProp_MaxMana_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_Stamina,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_CurrentStamina,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_MaxStamina,
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_Mana,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_CurrentMana,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::NewProp_MaxMana,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UFractPlayerAttributeComponent_Statics::PropPointers) < 2048);
@@ -115,10 +115,10 @@ UFractPlayerAttributeComponent::~UFractPlayerAttributeComponent() {}
 struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttributeComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UFractPlayerAttributeComponent, UFractPlayerAttributeComponent::StaticClass, TEXT("UFractPlayerAttributeComponent"), &Z_Registration_Info_UClass_UFractPlayerAttributeComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFractPlayerAttributeComponent), 3899137990U) },
+		{ Z_Construct_UClass_UFractPlayerAttributeComponent, UFractPlayerAttributeComponent::StaticClass, TEXT("UFractPlayerAttributeComponent"), &Z_Registration_Info_UClass_UFractPlayerAttributeComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFractPlayerAttributeComponent), 829785639U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttributeComponent_h_3233097806(TEXT("/Script/Alpha"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttributeComponent_h_2647490899(TEXT("/Script/Alpha"),
 	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttributeComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttributeComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

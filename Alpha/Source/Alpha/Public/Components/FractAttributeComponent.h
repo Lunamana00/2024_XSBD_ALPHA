@@ -25,10 +25,10 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
 	float CurrentHealth;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
-	float MaxHealth;
+	float MaxHealth = 100.f;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
-	float AttackDamage;
+	float BaseDamage = 20.f;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Attributes")
 	EFractElementType ElementType;
 
@@ -37,9 +37,10 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void ReceiveDamage(const float DamageAmount);
 	void HealHealth(const float HealAmount);
-	FORCEINLINE float GetCurrentHealth() const;
-	FORCEINLINE float GetAttackDamage() const;
-	FORCEINLINE EFractElementType GetElementType() const;
+	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+	FORCEINLINE float GetHealthPercent() const { return CurrentHealth / MaxHealth; }
+	FORCEINLINE float GetBaseDamage() const { return BaseDamage; }
+	FORCEINLINE EFractElementType GetElementType() const { return ElementType; }
 	bool IsAlive() const;
 	
 		

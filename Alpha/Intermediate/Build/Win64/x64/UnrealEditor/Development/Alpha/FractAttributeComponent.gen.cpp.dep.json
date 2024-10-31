@@ -7,7 +7,7 @@
         "Includes": [
             "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\alpha\\definitions.alpha.h",
             "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\components\\fractattributecomponent.h",
-            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\enums\\fractelementtype.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\enums\\fracttypes.h",
             "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\unrealeditor\\inc\\alpha\\uht\\fractattributecomponent.generated.h"
         ],
         "ImportedModules": [],

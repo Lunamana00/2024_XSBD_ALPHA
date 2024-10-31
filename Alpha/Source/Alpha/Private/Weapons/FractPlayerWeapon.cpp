@@ -70,7 +70,7 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 		if (AFractTestCharacter* PlayerCharacter = Cast<AFractTestCharacter>(GetInstigator()))
 		{
 			UGameplayStatics::ApplyDamage(WeaponHit.GetActor(),
-				PlayerCharacter->GetAttribute()->GetAttackDamage(),
+				PlayerCharacter->GetAttribute()->GetBaseDamage(),
 				GetInstigator()->GetController(),
 				this, UDamageType::StaticClass());
 		}

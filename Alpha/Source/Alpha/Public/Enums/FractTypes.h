@@ -3,47 +3,50 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "FractTypes.generated.h"
+
+class UAnimMontage;
+class UParticleSystem;
+class USoundBase;
 
 // 원소 종류
 UENUM(BlueprintType)
 enum class EFractElementType : uint8
 {
-	None UMETA(DisplayName = "None"),
-	Fire UMETA(DisplayName = "Fire"),
-	Water UMETA(DisplayName = "Water"),
-	Earth UMETA(DisplayName = "Earth"),
-	Wind UMETA(DisplayName = "Wind"),
-	Player UMETA(DisplayName = "Player")
-	
+    None UMETA(DisplayName = "None"),
+    Fire UMETA(DisplayName = "Fire"),
+    Water UMETA(DisplayName = "Water"),
+    Earth UMETA(DisplayName = "Earth"),
+    Wind UMETA(DisplayName = "Wind"),
+    Player UMETA(DisplayName = "Player")
 };
 
 // 공격 범위 타입
 UENUM(BlueprintType)
 enum class EFractAttackRange : uint8
 {
-	Melee UMETA(DisplayName = "Melee"),
-	Ranged UMETA(DisplayName = "Ranged")
+    Melee UMETA(DisplayName = "Melee"),
+    Ranged UMETA(DisplayName = "Ranged")
 };
 
 // 스킬인지 기본 공격인지
 UENUM(BlueprintType)
 enum class EFractAttackType : uint8
 {
-	Normal UMETA(DisplayName = "Normal"),
-	Skill UMETA(DisplayName = "Skill")
+    Normal UMETA(DisplayName = "Normal"),
+    Skill UMETA(DisplayName = "Skill")
 };
 
 // 캐릭터 스테이트
 UENUM(BlueprintType)
 enum class EFractCharacterState : uint8
 {
-	Idle,
-	Attacking,
-	Dodging,
-	Hit,
-	UsingSkill
+    ECS_Idle UMETA(DisplayName = "Idle"),
+    ECS_Attacking UMETA(DisplayName = "Attacking"),
+    ECS_Dodging UMETA(DisplayName = "Dodging"),
+    ECS_Hit UMETA(DisplayName = "Hit"),
+    ECS_UsingSkill UMETA(DisplayName = "UsingSkill")
 };
-
 
 // 기본 공격 구조체
 USTRUCT(BlueprintType)
@@ -65,11 +68,11 @@ struct FFractAttack
     EFractElementType Element = EFractElementType::None;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    bool bIsAerial = false;
+    bool bIsFlyingAttack = false;
 
-    // 콤보 관련
-    UPROPERTY(EditAnywhere, BlueprintReadWrite)
-    int32 ComboIndex = 0;  // 현재 콤보 단계 (0-3)
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+    TArray<UAnimMontage*> AttackMontages;
+    
 };
 
 // 스킬 구조체
@@ -84,6 +87,9 @@ struct FFractSkill
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skill Info")
     FText Description;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skill Info")
+    bool bIsFlyingSkill = false;
 
     // 데미지 관련
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Damage")
@@ -122,8 +128,4 @@ struct FFractSkill
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
     USoundBase* CastSound;
-	
 };
-
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnHealthChangedSignature, float, NewHealth, float, MaxHealth);
-DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnElementChangedSignature, EFractElementType, NewElement);
