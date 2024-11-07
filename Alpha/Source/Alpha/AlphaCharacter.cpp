@@ -96,7 +96,9 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 void AAlphaCharacter::Move(const FInputActionValue& Value)
 {
 	// input is a Vector2D
+	
 	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementInput = MovementVector;
 
 	if (Controller != nullptr)
 	{

@@ -8,6 +8,7 @@
 #include "FractPlayerWeapon.generated.h"
 
 
+class AFractProjectile;
 class UFractPlayerAttributeComponent;
 
 UCLASS()
@@ -47,10 +48,15 @@ private:
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	USceneComponent* BoxTraceEnd;
 
-	
+	UPROPERTY(VisibleAnywhere, Category = "Weapon")
+	USceneComponent* WeaponMuzzle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Camera")
+	TSubclassOf<UCameraShakeBase> CamShake;
 
 public:
 
+	FORCEINLINE USceneComponent* GetWeaponMuzzle() const { return WeaponMuzzle; }
 	FORCEINLINE UBoxComponent* GetWeaponBox() const { return WeaponBox; }
 	
 };

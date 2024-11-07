@@ -91,6 +91,9 @@
     <ClCompile Include="..\..\Source\Alpha\Private\Weapons\FractPlayerWeapon.cpp">
       <Filter>Source\Alpha\Private\Weapons</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\Alpha\Private\Weapons\FractProjectile.cpp">
+      <Filter>Source\Alpha\Private\Weapons</Filter>
+    </ClCompile>
     <Filter Include="Source\Alpha\Public">
       <UniqueIdentifier>{3573188E-76DE-30EB-BED4-216A3CC062D5}</UniqueIdentifier>
     </Filter>
@@ -131,6 +134,9 @@
       <UniqueIdentifier>{ABA152E5-8B8E-3EAB-B502-B7EA6C54A9B9}</UniqueIdentifier>
     </Filter>
     <ClInclude Include="..\..\Source\Alpha\Public\Weapons\FractPlayerWeapon.h">
+      <Filter>Source\Alpha\Public\Weapons</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\Alpha\Public\Weapons\FractProjectile.h">
       <Filter>Source\Alpha\Public\Weapons</Filter>
     </ClInclude>
   </ItemGroup>

@@ -50,6 +50,8 @@ public:
 
 protected:
 
+	FVector2D MovementInput;
+	
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
@@ -69,5 +71,7 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
 };
 

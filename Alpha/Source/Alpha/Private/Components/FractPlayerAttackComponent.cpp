@@ -3,13 +3,27 @@
 #include "Components/FractPlayerAttackComponent.h"
 
 #include "Components/FractPlayerAttributeComponent.h"
+#include "Kismet/GameplayStatics.h"
 #include "Test/FractTestCharacter.h"
+#include "Weapons/FractPlayerWeapon.h"
+#include "Weapons/FractProjectile.h"
+
+#define TRACE_LENGTH 80000.f
 
 UFractPlayerAttackComponent::UFractPlayerAttackComponent()
 {
 	
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 	
+}
+
+void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick TickType,
+	FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+
+	FHitResult HitResult;
+	TraceUnderCrosshairs(HitResult);
 }
 
 
@@ -28,13 +42,47 @@ void UFractPlayerAttackComponent::ResetCombo()
 	ComboCount = 0;
 }
 
-void UFractPlayerAttackComponent::ToggleRange()
+void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
+{
+	FVector2D ViewportSize;
+	if (GEngine && GEngine->GameViewport)
+	{
+		GEngine->GameViewport->GetViewportSize(ViewportSize);
+	}
+
+	FVector2D CrosshairLocation(ViewportSize.X / 2, ViewportSize.Y / 2);
+	FVector CrosshairWorldPosition;
+	FVector CrosshairWorldDirection;
+	bool bScreenToWorld = UGameplayStatics::DeprojectScreenToWorld(
+		UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation,
+		CrosshairWorldPosition, CrosshairWorldDirection);
+	if (bScreenToWorld)
+	{
+		FVector Start = CrosshairWorldPosition;
+		FVector End = Start + CrosshairWorldDirection * TRACE_LENGTH;
+
+		GetWorld()->LineTraceSingleByChannel(
+			TraceHitResult, Start, End, ECC_Visibility);
+		if (!TraceHitResult.bBlockingHit)
+		{
+			TraceHitResult.ImpactPoint = End;
+			HitLocation = End;
+		}
+		else
+		{
+			HitLocation = TraceHitResult.ImpactPoint;
+			DrawDebugSphere(GetWorld(), TraceHitResult.ImpactPoint, 12.f, 12, FColor::Red);
+		}
+	}
+}
+
+void UFractPlayerAttackComponent::SwitchRange()
 {
 	if (CurrentRange == EFractAttackRange::Melee)
 	{
 		CurrentRange = EFractAttackRange::Ranged;
 	}
-	else
+	else if (CurrentRange == EFractAttackRange::Ranged)
 	{
 		CurrentRange = EFractAttackRange::Melee;
 	}
@@ -99,8 +147,38 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 		{
 			if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
 			{
+				const FRotator ControlRotation = Character->GetControlRotation();
+				FVector InputDirection(Character->GetMovementInput().X, Character->GetMovementInput().Y, 0.f);
+				FVector WorldInputDirection = ControlRotation.RotateVector(InputDirection);
+				WorldInputDirection.Z = 0.0f;
+				FRotator TargetRotation = WorldInputDirection.Rotation();
+				FRotator NewRotation = FMath::RInterpTo(Character->GetActorRotation(), TargetRotation, GetWorld()->GetDeltaSeconds(), 5.0f);
+
+				Character->SetActorRotation(NewRotation);
+				ComboCount = ComboCount % Attack->AttackMontages.Num();
 				AnimInstance->Montage_Play(Attack->AttackMontages[ComboCount]);
-				ComboCount = (ComboCount + 1) % Attack->AttackMontages.Num();
+				ComboCount++;
+			}
+			if (Attack->Range == EFractAttackRange::Ranged)
+			{
+				APawn* InstigatorPawn = Cast<APawn>(GetOwner());
+				if (ProjectileClass && InstigatorPawn)
+				{
+					FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
+					FVector ToTarget = HitLocation - MuzzleLocation;
+					FRotator TargetRotation = ToTarget.Rotation();
+					FActorSpawnParameters SpawnParams;
+					SpawnParams.Owner = GetOwner();
+					SpawnParams.Instigator = InstigatorPawn;
+					if (UWorld* World = GetWorld())
+					{
+						World->SpawnActor<AFractProjectile>(
+							ProjectileClass,
+							MuzzleLocation,
+							TargetRotation,
+							SpawnParams);
+					}
+				}
 				
 			}
 		}

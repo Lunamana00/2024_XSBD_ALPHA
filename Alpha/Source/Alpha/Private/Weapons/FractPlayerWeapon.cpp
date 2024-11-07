@@ -24,6 +24,9 @@ AFractPlayerWeapon::AFractPlayerWeapon()
 	WeaponBox->SetCollisionResponseToAllChannels(ECR_Overlap);
 	WeaponBox->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
 
+	WeaponMuzzle = CreateDefaultSubobject<USceneComponent>(TEXT("MuzzleLocation"));
+	WeaponMuzzle->SetupAttachment(WeaponMesh);
+
 	BoxTraceStart = CreateDefaultSubobject<USceneComponent>(TEXT("BoxTraceStart"));
 	BoxTraceStart->SetupAttachment(WeaponMesh);
 	BoxTraceEnd = CreateDefaultSubobject<USceneComponent>(TEXT("BoxTraceEnd"));
@@ -62,6 +65,8 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 		EDrawDebugTrace::ForDuration, WeaponHit, true);
 	if (WeaponHit.GetActor())
 	{
+		UGameplayStatics::PlayWorldCameraShake(GetWorld(), CamShake, GetActorLocation(),
+			0, 1000.f, 1.f, false);
 		if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(WeaponHit.GetActor()))
 		{
 			HitInterface->GetHit(WeaponHit.ImpactPoint);

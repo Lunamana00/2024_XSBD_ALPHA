@@ -14,11 +14,11 @@ PRAGMA_DISABLE_DEPRECATION_WARNINGS
 #endif
 #define ALPHA_FractPlayerAttackComponent_generated_h
 
-#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
 	DECLARE_FUNCTION(execResetCombo);
 
 
-#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesUFractPlayerAttackComponent(); \
 	friend struct Z_Construct_UClass_UFractPlayerAttackComponent_Statics; \
@@ -27,7 +27,7 @@ public: \
 	DECLARE_SERIALIZER(UFractPlayerAttackComponent)
 
 
-#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_ENHANCED_CONSTRUCTORS \
+#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	UFractPlayerAttackComponent(UFractPlayerAttackComponent&&); \
@@ -39,13 +39,13 @@ public: \
 	NO_API virtual ~UFractPlayerAttackComponent();
 
 
-#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_15_PROLOG
-#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_16_PROLOG
+#define FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_INCLASS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_18_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_19_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

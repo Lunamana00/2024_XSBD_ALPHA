@@ -23,6 +23,9 @@ public:
 
 	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
+
+protected:
+	
 	
 private:
 	UPROPERTY(VisibleAnywhere, Category = Attribute)
@@ -39,6 +42,8 @@ private:
 
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* NormalAttackAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* SwitchRangeAction;
 
 	void NormalAttack();
 

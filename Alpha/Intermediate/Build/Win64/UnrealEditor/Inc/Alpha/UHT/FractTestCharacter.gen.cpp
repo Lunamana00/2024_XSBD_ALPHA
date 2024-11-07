@@ -113,6 +113,10 @@ struct Z_Construct_UClass_AFractTestCharacter_Statics
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SwitchRangeAction_MetaData[] = {
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterState_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "State" },
@@ -124,6 +128,7 @@ struct Z_Construct_UClass_AFractTestCharacter_Statics
 	static const UECodeGen_Private::FClassPropertyParams NewProp_WeaponClass;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Weapon;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_NormalAttackAction;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_SwitchRangeAction;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CharacterState_Underlying;
 	static const UECodeGen_Private::FEnumPropertyParams NewProp_CharacterState;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
@@ -142,6 +147,7 @@ const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestChar
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_WeaponClass = { "WeaponClass", nullptr, (EPropertyFlags)0x0044000000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, WeaponClass), Z_Construct_UClass_UClass, Z_Construct_UClass_AFractPlayerWeapon_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponClass_MetaData), NewProp_WeaponClass_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_Weapon = { "Weapon", nullptr, (EPropertyFlags)0x0040000000030001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, Weapon), Z_Construct_UClass_AFractPlayerWeapon_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Weapon_MetaData), NewProp_Weapon_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_NormalAttackAction = { "NormalAttackAction", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, NormalAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NormalAttackAction_MetaData), NewProp_NormalAttackAction_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_SwitchRangeAction = { "SwitchRangeAction", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, SwitchRangeAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SwitchRangeAction_MetaData), NewProp_SwitchRangeAction_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState = { "CharacterState", nullptr, (EPropertyFlags)0x0040000000010005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, CharacterState), Z_Construct_UEnum_Alpha_EFractCharacterState, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterState_MetaData), NewProp_CharacterState_MetaData) }; // 3248930071
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFractTestCharacter_Statics::PropPointers[] = {
@@ -150,6 +156,7 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFractTes
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_WeaponClass,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_Weapon,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_NormalAttackAction,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_SwitchRangeAction,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState_Underlying,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState,
 };
@@ -194,10 +201,10 @@ AFractTestCharacter::~AFractTestCharacter() {}
 struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFractTestCharacter, AFractTestCharacter::StaticClass, TEXT("AFractTestCharacter"), &Z_Registration_Info_UClass_AFractTestCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractTestCharacter), 4170453081U) },
+		{ Z_Construct_UClass_AFractTestCharacter, AFractTestCharacter::StaticClass, TEXT("AFractTestCharacter"), &Z_Registration_Info_UClass_AFractTestCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractTestCharacter), 201411144U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_1532937320(TEXT("/Script/Alpha"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_2775047323(TEXT("/Script/Alpha"),
 	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

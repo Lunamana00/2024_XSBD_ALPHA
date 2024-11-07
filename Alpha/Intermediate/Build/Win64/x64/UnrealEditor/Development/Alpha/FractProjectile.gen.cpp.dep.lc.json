@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\unrealeditor\\inc\\alpha\\uht\\fractprojectile.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\alphaeditor\\development\\unrealed\\sharedpch.unrealed.project.valapi.cpp20.h.pch",
+        "Includes": [
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\x64\\unrealeditor\\development\\alpha\\definitions.alpha.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\source\\alpha\\public\\weapons\\fractprojectile.h",
+            "d:\\xsbd_alpha\\2024_xsbd_alpha\\alpha\\intermediate\\build\\win64\\unrealeditor\\inc\\alpha\\uht\\fractprojectile.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

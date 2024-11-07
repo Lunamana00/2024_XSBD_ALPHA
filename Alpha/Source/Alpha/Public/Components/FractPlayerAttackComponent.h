@@ -7,6 +7,7 @@
 #include "Components/ActorComponent.h"
 #include "FractPlayerAttackComponent.generated.h"
 
+class AFractProjectile;
 class AFractTestCharacter;
 class AFractPlayerWeapon;
 class UFractPlayerAttributeComponent;
@@ -20,6 +21,7 @@ class ALPHA_API UFractPlayerAttackComponent : public UActorComponent
 public:	
 	// Sets default values for this component's properties
 	UFractPlayerAttackComponent();
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 protected:
 	// Called when the game starts
@@ -53,12 +55,17 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void ResetCombo();
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AFractProjectile> ProjectileClass;
+
+	FVector HitLocation;
 
 	
 
 public:	
 
-	void ToggleRange();
+	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
+	void SwitchRange();
 	FFractAttack* GetNormalAttack();
 	FFractSkill* GetSkill();
 	void UseNormalAttack();
