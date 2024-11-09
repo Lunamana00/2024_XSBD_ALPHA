@@ -171,14 +171,14 @@ AAlphaCharacter::~AAlphaCharacter() {}
 // End Class AAlphaCharacter
 
 // Begin Registration
-struct Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics
+struct Z_CompiledInDeferFile_FID_Users_kth00_Documents_GitHub_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
 		{ Z_Construct_UClass_AAlphaCharacter, AAlphaCharacter::StaticClass, TEXT("AAlphaCharacter"), &Z_Registration_Info_UClass_AAlphaCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AAlphaCharacter), 2730744420U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_2082019807(TEXT("/Script/Alpha"),
-	Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Git_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics::ClassInfo),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Users_kth00_Documents_GitHub_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_2082019807(TEXT("/Script/Alpha"),
+	Z_CompiledInDeferFile_FID_Users_kth00_Documents_GitHub_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Users_kth00_Documents_GitHub_2024_XSBD_ALPHA_Alpha_Source_Alpha_AlphaCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);
 // End Registration

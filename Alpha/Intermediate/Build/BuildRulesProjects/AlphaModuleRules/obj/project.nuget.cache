@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "7E6Gbr6SOuY=",
+  "dgSpecHash": "52VAPbzP5qE=",
   "success": true,
-  "projectFilePath": "C:\\Git\\2024_XSBD_ALPHA\\Alpha\\Intermediate\\Build\\BuildRulesProjects\\AlphaModuleRules\\AlphaModuleRules.csproj",
+  "projectFilePath": "C:\\Users\\kth00\\Documents\\GitHub\\2024_XSBD_ALPHA\\Alpha\\Intermediate\\Build\\BuildRulesProjects\\AlphaModuleRules\\AlphaModuleRules.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\kth00\\.nuget\\packages\\bitfaster.caching\\2.4.1\\bitfaster.caching.2.4.1.nupkg.sha512",
     "C:\\Users\\kth00\\.nuget\\packages\\blake3\\0.5.1\\blake3.0.5.1.nupkg.sha512",

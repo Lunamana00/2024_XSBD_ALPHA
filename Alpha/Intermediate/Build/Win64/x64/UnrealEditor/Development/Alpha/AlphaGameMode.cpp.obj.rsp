@@ -1,11 +1,11 @@
-"C:\Git\2024_XSBD_ALPHA\Alpha\Source\Alpha\AlphaGameMode.cpp"
-/FI"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/FI"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\Definitions.Alpha.h"
-/Yu"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
-/Fp"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
-/Fo"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\AlphaGameMode.cpp.obj"
-/sourceDependencies "C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\AlphaGameMode.cpp.dep.json"
-@"C:\Git\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\Alpha.Shared.rsp"
+"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Source\Alpha\AlphaGameMode.cpp"
+/FI"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/FI"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\Definitions.Alpha.h"
+/Yu"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h"
+/Fp"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\AlphaEditor\Development\UnrealEd\SharedPCH.UnrealEd.Project.ValApi.Cpp20.h.pch"
+/Fo"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\AlphaGameMode.cpp.obj"
+/sourceDependencies "C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\AlphaGameMode.cpp.dep.json"
+@"C:\Users\kth00\Documents\GitHub\2024_XSBD_ALPHA\Alpha\Intermediate\Build\Win64\x64\UnrealEditor\Development\Alpha\Alpha.Shared.rsp"
 /Zc:inline
 /nologo
 /Oi

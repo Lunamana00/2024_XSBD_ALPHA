@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("AlphaModuleRules")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Development")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2c49180bcd5f93a6345b15f32bad551d13cc2225")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+045618b7079123414ae637421e28317bb9042e0f")]
 [assembly: System.Reflection.AssemblyProductAttribute("AlphaModuleRules")]
 [assembly: System.Reflection.AssemblyTitleAttribute("AlphaModuleRules")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
