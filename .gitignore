@@ -74,3 +74,6 @@ Plugins/**/Intermediate/*
 DerivedDataCache/*
 # Ignore crash reports in the Saved/Crashes folder
 Alpha/Saved/Crashes/
+Alpha/Saved/Logs/
+Alpha/Saved/webcache_4430/
+Alpha/Saved/Config/CrashReportClient/
