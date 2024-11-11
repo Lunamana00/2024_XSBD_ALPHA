@@ -191,9 +191,7 @@ struct Z_Construct_UClass_AFractPlayerWeapon_Statics
 		{ "IncludePath", "Weapons/FractPlayerWeapon.h" },
 		{ "ModuleRelativePath", "Public/Weapons/FractPlayerWeapon.h" },
 	};
-	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeaponMesh_MetaData[] = {
-		{ "Category", "FractPlayerWeapon" },
-		{ "EditInline", "true" },
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_IgnoreActors_MetaData[] = {
 		{ "ModuleRelativePath", "Public/Weapons/FractPlayerWeapon.h" },
 	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeaponBox_MetaData[] = {
@@ -220,13 +218,20 @@ struct Z_Construct_UClass_AFractPlayerWeapon_Statics
 		{ "Category", "Camera" },
 		{ "ModuleRelativePath", "Public/Weapons/FractPlayerWeapon.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_WeaponMesh_MetaData[] = {
+		{ "Category", "FractPlayerWeapon" },
+		{ "EditInline", "true" },
+		{ "ModuleRelativePath", "Public/Weapons/FractPlayerWeapon.h" },
+	};
 #endif // WITH_METADATA
-	static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponMesh;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_IgnoreActors_Inner;
+	static const UECodeGen_Private::FArrayPropertyParams NewProp_IgnoreActors;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponBox;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BoxTraceStart;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_BoxTraceEnd;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponMuzzle;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_CamShake;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_WeaponMesh;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -239,19 +244,23 @@ struct Z_Construct_UClass_AFractPlayerWeapon_Statics
 	};
 	static const UECodeGen_Private::FClassParams ClassParams;
 };
-const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMesh = { "WeaponMesh", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, WeaponMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponMesh_MetaData), NewProp_WeaponMesh_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_IgnoreActors_Inner = { "IgnoreActors", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, Z_Construct_UClass_AActor_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_IgnoreActors = { "IgnoreActors", nullptr, (EPropertyFlags)0x0010000000000000, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, IgnoreActors), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_IgnoreActors_MetaData), NewProp_IgnoreActors_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponBox = { "WeaponBox", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, WeaponBox), Z_Construct_UClass_UBoxComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponBox_MetaData), NewProp_WeaponBox_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_BoxTraceStart = { "BoxTraceStart", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, BoxTraceStart), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BoxTraceStart_MetaData), NewProp_BoxTraceStart_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_BoxTraceEnd = { "BoxTraceEnd", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, BoxTraceEnd), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_BoxTraceEnd_MetaData), NewProp_BoxTraceEnd_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMuzzle = { "WeaponMuzzle", nullptr, (EPropertyFlags)0x00400000000a0009, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, WeaponMuzzle), Z_Construct_UClass_USceneComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponMuzzle_MetaData), NewProp_WeaponMuzzle_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_CamShake = { "CamShake", nullptr, (EPropertyFlags)0x0044000000010001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, CamShake), Z_Construct_UClass_UClass, Z_Construct_UClass_UCameraShakeBase_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CamShake_MetaData), NewProp_CamShake_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMesh = { "WeaponMesh", nullptr, (EPropertyFlags)0x001000000008000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractPlayerWeapon, WeaponMesh), Z_Construct_UClass_UStaticMeshComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_WeaponMesh_MetaData), NewProp_WeaponMesh_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFractPlayerWeapon_Statics::PropPointers[] = {
-	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMesh,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_IgnoreActors_Inner,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_IgnoreActors,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponBox,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_BoxTraceStart,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_BoxTraceEnd,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMuzzle,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_CamShake,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractPlayerWeapon_Statics::NewProp_WeaponMesh,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFractPlayerWeapon_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AFractPlayerWeapon_Statics::DependentSingletons[])() = {
@@ -294,10 +303,10 @@ AFractPlayerWeapon::~AFractPlayerWeapon() {}
 struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFractPlayerWeapon, AFractPlayerWeapon::StaticClass, TEXT("AFractPlayerWeapon"), &Z_Registration_Info_UClass_AFractPlayerWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractPlayerWeapon), 1543841903U) },
+		{ Z_Construct_UClass_AFractPlayerWeapon, AFractPlayerWeapon::StaticClass, TEXT("AFractPlayerWeapon"), &Z_Registration_Info_UClass_AFractPlayerWeapon, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractPlayerWeapon), 3223327032U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_41249035(TEXT("/Script/Alpha"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_1749793616(TEXT("/Script/Alpha"),
 	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Weapons_FractPlayerWeapon_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

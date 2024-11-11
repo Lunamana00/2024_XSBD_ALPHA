@@ -83,6 +83,7 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &AAlphaCharacter::StopMoving);
 
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Look);
@@ -99,7 +100,7 @@ void AAlphaCharacter::Move(const FInputActionValue& Value)
 	
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	MovementInput = MovementVector;
-
+	
 	if (Controller != nullptr)
 	{
 		// find out which way is forward
@@ -129,4 +130,9 @@ void AAlphaCharacter::Look(const FInputActionValue& Value)
 		AddControllerYawInput(LookAxisVector.X);
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
+}
+
+void AAlphaCharacter::StopMoving()
+{
+	MovementInput = FVector2D::ZeroVector;
 }

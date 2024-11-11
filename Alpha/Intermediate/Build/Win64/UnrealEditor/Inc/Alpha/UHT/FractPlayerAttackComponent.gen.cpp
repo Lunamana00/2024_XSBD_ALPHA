@@ -13,12 +13,14 @@ void EmptyLinkFunctionForGeneratedCodeFractPlayerAttackComponent() {}
 // Begin Cross Module References
 ALPHA_API UClass* Z_Construct_UClass_AFractProjectile_NoRegister();
 ALPHA_API UClass* Z_Construct_UClass_AFractTestCharacter_NoRegister();
+ALPHA_API UClass* Z_Construct_UClass_AFractTestEnemy_NoRegister();
 ALPHA_API UClass* Z_Construct_UClass_UFractPlayerAttackComponent();
 ALPHA_API UClass* Z_Construct_UClass_UFractPlayerAttackComponent_NoRegister();
 ALPHA_API UEnum* Z_Construct_UEnum_Alpha_EFractAttackRange();
 ALPHA_API UScriptStruct* Z_Construct_UScriptStruct_FFractAttack();
 ALPHA_API UScriptStruct* Z_Construct_UScriptStruct_FFractSkill();
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector();
 ENGINE_API UClass* Z_Construct_UClass_UActorComponent();
 UPackage* Z_Construct_UPackage__Script_Alpha();
 // End Cross Module References
@@ -112,6 +114,29 @@ struct Z_Construct_UClass_UFractPlayerAttackComponent_Statics
 		{ "Category", "FractPlayerAttackComponent" },
 		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AutoTargetRange_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AutoTargetAngle_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_AttackDirection_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CurrentTarget_MetaData[] = {
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bHasTarget_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bCanRotateToInputDirection_MetaData[] = {
+		{ "Category", "Combat" },
+		{ "ModuleRelativePath", "Public/Components/FractPlayerAttackComponent.h" },
+	};
 #endif // WITH_METADATA
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Character;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CurrentRange_Underlying;
@@ -128,6 +153,14 @@ struct Z_Construct_UClass_UFractPlayerAttackComponent_Statics
 	static const UECodeGen_Private::FArrayPropertyParams NewProp_AerialSkills;
 	static const UECodeGen_Private::FIntPropertyParams NewProp_ComboCount;
 	static const UECodeGen_Private::FClassPropertyParams NewProp_ProjectileClass;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_AutoTargetRange;
+	static const UECodeGen_Private::FFloatPropertyParams NewProp_AutoTargetAngle;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_AttackDirection;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_CurrentTarget;
+	static void NewProp_bHasTarget_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bHasTarget;
+	static void NewProp_bCanRotateToInputDirection_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bCanRotateToInputDirection;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
@@ -157,6 +190,20 @@ const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UFractPlayerAt
 const UECodeGen_Private::FArrayPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AerialSkills = { "AerialSkills", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Array, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, AerialSkills), EArrayPropertyFlags::None, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AerialSkills_MetaData), NewProp_AerialSkills_MetaData) }; // 3798258329
 const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_ComboCount = { "ComboCount", nullptr, (EPropertyFlags)0x0020080000030001, UECodeGen_Private::EPropertyGenFlags::Int, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, ComboCount), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ComboCount_MetaData), NewProp_ComboCount_MetaData) };
 const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_ProjectileClass = { "ProjectileClass", nullptr, (EPropertyFlags)0x0024080000000001, UECodeGen_Private::EPropertyGenFlags::Class, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, ProjectileClass), Z_Construct_UClass_UClass, Z_Construct_UClass_AFractProjectile_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ProjectileClass_MetaData), NewProp_ProjectileClass_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AutoTargetRange = { "AutoTargetRange", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, AutoTargetRange), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AutoTargetRange_MetaData), NewProp_AutoTargetRange_MetaData) };
+const UECodeGen_Private::FFloatPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AutoTargetAngle = { "AutoTargetAngle", nullptr, (EPropertyFlags)0x0020080000000001, UECodeGen_Private::EPropertyGenFlags::Float, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, AutoTargetAngle), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AutoTargetAngle_MetaData), NewProp_AutoTargetAngle_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AttackDirection = { "AttackDirection", nullptr, (EPropertyFlags)0x0020080000030001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, AttackDirection), Z_Construct_UScriptStruct_FVector, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_AttackDirection_MetaData), NewProp_AttackDirection_MetaData) };
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_CurrentTarget = { "CurrentTarget", nullptr, (EPropertyFlags)0x0020080000000000, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UFractPlayerAttackComponent, CurrentTarget), Z_Construct_UClass_AFractTestEnemy_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CurrentTarget_MetaData), NewProp_CurrentTarget_MetaData) };
+void Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bHasTarget_SetBit(void* Obj)
+{
+	((UFractPlayerAttackComponent*)Obj)->bHasTarget = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bHasTarget = { "bHasTarget", nullptr, (EPropertyFlags)0x0020080000010001, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UFractPlayerAttackComponent), &Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bHasTarget_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bHasTarget_MetaData), NewProp_bHasTarget_MetaData) };
+void Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bCanRotateToInputDirection_SetBit(void* Obj)
+{
+	((UFractPlayerAttackComponent*)Obj)->bCanRotateToInputDirection = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bCanRotateToInputDirection = { "bCanRotateToInputDirection", nullptr, (EPropertyFlags)0x0020080000010005, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(UFractPlayerAttackComponent), &Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bCanRotateToInputDirection_SetBit, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_bCanRotateToInputDirection_MetaData), NewProp_bCanRotateToInputDirection_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFractPlayerAttackComponent_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_Character,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_CurrentRange_Underlying,
@@ -172,6 +219,12 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UFractPla
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AerialSkills,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_ComboCount,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_ProjectileClass,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AutoTargetRange,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AutoTargetAngle,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_AttackDirection,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_CurrentTarget,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bHasTarget,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UFractPlayerAttackComponent_Statics::NewProp_bCanRotateToInputDirection,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_UFractPlayerAttackComponent_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_UFractPlayerAttackComponent_Statics::DependentSingletons[])() = {
@@ -214,10 +267,10 @@ UFractPlayerAttackComponent::~UFractPlayerAttackComponent() {}
 struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UFractPlayerAttackComponent, UFractPlayerAttackComponent::StaticClass, TEXT("UFractPlayerAttackComponent"), &Z_Registration_Info_UClass_UFractPlayerAttackComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFractPlayerAttackComponent), 315453211U) },
+		{ Z_Construct_UClass_UFractPlayerAttackComponent, UFractPlayerAttackComponent::StaticClass, TEXT("UFractPlayerAttackComponent"), &Z_Registration_Info_UClass_UFractPlayerAttackComponent, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UFractPlayerAttackComponent), 357940674U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_1964098247(TEXT("/Script/Alpha"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_1161024101(TEXT("/Script/Alpha"),
 	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Components_FractPlayerAttackComponent_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

@@ -20,6 +20,7 @@ public:
 	// Sets default values for this actor's properties
 	AFractPlayerWeapon();
 
+	UPROPERTY()
 	TArray<AActor*> IgnoreActors;
 
 protected:
@@ -37,8 +38,7 @@ public:
 
 private:
 
-	UPROPERTY(VisibleAnywhere)
-	UStaticMeshComponent* WeaponMesh;
+	
 
 	UPROPERTY(VisibleAnywhere, Category = "Weapon")
 	UBoxComponent* WeaponBox;
@@ -56,6 +56,8 @@ private:
 
 public:
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	UStaticMeshComponent* WeaponMesh;
 	FORCEINLINE USceneComponent* GetWeaponMuzzle() const { return WeaponMuzzle; }
 	FORCEINLINE UBoxComponent* GetWeaponBox() const { return WeaponBox; }
 	

@@ -9,16 +9,20 @@
 #include "UObject/ScriptMacros.h"
 
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
+class AFractPlayerWeapon;
 #ifdef ALPHA_FractTestCharacter_generated_h
 #error "FractTestCharacter.generated.h already included, missing '#pragma once' in FractTestCharacter.h"
 #endif
 #define ALPHA_FractTestCharacter_generated_h
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	DECLARE_FUNCTION(execSetWeaponCollisionEnabled);
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execSetAllowPhysicsRotationDuringAnimRootMotion); \
+	DECLARE_FUNCTION(execSwitchWeaponSocket); \
+	DECLARE_FUNCTION(execSetWeaponCollisionEnabled); \
+	DECLARE_FUNCTION(execGetWeapon);
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_INCLASS_NO_PURE_DECLS \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_INCLASS_NO_PURE_DECLS \
 private: \
 	static void StaticRegisterNativesAFractTestCharacter(); \
 	friend struct Z_Construct_UClass_AFractTestCharacter_Statics; \
@@ -27,7 +31,7 @@ public: \
 	DECLARE_SERIALIZER(AFractTestCharacter)
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_ENHANCED_CONSTRUCTORS \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 	/** Private move- and copy-constructors, should never be used */ \
 	AFractTestCharacter(AFractTestCharacter&&); \
@@ -39,13 +43,13 @@ public: \
 	NO_API virtual ~AFractTestCharacter();
 
 
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_16_PROLOG
-#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_GENERATED_BODY \
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_17_PROLOG
+#define FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_GENERATED_BODY \
 PRAGMA_DISABLE_DEPRECATION_WARNINGS \
 public: \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_INCLASS_NO_PURE_DECLS \
-	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_19_ENHANCED_CONSTRUCTORS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_INCLASS_NO_PURE_DECLS \
+	FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_20_ENHANCED_CONSTRUCTORS \
 private: \
 PRAGMA_ENABLE_DEPRECATION_WARNINGS
 

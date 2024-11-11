@@ -18,10 +18,100 @@ ALPHA_API UClass* Z_Construct_UClass_UFractPlayerAttackComponent_NoRegister();
 ALPHA_API UClass* Z_Construct_UClass_UFractPlayerAttributeComponent_NoRegister();
 ALPHA_API UEnum* Z_Construct_UEnum_Alpha_EFractCharacterState();
 COREUOBJECT_API UClass* Z_Construct_UClass_UClass();
+COREUOBJECT_API UScriptStruct* Z_Construct_UScriptStruct_FVector2D();
 ENGINE_API UEnum* Z_Construct_UEnum_Engine_ECollisionEnabled();
 ENHANCEDINPUT_API UClass* Z_Construct_UClass_UInputAction_NoRegister();
+MOTIONWARPING_API UClass* Z_Construct_UClass_UMotionWarpingComponent_NoRegister();
 UPackage* Z_Construct_UPackage__Script_Alpha();
 // End Cross Module References
+
+// Begin Class AFractTestCharacter Function GetWeapon
+struct Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics
+{
+	struct FractTestCharacter_eventGetWeapon_Parms
+	{
+		AFractPlayerWeapon* ReturnValue;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_ReturnValue;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::NewProp_ReturnValue = { "ReturnValue", nullptr, (EPropertyFlags)0x0010000000000580, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(FractTestCharacter_eventGetWeapon_Parms, ReturnValue), Z_Construct_UClass_AFractPlayerWeapon_NoRegister, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::NewProp_ReturnValue,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFractTestCharacter, nullptr, "GetWeapon", nullptr, nullptr, Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::PropPointers), sizeof(Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::FractTestCharacter_eventGetWeapon_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x54020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::FractTestCharacter_eventGetWeapon_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AFractTestCharacter_GetWeapon()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFractTestCharacter_GetWeapon_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFractTestCharacter::execGetWeapon)
+{
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	*(AFractPlayerWeapon**)Z_Param__Result=P_THIS->GetWeapon();
+	P_NATIVE_END;
+}
+// End Class AFractTestCharacter Function GetWeapon
+
+// Begin Class AFractTestCharacter Function SetAllowPhysicsRotationDuringAnimRootMotion
+struct Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics
+{
+	struct FractTestCharacter_eventSetAllowPhysicsRotationDuringAnimRootMotion_Parms
+	{
+		bool bAllowRotation;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static void NewProp_bAllowRotation_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bAllowRotation;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::NewProp_bAllowRotation_SetBit(void* Obj)
+{
+	((FractTestCharacter_eventSetAllowPhysicsRotationDuringAnimRootMotion_Parms*)Obj)->bAllowRotation = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::NewProp_bAllowRotation = { "bAllowRotation", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FractTestCharacter_eventSetAllowPhysicsRotationDuringAnimRootMotion_Parms), &Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::NewProp_bAllowRotation_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::NewProp_bAllowRotation,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFractTestCharacter, nullptr, "SetAllowPhysicsRotationDuringAnimRootMotion", nullptr, nullptr, Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::PropPointers), sizeof(Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::FractTestCharacter_eventSetAllowPhysicsRotationDuringAnimRootMotion_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::FractTestCharacter_eventSetAllowPhysicsRotationDuringAnimRootMotion_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFractTestCharacter::execSetAllowPhysicsRotationDuringAnimRootMotion)
+{
+	P_GET_UBOOL(Z_Param_bAllowRotation);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SetAllowPhysicsRotationDuringAnimRootMotion(Z_Param_bAllowRotation);
+	P_NATIVE_END;
+}
+// End Class AFractTestCharacter Function SetAllowPhysicsRotationDuringAnimRootMotion
 
 // Begin Class AFractTestCharacter Function SetWeaponCollisionEnabled
 struct Z_Construct_UFunction_AFractTestCharacter_SetWeaponCollisionEnabled_Statics
@@ -65,12 +155,62 @@ DEFINE_FUNCTION(AFractTestCharacter::execSetWeaponCollisionEnabled)
 }
 // End Class AFractTestCharacter Function SetWeaponCollisionEnabled
 
+// Begin Class AFractTestCharacter Function SwitchWeaponSocket
+struct Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics
+{
+	struct FractTestCharacter_eventSwitchWeaponSocket_Parms
+	{
+		bool bIsRight;
+	};
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Function_MetaDataParams[] = {
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
+#endif // WITH_METADATA
+	static void NewProp_bIsRight_SetBit(void* Obj);
+	static const UECodeGen_Private::FBoolPropertyParams NewProp_bIsRight;
+	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
+	static const UECodeGen_Private::FFunctionParams FuncParams;
+};
+void Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::NewProp_bIsRight_SetBit(void* Obj)
+{
+	((FractTestCharacter_eventSwitchWeaponSocket_Parms*)Obj)->bIsRight = 1;
+}
+const UECodeGen_Private::FBoolPropertyParams Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::NewProp_bIsRight = { "bIsRight", nullptr, (EPropertyFlags)0x0010000000000080, UECodeGen_Private::EPropertyGenFlags::Bool | UECodeGen_Private::EPropertyGenFlags::NativeBool, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, sizeof(bool), sizeof(FractTestCharacter_eventSwitchWeaponSocket_Parms), &Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::NewProp_bIsRight_SetBit, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::PropPointers[] = {
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::NewProp_bIsRight,
+};
+static_assert(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::PropPointers) < 2048);
+const UECodeGen_Private::FFunctionParams Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::FuncParams = { (UObject*(*)())Z_Construct_UClass_AFractTestCharacter, nullptr, "SwitchWeaponSocket", nullptr, nullptr, Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::PropPointers, UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::PropPointers), sizeof(Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::FractTestCharacter_eventSwitchWeaponSocket_Parms), RF_Public|RF_Transient|RF_MarkAsNative, (EFunctionFlags)0x04020401, 0, 0, METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::Function_MetaDataParams), Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::Function_MetaDataParams) };
+static_assert(sizeof(Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::FractTestCharacter_eventSwitchWeaponSocket_Parms) < MAX_uint16);
+UFunction* Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket()
+{
+	static UFunction* ReturnFunction = nullptr;
+	if (!ReturnFunction)
+	{
+		UECodeGen_Private::ConstructUFunction(&ReturnFunction, Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket_Statics::FuncParams);
+	}
+	return ReturnFunction;
+}
+DEFINE_FUNCTION(AFractTestCharacter::execSwitchWeaponSocket)
+{
+	P_GET_UBOOL(Z_Param_bIsRight);
+	P_FINISH;
+	P_NATIVE_BEGIN;
+	P_THIS->SwitchWeaponSocket(Z_Param_bIsRight);
+	P_NATIVE_END;
+}
+// End Class AFractTestCharacter Function SwitchWeaponSocket
+
 // Begin Class AFractTestCharacter
 void AFractTestCharacter::StaticRegisterNativesAFractTestCharacter()
 {
 	UClass* Class = AFractTestCharacter::StaticClass();
 	static const FNameNativePtrPair Funcs[] = {
+		{ "GetWeapon", &AFractTestCharacter::execGetWeapon },
+		{ "SetAllowPhysicsRotationDuringAnimRootMotion", &AFractTestCharacter::execSetAllowPhysicsRotationDuringAnimRootMotion },
 		{ "SetWeaponCollisionEnabled", &AFractTestCharacter::execSetWeaponCollisionEnabled },
+		{ "SwitchWeaponSocket", &AFractTestCharacter::execSwitchWeaponSocket },
 	};
 	FNativeFunctionRegistrar::RegisterFunctions(Class, Funcs, UE_ARRAY_COUNT(Funcs));
 }
@@ -117,9 +257,19 @@ struct Z_Construct_UClass_AFractTestCharacter_Statics
 		{ "Category", "Input" },
 		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MovementInputVector_MetaData[] = {
+		{ "Category", "Input" },
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_CharacterState_MetaData[] = {
 		{ "AllowPrivateAccess", "true" },
 		{ "Category", "State" },
+		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
+	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_MotionWarpingComponent_MetaData[] = {
+		{ "AllowPrivateAccess", "true" },
+		{ "Category", "Attack" },
+		{ "EditInline", "true" },
 		{ "ModuleRelativePath", "Public/Test/FractTestCharacter.h" },
 	};
 #endif // WITH_METADATA
@@ -129,12 +279,17 @@ struct Z_Construct_UClass_AFractTestCharacter_Statics
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_Weapon;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_NormalAttackAction;
 	static const UECodeGen_Private::FObjectPropertyParams NewProp_SwitchRangeAction;
+	static const UECodeGen_Private::FStructPropertyParams NewProp_MovementInputVector;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_CharacterState_Underlying;
 	static const UECodeGen_Private::FEnumPropertyParams NewProp_CharacterState;
+	static const UECodeGen_Private::FObjectPropertyParams NewProp_MotionWarpingComponent;
 	static const UECodeGen_Private::FPropertyParamsBase* const PropPointers[];
 	static UObject* (*const DependentSingletons[])();
 	static constexpr FClassFunctionLinkInfo FuncInfo[] = {
+		{ &Z_Construct_UFunction_AFractTestCharacter_GetWeapon, "GetWeapon" }, // 2625864155
+		{ &Z_Construct_UFunction_AFractTestCharacter_SetAllowPhysicsRotationDuringAnimRootMotion, "SetAllowPhysicsRotationDuringAnimRootMotion" }, // 3265561689
 		{ &Z_Construct_UFunction_AFractTestCharacter_SetWeaponCollisionEnabled, "SetWeaponCollisionEnabled" }, // 3899947263
+		{ &Z_Construct_UFunction_AFractTestCharacter_SwitchWeaponSocket, "SwitchWeaponSocket" }, // 3485043628
 	};
 	static_assert(UE_ARRAY_COUNT(FuncInfo) < 2048);
 	static constexpr FCppClassTypeInfoStatic StaticCppClassTypeInfo = {
@@ -148,8 +303,10 @@ const UECodeGen_Private::FClassPropertyParams Z_Construct_UClass_AFractTestChara
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_Weapon = { "Weapon", nullptr, (EPropertyFlags)0x0040000000030001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, Weapon), Z_Construct_UClass_AFractPlayerWeapon_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_Weapon_MetaData), NewProp_Weapon_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_NormalAttackAction = { "NormalAttackAction", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, NormalAttackAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_NormalAttackAction_MetaData), NewProp_NormalAttackAction_MetaData) };
 const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_SwitchRangeAction = { "SwitchRangeAction", nullptr, (EPropertyFlags)0x0040000000010001, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, SwitchRangeAction), Z_Construct_UClass_UInputAction_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SwitchRangeAction_MetaData), NewProp_SwitchRangeAction_MetaData) };
+const UECodeGen_Private::FStructPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_MovementInputVector = { "MovementInputVector", nullptr, (EPropertyFlags)0x0040000000030001, UECodeGen_Private::EPropertyGenFlags::Struct, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, MovementInputVector), Z_Construct_UScriptStruct_FVector2D, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MovementInputVector_MetaData), NewProp_MovementInputVector_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState = { "CharacterState", nullptr, (EPropertyFlags)0x0040000000010005, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, CharacterState), Z_Construct_UEnum_Alpha_EFractCharacterState, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_CharacterState_MetaData), NewProp_CharacterState_MetaData) }; // 3248930071
+const UECodeGen_Private::FObjectPropertyParams Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_MotionWarpingComponent = { "MotionWarpingComponent", nullptr, (EPropertyFlags)0x00400000000b000d, UECodeGen_Private::EPropertyGenFlags::Object, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(AFractTestCharacter, MotionWarpingComponent), Z_Construct_UClass_UMotionWarpingComponent_NoRegister, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_MotionWarpingComponent_MetaData), NewProp_MotionWarpingComponent_MetaData) };
 const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFractTestCharacter_Statics::PropPointers[] = {
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_Attribute,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_AttackComponent,
@@ -157,8 +314,10 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_AFractTes
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_Weapon,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_NormalAttackAction,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_SwitchRangeAction,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_MovementInputVector,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState_Underlying,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_CharacterState,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_AFractTestCharacter_Statics::NewProp_MotionWarpingComponent,
 };
 static_assert(UE_ARRAY_COUNT(Z_Construct_UClass_AFractTestCharacter_Statics::PropPointers) < 2048);
 UObject* (*const Z_Construct_UClass_AFractTestCharacter_Statics::DependentSingletons[])() = {
@@ -201,10 +360,10 @@ AFractTestCharacter::~AFractTestCharacter() {}
 struct Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_AFractTestCharacter, AFractTestCharacter::StaticClass, TEXT("AFractTestCharacter"), &Z_Registration_Info_UClass_AFractTestCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractTestCharacter), 201411144U) },
+		{ Z_Construct_UClass_AFractTestCharacter, AFractTestCharacter::StaticClass, TEXT("AFractTestCharacter"), &Z_Registration_Info_UClass_AFractTestCharacter, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AFractTestCharacter), 444569168U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_2775047323(TEXT("/Script/Alpha"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_348463036(TEXT("/Script/Alpha"),
 	Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Alpha_Source_Alpha_Public_Test_FractTestCharacter_h_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

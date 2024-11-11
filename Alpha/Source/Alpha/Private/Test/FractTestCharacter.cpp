@@ -4,14 +4,18 @@
 #include "Test/FractTestCharacter.h"
 
 #include "EnhancedInputComponent.h"
+#include "MotionWarpingComponent.h"
 #include "Components/FractPlayerAttackComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "Weapons/FractPlayerWeapon.h"
 
 AFractTestCharacter::AFractTestCharacter()
 {
 	Attribute = CreateDefaultSubobject<UFractPlayerAttributeComponent>(TEXT("Player Attribute Component"));
 	AttackComponent = CreateDefaultSubobject<UFractPlayerAttackComponent>(TEXT("Player Attack Component"));
+	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("Motion Warping Component"));
+	
 }
 
 void AFractTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
@@ -46,13 +50,26 @@ void AFractTestCharacter::BeginPlay()
 	{
 		Weapon->AttachToComponent(
 			GetMesh(),
-			FAttachmentTransformRules::SnapToTargetIncludingScale,
-			"WeaponSocket");
+			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+			"RightWeaponSocket");
 	}
 
 	
 }
 
+
+
+void AFractTestCharacter::Move(const FInputActionValue& Value)
+{
+	Super::Move(Value);
+	MovementInputVector = Value.Get<FVector2D>();
+}
+
+void AFractTestCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	
+}
 
 
 void AFractTestCharacter::NormalAttack()
@@ -64,9 +81,34 @@ void AFractTestCharacter::SetWeaponCollisionEnabled(ECollisionEnabled::Type Coll
 {
 	if (Weapon && Weapon->GetWeaponBox())
 	{
-		Weapon->GetWeaponBox()->SetCollisionEnabled(CollisionEnabled);
 		Weapon->IgnoreActors.Empty();
+		Weapon->GetWeaponBox()->SetCollisionEnabled(CollisionEnabled);
 	}
+}
+
+void AFractTestCharacter::SwitchWeaponSocket(bool bIsRight)
+{
+	if (Weapon && GetMesh())
+	{
+		if (bIsRight)
+		{
+			Weapon->AttachToComponent(GetMesh(),
+				FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("RightWeaponSocket"));
+		}
+		else
+		{
+			Weapon->AttachToComponent(GetMesh(),
+				FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("LeftWeaponSocket"));
+		}
+	}
+	
+}
+
+void AFractTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool bAllowRotation)
+{
+	if (AttackComponent->GetCurrentTarget())
+		return;
+	GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = bAllowRotation;
 }
 
 

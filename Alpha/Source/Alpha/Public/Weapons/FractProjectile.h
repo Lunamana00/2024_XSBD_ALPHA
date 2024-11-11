@@ -26,9 +26,9 @@ private:
 	class UProjectileMovementComponent* ProjectileMovementComponent;
 
 	UPROPERTY(EditAnywhere)
-	class UParticleSystem* Tracer;
+	class UNiagaraSystem* TracerEffect;
 
 	UPROPERTY(EditAnywhere)
-	class UParticleSystemComponent* TracerComponent;
-
+	class UNiagaraComponent* NiagaraComponent;
+	
 };
