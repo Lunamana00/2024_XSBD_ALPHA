@@ -77,3 +77,6 @@ Alpha/Saved/Crashes/
 Alpha/Saved/Logs/
 Alpha/Saved/webcache_4430/
 Alpha/Saved/Config/CrashReportClient/
+# Ignore Intermediate and Saved directories
+Alpha/Intermediate/
+Alpha/Saved/
