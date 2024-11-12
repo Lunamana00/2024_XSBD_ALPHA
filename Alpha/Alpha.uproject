@@ -7,10 +7,14 @@
 		{
 			"Name": "Alpha",
 			"Type": "Runtime",
+<<<<<<< HEAD
 			"LoadingPhase": "Default",
 			"AdditionalDependencies": [
 				"Engine"
 			]
+=======
+			"LoadingPhase": "Default"
+>>>>>>> parent of 414c56c ([FEAT] short AI)
 		}
 	],
 	"Plugins": [
