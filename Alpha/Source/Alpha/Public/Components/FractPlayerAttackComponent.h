@@ -7,8 +7,9 @@
 #include "Components/ActorComponent.h"
 #include "FractPlayerAttackComponent.generated.h"
 
+class AFractTestEnemy;
 class AFractProjectile;
-class AFractTestCharacter;
+class ASeunghwanTestCharacter;
 class AFractPlayerWeapon;
 class UFractPlayerAttributeComponent;
 
@@ -28,7 +29,7 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(VisibleAnywhere, Category = "Player")
-	AFractTestCharacter* Character;
+	ASeunghwanTestCharacter* Character;
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	EFractAttackRange CurrentRange = EFractAttackRange::Melee;
@@ -60,15 +61,39 @@ protected:
 
 	FVector HitLocation;
 
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float AutoTargetRange = 200.f;
+
+	UPROPERTY(EditAnywhere, Category = "Combat")
+	float AutoTargetAngle = 90.f;
+
+	UPROPERTY(VisibleDefaultsOnly, Category = "Combat")
+	FVector AttackDirection;
 	
+	void MotionWarpToTarget(const AActor* Target) const;
+
+	UPROPERTY()
+	AFractTestEnemy* CurrentTarget = nullptr;
+
+	AFractTestEnemy* FindTarget();
+	void RemoveMotionWarpTarget(FName WarpTargetName) const;
+	void RotateToInputDirection(float DeltaTime);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	bool bHasTarget = false;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat")
+	bool bCanRotateToInputDirection = false;
 
 public:	
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
 	void SwitchRange();
-	FFractAttack* GetNormalAttack();
-	FFractSkill* GetSkill();
+	FORCEINLINE FFractAttack* GetNormalAttack();
+	FORCEINLINE FFractSkill* GetSkill();
+	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
 	void UseNormalAttack();
 	void UseSkill();
+	
 		
 };
