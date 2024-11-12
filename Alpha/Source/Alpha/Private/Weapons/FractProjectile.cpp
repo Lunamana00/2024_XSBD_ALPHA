@@ -2,7 +2,9 @@
 
 
 #include "Weapons/FractProjectile.h"
-#include "Particles/ParticleSystemComponent.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Components/BoxComponent.h"
 #include "GameFramework/ProjectileMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
@@ -20,6 +22,8 @@ AFractProjectile::AFractProjectile()
 	CollisionBox->SetCollisionResponseToChannel(ECC_Visibility, ECollisionResponse::ECR_Block);
 	CollisionBox->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
 
+	NiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("NiagaraComponent"));
+
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->bRotationFollowsVelocity = true;
 	ProjectileMovementComponent->InitialSpeed = 2000.f;
@@ -30,11 +34,18 @@ AFractProjectile::AFractProjectile()
 void AFractProjectile::BeginPlay()
 {
 	Super::BeginPlay();
-
-	if (Tracer)
+	
+	if (TracerEffect)
 	{
-		TracerComponent = UGameplayStatics::SpawnEmitterAttached(Tracer, CollisionBox, FName(),
-			GetActorLocation(), GetActorRotation(), EAttachLocation::KeepWorldPosition);
+		UNiagaraFunctionLibrary::SpawnSystemAttached(
+		TracerEffect,
+		GetRootComponent(),          // Attach to the root component or any other component
+		NAME_None,
+		FVector::ZeroVector,         // Relative location
+		FRotator::ZeroRotator,       // Relative rotation
+		EAttachLocation::KeepRelativeOffset,
+		true                         // Auto destroy
+		);
 	}
 	
 }

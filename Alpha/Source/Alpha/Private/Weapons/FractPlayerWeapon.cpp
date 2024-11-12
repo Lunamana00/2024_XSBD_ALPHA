@@ -60,7 +60,7 @@ void AFractPlayerWeapon::OnWeaponBoxOverlap(UPrimitiveComponent* OverlappedCompo
 	}
 	
 	FHitResult WeaponHit;
-	UKismetSystemLibrary::BoxTraceSingle(this, Start, End, FVector(5.f, 5.f, 5.f),
+	UKismetSystemLibrary::BoxTraceSingle(this, Start, End, FVector(10.f, 10.f, 30.f),
 		BoxTraceStart->GetComponentRotation(), ETraceTypeQuery::TraceTypeQuery1, false, ActorsToIgnore,
 		EDrawDebugTrace::ForDuration, WeaponHit, true);
 	if (WeaponHit.GetActor())
@@ -93,7 +93,7 @@ void AFractPlayerWeapon::OnWeaponBoxEndOverlap(UPrimitiveComponent* OverlappedCo
 void AFractPlayerWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
+	
 }
 
 
