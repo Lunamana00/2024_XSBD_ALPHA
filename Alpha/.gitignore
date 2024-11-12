@@ -70,48 +70,5 @@ Saved/*
 Intermediate/*
 Plugins/**/Intermediate/*
 
-# Unreal Engine 기본 빌드 폴더 및 파일 무시
-
-# 빌드된 바이너리 폴더
-Binaries/
-DerivedDataCache/
-Intermediate/
-Saved/
-*.sln
-
-# 빌드된 실행 파일 및 로그 파일
-*.exe
-*.dll
-*.app
-*.dylib
-*.so
-*.log
-
-# 사용자 설정 파일 무시
-*.user
-*.userprefs
-*.userosettings
-*.suo
-
-# IDE 설정 파일 (Visual Studio, Rider 등)
-.vscode/
-.idea/
-.vs/
-
-# MacOS 관련 파일 무시
-.DS_Store
-
-# Windows 관련 파일 무시
-Thumbs.db
-
-
 # Cache files for the editor to use
 DerivedDataCache/*
-# Ignore crash reports in the Saved/Crashes folder
-Alpha/Saved/Crashes/
-Alpha/Saved/Logs/
-Alpha/Saved/webcache_4430/
-Alpha/Saved/Config/CrashReportClient/
-# Ignore Intermediate and Saved directories
-Alpha/Intermediate/
-Alpha/Saved/
