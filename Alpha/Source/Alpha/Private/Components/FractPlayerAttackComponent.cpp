@@ -33,7 +33,6 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
 	
-	
 
 	if (AFractTestEnemy* FoundTarget = FindTarget())
 	{

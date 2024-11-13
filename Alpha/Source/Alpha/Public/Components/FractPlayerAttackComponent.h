@@ -37,7 +37,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	bool bIsFlying = false;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|Attacks")
 	TArray<FFractAttack> MeleeAttacks;
 
