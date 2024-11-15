@@ -50,17 +50,16 @@ public:
 protected:
 	virtual void BeginPlay() override;
 
-	FVector2D MovementInput;
 	/** Called for movement input */
 	void Move(const FInputActionValue& Value);
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 
+	void StopMoving();
+
 private:
 	
-	
-
 	UPROPERTY(VisibleAnywhere, Category = Attribute)
 	UFractPlayerAttributeComponent* Attribute;
 
@@ -91,9 +90,12 @@ private:
 
 public:
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
+	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }
+	
 	FORCEINLINE EFractCharacterState GetState() const { return CharacterState; }
+	
 	FORCEINLINE void SetState(const EFractCharacterState State) { CharacterState = State; }
 	
 	UFUNCTION(BluePrintCallable)
@@ -104,14 +106,13 @@ public:
 
 	UFUNCTION(BluePrintCallable)
 	void SetAllowPhysicsRotationDuringAnimRootMotion(bool bAllowRotation);
+	
 	FORCEINLINE UMotionWarpingComponent* GetMotionWarpingComponent() const { return MotionWarpingComponent; }
+	
 	FORCEINLINE FVector2D GetMovementInputVector() const { return MovementInputVector; }
 
-	/** Returns CameraBoom subobject **/
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
-	/** Returns FollowCamera subobject **/
+	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
-
-	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
 
 };

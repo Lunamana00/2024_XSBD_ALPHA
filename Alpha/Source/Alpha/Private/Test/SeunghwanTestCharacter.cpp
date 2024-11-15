@@ -3,6 +3,7 @@
 
 #include "Test/SeunghwanTestCharacter.h"
 #include "EnhancedInputComponent.h"
+#include "EnhancedInputSubsystems.h"
 #include "MotionWarpingComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
@@ -75,7 +76,7 @@ void ASeunghwanTestCharacter::BeginPlay()
 	{
 		Weapon->AttachToComponent(
 			GetMesh(),
-			FAttachmentTransformRules::SnapToTargetNotIncludingScale,
+			FAttachmentTransformRules::SnapToTargetIncludingScale,
 			"RightWeaponSocket");
 	}
 	
@@ -92,8 +93,27 @@ void ASeunghwanTestCharacter::Tick(float DeltaTime)
 void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	if (APlayerController* PlayerController = Cast<APlayerController>(GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(DefaultMappingContext, 0);
+		}
+	}
+	
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
+		// Jumping
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+
+		// Moving
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Move);
+		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &ASeunghwanTestCharacter::StopMoving);
+
+		// Looking
+		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Look);
 		// Attacking
 		EnhancedInputComponent->BindAction(NormalAttackAction, ETriggerEvent::Started, this, &ASeunghwanTestCharacter::NormalAttack);
 		EnhancedInputComponent->BindAction(SwitchRangeAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::SwitchRange);
@@ -104,8 +124,8 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 {
 	FVector2D MovementVector = Value.Get<FVector2D>();
-	MovementInput = MovementVector;
-
+	MovementInputVector = MovementVector;
+	
 	if (Controller != nullptr)
 	{
 		// find out which way is forward
@@ -122,7 +142,16 @@ void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
-	MovementInputVector = Value.Get<FVector2D>();
+	else
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Controller Null");
+	}
+	
+}
+
+void ASeunghwanTestCharacter::StopMoving()
+{
+	MovementInputVector = FVector2D::ZeroVector;
 }
 
 void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)
@@ -137,6 +166,8 @@ void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+
 
 void ASeunghwanTestCharacter::NormalAttack()
 {

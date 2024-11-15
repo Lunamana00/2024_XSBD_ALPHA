@@ -37,7 +37,6 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	bool bIsFlying = false;
 
-
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|Attacks")
 	TArray<FFractAttack> MeleeAttacks;
 
@@ -62,7 +61,7 @@ protected:
 	FVector HitLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	float AutoTargetRange = 200.f;
+	float AutoTargetRange = 300.f;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AutoTargetAngle = 90.f;
@@ -84,6 +83,9 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Combat")
 	bool bCanRotateToInputDirection = false;
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void SpawnProjectile();
 
 public:	
 

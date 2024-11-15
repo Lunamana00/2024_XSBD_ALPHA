@@ -16,7 +16,7 @@
 #include "Weapons/FractProjectile.h"
 
 #define TRACE_LENGTH 80000.f
-#define ATTACK_DISTANCE 100.f
+#define ATTACK_DISTANCE 110.f
 
 UFractPlayerAttackComponent::UFractPlayerAttackComponent()
 {
@@ -32,7 +32,6 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
-	
 	
 
 	if (AFractTestEnemy* FoundTarget = FindTarget())
@@ -166,6 +165,7 @@ void UFractPlayerAttackComponent::RemoveMotionWarpTarget(FName WarpTargetName) c
 	}
 }
 
+// 인풋 방향을 향해 회전을 하는 함수
 void UFractPlayerAttackComponent::RotateToInputDirection(float DeltaTime)
 {
 	FRotator InitialRotation = Character->GetActorRotation();
@@ -306,10 +306,6 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 					{
 						MotionWarpToTarget(CurrentTarget);
 					}
-					else
-					{
-						
-					}
 				}
 
 				ComboCount = ComboCount % Attack->AttackMontages.Num();
@@ -318,31 +314,32 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 			}
 			if (Attack->Range == EFractAttackRange::Ranged)
 			{
-				APawn* InstigatorPawn = Cast<APawn>(GetOwner());
-				if (ProjectileClass && InstigatorPawn)
-				{
-   					FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
-					FVector ToTarget = HitLocation - MuzzleLocation;
-					FRotator TargetRotation = ToTarget.Rotation();
-					FActorSpawnParameters SpawnParams;
-					SpawnParams.Owner = GetOwner();
-					SpawnParams.Instigator = InstigatorPawn;
-					if (UWorld* World = GetWorld())
-					{
-						World->SpawnActor<AFractProjectile>(
-							ProjectileClass,
-							MuzzleLocation,
-							TargetRotation,
-							SpawnParams);
-					}
-				}
-				
+				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Black, TEXT("Hi"));
 			}
 		}
 	}
-	
-	
-	
+}
+
+void UFractPlayerAttackComponent::SpawnProjectile()
+{
+	FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
+    
+	FVector AimDirection = (HitLocation - MuzzleLocation).GetSafeNormal();
+	FRotator SpawnRotation = AimDirection.Rotation();
+    
+	if (ProjectileClass && GetWorld())
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = GetOwner();
+		SpawnParams.Instigator = Cast<APawn>(GetOwner());
+        
+		GetWorld()->SpawnActor<AFractProjectile>(
+			ProjectileClass,
+			MuzzleLocation,
+			SpawnRotation,
+			SpawnParams
+		);
+	}
 }
 
 // 플레이어가 스킬을 사용하는 함수
