@@ -72,6 +72,8 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, Category = Weapon)
 	AFractPlayerWeapon* Weapon;
 
+	TSubclassOf<AFractPlayerWeapon> BP_Weapon;
+
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* NormalAttackAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
@@ -93,6 +95,9 @@ public:
 	
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }
+
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE TSubclassOf<AFractPlayerWeapon> GetBPWeapon() const { return BP_Weapon; }
 	
 	FORCEINLINE EFractCharacterState GetState() const { return CharacterState; }
 	

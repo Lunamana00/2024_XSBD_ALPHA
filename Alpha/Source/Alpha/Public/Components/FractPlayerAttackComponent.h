@@ -87,6 +87,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void SpawnProjectile();
 
+	bool bIsRangedAttacking = false;
+	FVector CachedHitLocation;
+
 public:	
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);

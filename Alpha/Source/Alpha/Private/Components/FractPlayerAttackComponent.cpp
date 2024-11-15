@@ -7,7 +7,6 @@
 #include "Camera/CameraComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/OverlapResult.h"
-#include "GameFramework/CharacterMovementComponent.h"
 #include "Kismet/GameplayStatics.h"
 #include "Test/FractTestCharacter.h"
 #include "Test/FractTestEnemy.h"
@@ -174,6 +173,31 @@ void UFractPlayerAttackComponent::RotateToInputDirection(float DeltaTime)
 	Character->SetActorRotation(InterpRotation);
 }
 
+
+void UFractPlayerAttackComponent::SpawnProjectile()
+{
+	FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
+    
+	FVector AimDirection = HitLocation - MuzzleLocation;
+	AimDirection = AimDirection.GetSafeNormal();
+	FRotator SpawnRotation = AimDirection.Rotation();
+    
+	if (ProjectileClass && GetWorld())
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = GetOwner();
+		SpawnParams.Instigator = Cast<APawn>(GetOwner());
+        
+		GetWorld()->SpawnActor<AFractProjectile>(
+			ProjectileClass,
+			MuzzleLocation,
+			SpawnRotation,
+			SpawnParams
+		);
+	}
+}
+
+
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
 void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
 {
@@ -307,40 +331,24 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 						MotionWarpToTarget(CurrentTarget);
 					}
 				}
+				else if (Attack->Range == EFractAttackRange::Ranged)
+				{
+					FHitResult TraceResult;
+					TraceUnderCrosshairs(TraceResult);
+					CachedHitLocation = TraceResult.ImpactPoint;
+					bIsRangedAttacking = true;
+				}
 
 				ComboCount = ComboCount % Attack->AttackMontages.Num();
 				AnimInstance->Montage_Play(Attack->AttackMontages[ComboCount]);
 				ComboCount++;
 			}
-			if (Attack->Range == EFractAttackRange::Ranged)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Black, TEXT("Hi"));
-			}
+			
 		}
 	}
 }
 
-void UFractPlayerAttackComponent::SpawnProjectile()
-{
-	FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
-    
-	FVector AimDirection = (HitLocation - MuzzleLocation).GetSafeNormal();
-	FRotator SpawnRotation = AimDirection.Rotation();
-    
-	if (ProjectileClass && GetWorld())
-	{
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = GetOwner();
-		SpawnParams.Instigator = Cast<APawn>(GetOwner());
-        
-		GetWorld()->SpawnActor<AFractProjectile>(
-			ProjectileClass,
-			MuzzleLocation,
-			SpawnRotation,
-			SpawnParams
-		);
-	}
-}
+
 
 // 플레이어가 스킬을 사용하는 함수
 void UFractPlayerAttackComponent::UseSkill()
