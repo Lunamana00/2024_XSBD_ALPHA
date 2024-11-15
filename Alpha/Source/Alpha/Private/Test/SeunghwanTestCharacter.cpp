@@ -70,7 +70,6 @@ void ASeunghwanTestCharacter::BeginPlay()
 			GetActorRotation(),
 			SpawnParams
 			);
-		BP_Weapon = Cast<TSubclassOf<AFractPlayerWeapon>>(*Weapon);
 	}
 
 	if (Weapon)
