@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Components/CPP_FlightActorComponent.h"
 #include "AlphaCharacter.generated.h"
 
 class USpringArmComponent;
@@ -73,5 +74,11 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
+
+private:
+
+	//*** 비행 추가 부분 ***//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCPP_FlightActorComponent* FlightComponent;
 };
 
