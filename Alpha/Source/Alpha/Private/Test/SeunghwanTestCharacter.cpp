@@ -117,6 +117,7 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		// Attacking
 		EnhancedInputComponent->BindAction(NormalAttackAction, ETriggerEvent::Started, this, &ASeunghwanTestCharacter::NormalAttack);
 		EnhancedInputComponent->BindAction(SwitchRangeAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::SwitchRange);
+		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::ToggleLockOn);
 	}
 
 }
