@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
+#include "Components/CPP_FlightActorComponent.h"
 #include "AlphaCharacter.generated.h"
 
 class USpringArmComponent;
@@ -44,9 +45,17 @@ class AAlphaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	/** Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* StartSnipeAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* EndSnipeAction;
+
 public:
 	AAlphaCharacter();
 	
+	bool SnipeState();
 
 protected:
 
@@ -58,6 +67,10 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 			
+	void StartSnipe(const FInputActionValue& Value);
+
+	void EndSnipe(const FInputActionValue& Value);
+
 
 protected:
 	// APawn interface
@@ -73,5 +86,14 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	bool IsSniping;
+
+private:
+
+	//*** 비행 추가 부분 ***//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCPP_FlightActorComponent* FlightComponent;
 };
 
