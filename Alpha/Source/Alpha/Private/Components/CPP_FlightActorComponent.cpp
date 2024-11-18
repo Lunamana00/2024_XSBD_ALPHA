@@ -49,43 +49,41 @@ void UCPP_FlightActorComponent::MoveUp(const FInputActionValue& Value)
 
 void UCPP_FlightActorComponent::Move(const FInputActionValue& Value)
 {
-	FVector2D Input = Value.Get<FVector2D>();
+	FVector2D Movementvector = Value.Get<FVector2D>();
+	ACharacter* Character = Cast<ACharacter>(GetOwner());
 
 	if (GetOwner())
 	{
-		// Forward 벡터와 Right 벡터 계산
-		FVector Forward = GetOwner()->GetActorForwardVector();
-		FVector Right = GetOwner()->GetActorRightVector();
+		const FRotator Rotation =Character->Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
+		const FRotator PitchRotation(Rotation.Pitch, 0, 0);
 
-		// Pitch를 고려한 위쪽 방향 이동 계산
-		FRotator ActorRotation = GetOwner()->GetActorRotation();
-		FRotator AdjustedRotation = FRotator(ActorRotation.Pitch, 0.0f, 0.0f); // Pitch만 고려
-		FVector UpDirection = FRotationMatrix(AdjustedRotation).GetUnitAxis(EAxis::X);
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 
-		// 이동 속도 계산
-		CurrentVelocity = (Input.X * Forward + Input.Y * Right + UpDirection * Input.X) * FlightSpeed;
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
+
+		const FVector UpwardDirection = FRotationMatrix(PitchRotation).GetUnitAxis(EAxis::X);
+
+		Character->AddMovementInput(ForwardDirection, Movementvector.Y);
+		Character->AddMovementInput(RightDirection,Movementvector.X);
+		Character->AddMovementInput(UpwardDirection, Movementvector.Y*1.0f);
+	
 	}
 }
 
-void UCPP_FlightActorComponent::Yaw(const FInputActionValue& Value)
+void UCPP_FlightActorComponent::Look(const FInputActionValue& Value)
 {
-	float Amount = Value.Get<float>();
-	if (GetOwner()->GetInstigatorController())
-	{
-		Cast<APlayerController>(GetOwner()->GetInstigatorController())->AddYawInput(Amount * RotationSpeed * GetWorld()->GetDeltaSeconds());
+	FVector2D LookAxisVector = Value.Get<FVector2D>();
+	ACharacter* Character = Cast<ACharacter>(GetOwner());
+	FRotator ControlRotation = Character->Controller->GetControlRotation();
 
-	}
-}
+	// Apply yaw and pitch input to the controller based on the LookAxisVector
+	Character->AddControllerYawInput(LookAxisVector.X);
+	Character->AddControllerPitchInput(LookAxisVector.Y);
 
-void UCPP_FlightActorComponent::Pitch(const FInputActionValue& Value)
-{
-	float Amount = Value.Get<float>();
-	if (GetOwner())
-	{
-		FRotator CurrentRotation = GetOwner()->GetActorRotation();
-		CurrentRotation.Pitch += Amount * RotationSpeed * GetWorld()->GetDeltaSeconds();
-		GetOwner()->SetActorRotation(CurrentRotation);
-	}
+	// Adjust the player's forward vector to align with the camera's direction
+	FVector ForwardDirection = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::X);
+	FVector RightDirection = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Y);
 }
 
 void UCPP_FlightActorComponent::PressedSpace()

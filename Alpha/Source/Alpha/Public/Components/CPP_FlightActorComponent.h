@@ -26,9 +26,7 @@ public:
 
 	void Move(const FInputActionValue& Value);
 
-	void Yaw(const FInputActionValue& Value);
-
-	void Pitch(const FInputActionValue& Value);
+	void Look(const FInputActionValue& Value);
 
 	void PressedSpace();
 

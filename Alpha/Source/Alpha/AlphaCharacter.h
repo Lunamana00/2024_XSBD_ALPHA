@@ -45,6 +45,13 @@ class AAlphaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	/** Input Action */
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* StartSnipeAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* EndSnipeAction;
+
 public:
 	AAlphaCharacter();
 	
@@ -59,6 +66,8 @@ protected:
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
 			
+	void StartSnipe(const FInputActionValue& Value);
+	void EndSnipe(const FInputActionValue& Value);
 
 protected:
 	// APawn interface

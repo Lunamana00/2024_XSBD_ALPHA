@@ -78,18 +78,31 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
 		// Jumping
 		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
 		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::PressedSpace);
-
+		
 		// Moving
-		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Move);
+		if (!(&UCPP_FlightActorComponent::FlyingState))
+		{
+			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Move);
 
-		// Looking
-		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Look);
+
+			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Look);
+		}
+		else 
+		{
+			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Move);
+			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Look);
+		}
+		
+		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
+		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Canceled, this, &AAlphaCharacter::EndSnipe);
 	}
+
+	
+	
 	else
 	{
 		UE_LOG(LogTemplateCharacter, Error, TEXT("'%s' Failed to find an Enhanced Input component! This template is built to use the Enhanced Input system. If you intend to use the legacy system, then you will need to update this C++ file."), *GetNameSafe(this));
@@ -133,3 +146,27 @@ void AAlphaCharacter::Look(const FInputActionValue& Value)
 		AddControllerPitchInput(LookAxisVector.Y);
 	}
 }
+
+void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
+{
+	if (GetCharacterMovement()) {
+		// Disable rotation based on movement
+		GetCharacterMovement()->bOrientRotationToMovement = false;
+
+		// Enable rotation based on controller's desired rotation
+		GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	}
+}
+
+void AAlphaCharacter::EndSnipe(const FInputActionValue& Value)
+{
+	if (GetCharacterMovement())
+	{
+		// Re-enable rotation based on movement
+		GetCharacterMovement()->bOrientRotationToMovement = true;
+
+		// Disable controller's desired rotation
+		GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	}
+}
+
