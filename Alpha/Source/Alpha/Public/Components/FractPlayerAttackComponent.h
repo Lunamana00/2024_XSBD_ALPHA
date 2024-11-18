@@ -69,7 +69,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Combat")
 	FVector AttackDirection;
 	
-	void MotionWarpToTarget(const AActor* Target) const;
+	void AddMotionWarpTarget(const AActor* Target) const;
 
 	UPROPERTY()
 	AFractTestEnemy* CurrentTarget = nullptr;
@@ -87,6 +87,11 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void SpawnProjectile();
 
+	bool bIsRangedAttacking = false;
+	FVector CachedHitLocation;
+	
+	
+
 public:	
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
@@ -96,6 +101,14 @@ public:
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
 	void UseNormalAttack();
 	void UseSkill();
+	void StartLockOn();
+	void EndLockOn();
+	void ToggleLockOn();
+	UPROPERTY()
+	AActor* CurrentLockOnTargetActor;
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bHasLockOnTarget = false;
+	
 	
 		
 };

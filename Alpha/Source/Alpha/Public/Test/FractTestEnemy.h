@@ -41,7 +41,8 @@ protected:
 	void PlayHitReactMontage(const FName& SectionName);
 
 public:	
-	
+
+	UFractAttributeComponent* GetAttribute() const { return Attribute; }
 	
 
 };

@@ -76,6 +76,8 @@ private:
 	UInputAction* NormalAttackAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* SwitchRangeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* LockOnAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Input)
 	FVector2D MovementInputVector;
@@ -90,10 +92,10 @@ private:
 
 public:
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
-	
+
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }
-	
+
 	FORCEINLINE EFractCharacterState GetState() const { return CharacterState; }
 	
 	FORCEINLINE void SetState(const EFractCharacterState State) { CharacterState = State; }
