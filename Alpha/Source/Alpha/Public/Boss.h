@@ -1,14 +1,14 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Actor.h"
-
-#include "NiagaraSystem.h"  // Niagara 시스템 헤더 파일 추가
-#include "NiagaraFunctionLibrary.h"  // Niagara 관련 기능 호출용 헤더 파일
+#include "GameFramework/Character.h"
+#include "Animation/AnimSequence.h"
+#include "NiagaraSystem.h"
+#include "NiagaraFunctionLibrary.h"
 #include "Boss.generated.h"
 
 UCLASS()
-class ALPHA_API ABoss : public AActor
+class ALPHA_API ABoss : public ACharacter
 {
     GENERATED_BODY()
 
@@ -21,29 +21,81 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
-    // 발사체 생성 함수
+    UFUNCTION(BlueprintCallable, Category = "Health")
+    void TakeDamage(float DamageAmount);
+
     void SpawnProjectile();
+    void PerformEarthquake();
+    void PerformAOE();
+    void CheckPhaseTransition();
+    void TransitionToPhase(int32 NewPhase);
+    void OnPhaseTransitionEnd();
+    void HandleDeath();
+
+    // 체력 비율 반환 함수
+    UFUNCTION(BlueprintCallable, Category = "Health")
+    float GetHealthPercentage() const;
+
+    // 패턴 및 애니메이션
+    void ExecutePhasePattern();
+    void PlayPatternAnimation();
 
 private:
-    // 플레이어 참조
     ACharacter* Player;
 
-    // 회전 속도
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
+    float MaxHP = 100.0f;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Health", meta = (AllowPrivateAccess = "true"))
+    float CurrentHP;
+
     UPROPERTY(EditAnywhere, Category = "Rotation")
     float RotationSpeed = 2.0f;
 
-    // 발사체 클래스
     UPROPERTY(EditAnywhere, Category = "Projectile")
     TSubclassOf<class ABossProjectile> ProjectileClass;
 
-    // 발사체 생성 간격
     UPROPERTY(EditAnywhere, Category = "Projectile")
-    float SpawnInterval = 0.5f;
+    float SpawnInterval = 2.0f; // 2초 간격 실행
 
-    // Boss 클래스 내에서:
     UPROPERTY(EditAnywhere, Category = "Effects")
-    UNiagaraSystem* NiagaraSpawnEffect;  // 발사체 생성 시 사용할 나이아가라 이펙트
+    UNiagaraSystem* NiagaraSpawnEffect;
+    UPROPERTY(EditAnywhere, Category = "Effects")
+    UNiagaraSystem* EarthquakeEffect;
+    UPROPERTY(EditAnywhere, Category = "Effects")
+    UNiagaraSystem* AOEEffect;
 
-    // 발사체 생성 타이머
-    FTimerHandle SpawnTimerHandle;
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    float EarthquakeDamage = 20.0f;
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    float AOEDamage = 50.0f;
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    float EarthquakeRadius = 500.0f;
+    UPROPERTY(EditAnywhere, Category = "Damage")
+    float AOERadius = 300.0f;
+
+    UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Phase", meta = (AllowPrivateAccess = "true"))
+    int32 CurrentPhase = 1;
+    bool bIsTransitioning = false;
+
+    UPROPERTY(EditAnywhere, Category = "Phase")
+    float Phase2HP = 70.0f;
+    UPROPERTY(EditAnywhere, Category = "Phase")
+    float Phase3HP = 30.0f;
+
+    // 애니메이션
+    UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* PhaseTransitionAnimation;
+    UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* PatternAnimation1; // 1페이즈 패턴 애니메이션
+    UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* PatternAnimation2; // 2페이즈 패턴 애니메이션
+    UPROPERTY(EditAnywhere, Category = "Animation")
+    UAnimSequence* PatternAnimation3; // 3페이즈 패턴 애니메이션
+
+    FTimerHandle PatternExecutionTimerHandle;
+    FTimerHandle AnimationTimerHandle;
+
+    UPROPERTY(EditAnywhere, Category = "Phase")
+    float TransitionDuration = 3.0f;
 };
