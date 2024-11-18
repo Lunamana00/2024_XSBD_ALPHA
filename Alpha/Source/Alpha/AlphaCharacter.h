@@ -55,6 +55,7 @@ class AAlphaCharacter : public ACharacter
 public:
 	AAlphaCharacter();
 	
+	bool SnipeState();
 
 protected:
 
@@ -67,7 +68,9 @@ protected:
 	void Look(const FInputActionValue& Value);
 			
 	void StartSnipe(const FInputActionValue& Value);
+
 	void EndSnipe(const FInputActionValue& Value);
+
 
 protected:
 	// APawn interface
@@ -83,6 +86,9 @@ public:
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
 	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	bool IsSniping;
 
 private:
 

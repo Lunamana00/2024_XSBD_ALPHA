@@ -98,7 +98,7 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		}
 		
 		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
-		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Canceled, this, &AAlphaCharacter::EndSnipe);
+		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::EndSnipe);
 	}
 
 	
@@ -150,6 +150,8 @@ void AAlphaCharacter::Look(const FInputActionValue& Value)
 void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
 {
 	if (GetCharacterMovement()) {
+
+		IsSniping = true;
 		// Disable rotation based on movement
 		GetCharacterMovement()->bOrientRotationToMovement = false;
 
@@ -160,13 +162,13 @@ void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
 
 void AAlphaCharacter::EndSnipe(const FInputActionValue& Value)
 {
-	if (GetCharacterMovement())
-	{
-		// Re-enable rotation based on movement
-		GetCharacterMovement()->bOrientRotationToMovement = true;
+
+		IsSniping = false;
 
 		// Disable controller's desired rotation
 		GetCharacterMovement()->bUseControllerDesiredRotation = false;
-	}
-}
 
+		// Re-enable rotation based on movement
+		GetCharacterMovement()->bOrientRotationToMovement = true;
+
+}
