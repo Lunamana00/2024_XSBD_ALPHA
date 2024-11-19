@@ -73,11 +73,21 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	{
 		FVector CurrentLocation = Character->GetActorLocation();
 		FVector TargetLocation = CurrentLockOnTargetActor->GetActorLocation();
+		double TargetDistance = FVector::Distance(CurrentLocation, TargetLocation);
 
-		TargetLocation.Z -= 50.f;
-		FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(
-			CurrentLocation, TargetLocation);
-		GetWorld()->GetFirstPlayerController()->SetControlRotation(NewRotation);
+		if (TargetDistance >= LockOnBreakDistance)
+		{
+			EndLockOn();
+		}
+		else if (IsValid(CurrentLockOnTargetActor))
+		{
+			TargetLocation.Z -= 50.f;
+			FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(
+				CurrentLocation, TargetLocation);
+			GetWorld()->GetFirstPlayerController()->SetControlRotation(NewRotation);
+		}
+
+		
 	}
 	
 }
@@ -448,10 +458,13 @@ void UFractPlayerAttackComponent::StartLockOn()
 	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	Character->GetCameraBoom()->TargetOffset = FVector(0.f, 0.f , 50.f);
+
+	IFractEnemyInterface::Execute_OnSelect(CurrentLockOnTargetActor);
 }
 
 void UFractPlayerAttackComponent::EndLockOn()
 {
+	IFractEnemyInterface::Execute_OnDeselect(CurrentLockOnTargetActor);
 	RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
 	CurrentLockOnTargetActor = nullptr;
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;

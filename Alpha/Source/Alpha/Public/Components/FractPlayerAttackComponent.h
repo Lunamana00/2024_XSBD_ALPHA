@@ -89,6 +89,9 @@ protected:
 
 	bool bIsRangedAttacking = false;
 	FVector CachedHitLocation;
+
+	UPROPERTY(EditAnywhere)
+	double LockOnBreakDistance = 1000.f;
 	
 	
 
