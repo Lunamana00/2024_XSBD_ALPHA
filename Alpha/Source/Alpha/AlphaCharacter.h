@@ -54,8 +54,6 @@ class AAlphaCharacter : public ACharacter
 
 public:
 	AAlphaCharacter();
-	
-	bool SnipeState();
 
 protected:
 
@@ -95,5 +93,8 @@ private:
 	//*** 비행 추가 부분 ***//
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCPP_FlightActorComponent* FlightComponent;
+
+	UFUNCTION(BlueprintCallable, Category = "Flight")
+	bool GetIsFlying() const;
 };
 

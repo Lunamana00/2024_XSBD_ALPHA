@@ -62,6 +62,11 @@ void AAlphaCharacter::BeginPlay()
 	Super::BeginPlay();
 }
 
+bool AAlphaCharacter::GetIsFlying() const
+{
+	return FlightComponent ? FlightComponent->FlyingState() : false;
+}
+
 //////////////////////////////////////////////////////////////////////////
 // Input
 
@@ -152,10 +157,9 @@ void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
 	if (GetCharacterMovement()) {
 
 		IsSniping = true;
-		// Disable rotation based on movement
+
 		GetCharacterMovement()->bOrientRotationToMovement = false;
 
-		// Enable rotation based on controller's desired rotation
 		GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
 }
@@ -165,10 +169,8 @@ void AAlphaCharacter::EndSnipe(const FInputActionValue& Value)
 
 		IsSniping = false;
 
-		// Disable controller's desired rotation
 		GetCharacterMovement()->bUseControllerDesiredRotation = false;
 
-		// Re-enable rotation based on movement
 		GetCharacterMovement()->bOrientRotationToMovement = true;
 
 }

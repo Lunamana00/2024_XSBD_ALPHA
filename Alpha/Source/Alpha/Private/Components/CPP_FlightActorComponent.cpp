@@ -26,8 +26,13 @@ void UCPP_FlightActorComponent::StartFlying()
 
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
-		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 		IsFlying = true;
+
+		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
 }
 
@@ -37,6 +42,11 @@ void UCPP_FlightActorComponent::EndFlying()
 	{
 		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 		IsFlying = false;
+
+		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+
 		CurrentVelocity = FVector::ZeroVector;
 	}
 }
