@@ -7,6 +7,13 @@
 #include "Components/ActorComponent.h"
 #include "FractPlayerAttackComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
+	FOnUpdatedTargetSignature,
+	UFractPlayerAttackComponent, OnUpdatedTargetDelegate,
+	AActor*, NewTargetActorRef
+);
+
+struct FInputActionValue;
 class AFractTestEnemy;
 class AFractProjectile;
 class ASeunghwanTestCharacter;
@@ -23,6 +30,8 @@ public:
 	// Sets default values for this component's properties
 	UFractPlayerAttackComponent();
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	
 
 protected:
 	// Called when the game starts
@@ -92,13 +101,24 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	double LockOnBreakDistance = 1000.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float AimFOV = 65.f;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float DefaultFOV = 90.f;
+
+	FVector DefaultCameraLocation;
+	
 	
 	
 
-public:	
+public:
+
+	UPROPERTY(BlueprintAssignable)
+	FOnUpdatedTargetSignature OnUpdatedTargetDelegate;
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
-	void SwitchRange();
+	void AimDownSight(const FInputActionValue& Value);
 	FORCEINLINE FFractAttack* GetNormalAttack();
 	FORCEINLINE FFractSkill* GetSkill();
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
@@ -111,6 +131,8 @@ public:
 	AActor* CurrentLockOnTargetActor;
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	bool bHasLockOnTarget = false;
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bIsAiming = false;
 	
 	
 		

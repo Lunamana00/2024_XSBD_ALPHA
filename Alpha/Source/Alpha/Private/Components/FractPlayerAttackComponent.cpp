@@ -20,6 +20,8 @@
 #define TRACE_LENGTH 80000.f
 #define ATTACK_DISTANCE 110.f
 
+
+
 UFractPlayerAttackComponent::UFractPlayerAttackComponent()
 {
 	
@@ -34,6 +36,17 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
+
+	
+	if (UCameraComponent* Camera = Character->GetFollowCamera())
+	{
+		float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
+		FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 50.f) : DefaultCameraLocation;
+		float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
+		FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
+		Camera->SetRelativeLocation(NewCamLocation);
+		Camera->SetFieldOfView(NewFOV);
+	}
 	
 	if (!bHasLockOnTarget)
 	{
@@ -99,6 +112,7 @@ void UFractPlayerAttackComponent::BeginPlay()
 
 	
 	Character = Cast<ASeunghwanTestCharacter>(GetOwner());
+	DefaultCameraLocation = Character->GetFollowCamera()->GetRelativeLocation();
 	
 	
 }
@@ -266,15 +280,21 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 }
 
 // 플레이어의 원거리, 근거리 공격 상태 전환용 함수
-void UFractPlayerAttackComponent::SwitchRange()
+void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 {
-	if (CurrentRange == EFractAttackRange::Melee)
+	bIsAiming = Value.Get<bool>();
+	if (bIsAiming)
 	{
 		CurrentRange = EFractAttackRange::Ranged;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
-	else if (CurrentRange == EFractAttackRange::Ranged)
+	else
 	{
 		CurrentRange = EFractAttackRange::Melee;
+		ResetCombo();
+		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
 	}
 }
 
@@ -396,6 +416,7 @@ void UFractPlayerAttackComponent::UseSkill()
 
 void UFractPlayerAttackComponent::StartLockOn()
 {
+	if (bIsAiming) return;
 	TArray<FHitResult> OutResults;
 	FVector CurrentLocation = Character->GetActorLocation();
 	FCollisionShape Sphere = FCollisionShape::MakeSphere(750.f);
@@ -460,6 +481,8 @@ void UFractPlayerAttackComponent::StartLockOn()
 	Character->GetCameraBoom()->TargetOffset = FVector(0.f, 0.f , 50.f);
 
 	IFractEnemyInterface::Execute_OnSelect(CurrentLockOnTargetActor);
+
+	OnUpdatedTargetDelegate.Broadcast(CurrentLockOnTargetActor);
 }
 
 void UFractPlayerAttackComponent::EndLockOn()
@@ -473,6 +496,8 @@ void UFractPlayerAttackComponent::EndLockOn()
 	GetWorld()->GetFirstPlayerController()->ResetIgnoreLookInput();
 	bHasLockOnTarget = false;
 	bCanRotateToInputDirection = false;
+	OnUpdatedTargetDelegate.Broadcast(CurrentLockOnTargetActor);
+
 }
 
 void UFractPlayerAttackComponent::ToggleLockOn()

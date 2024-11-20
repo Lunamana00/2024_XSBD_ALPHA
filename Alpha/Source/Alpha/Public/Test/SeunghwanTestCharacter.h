@@ -75,7 +75,7 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* NormalAttackAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
-	UInputAction* SwitchRangeAction;
+	UInputAction* AimAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* LockOnAction;
 

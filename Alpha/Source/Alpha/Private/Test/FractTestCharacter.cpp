@@ -21,7 +21,7 @@ void AFractTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInput
 	{
 		// Attacking
 		EnhancedInputComponent->BindAction(NormalAttackAction, ETriggerEvent::Started, this, &AFractTestCharacter::NormalAttack);
-		EnhancedInputComponent->BindAction(SwitchRangeAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::SwitchRange);
+		EnhancedInputComponent->BindAction(SwitchRangeAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::AimDownSight);
 	}
 }
 
