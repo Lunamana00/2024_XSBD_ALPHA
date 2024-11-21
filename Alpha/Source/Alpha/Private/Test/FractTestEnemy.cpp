@@ -12,11 +12,11 @@ AFractTestEnemy::AFractTestEnemy()
  	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
 
-	GetMesh()->SetCollisionObjectType(ECC_WorldDynamic);
-	GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
-	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	// GetMesh()->SetCollisionObjectType(ECC_WorldDynamic);
+	// GetMesh()->SetCollisionResponseToChannel(ECC_Visibility, ECR_Block);
+	// GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetGenerateOverlapEvents(true);
-	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	// GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 
 	Attribute = CreateDefaultSubobject<UFractAttributeComponent>(TEXT("Attribute Component"));
 }
@@ -24,6 +24,7 @@ AFractTestEnemy::AFractTestEnemy()
 float AFractTestEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 	class AController* EventInstigator, AActor* DamageCauser)
 {
+	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("Damage: %f"), DamageAmount));
 	if (Attribute)
 	{
 		Attribute->ReceiveDamage(DamageAmount);
@@ -60,7 +61,7 @@ void AFractTestEnemy::DirectionalHitReact(const FVector& ImpactPoint)
 	const FVector Forward = GetActorForwardVector();
 
 	const FVector ImpactLowered(ImpactPoint.X, ImpactPoint.Y, GetActorLocation().Z);
-	const FVector ToHit = (ImpactPoint - GetActorForwardVector()).GetSafeNormal();
+	const FVector ToHit = (ImpactLowered - GetActorForwardVector()).GetSafeNormal();
 
 	const double CosTheta = FVector::DotProduct(ToHit, Forward);
 	double Theta = FMath::Acos(CosTheta);

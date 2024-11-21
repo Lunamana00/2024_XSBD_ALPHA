@@ -40,12 +40,15 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	
 	if (UCameraComponent* Camera = Character->GetFollowCamera())
 	{
-		float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
-		FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 50.f) : DefaultCameraLocation;
-		float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
-		FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
-		Camera->SetRelativeLocation(NewCamLocation);
-		Camera->SetFieldOfView(NewFOV);
+		if (!bHasLockOnTarget)
+		{
+			float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
+			FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 50.f) : DefaultCameraLocation;
+			float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
+			FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
+			Camera->SetRelativeLocation(NewCamLocation);
+			Camera->SetFieldOfView(NewFOV);
+		}
 	}
 	
 	if (!bHasLockOnTarget)
@@ -73,7 +76,14 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	}
 	else
 	{
-		AddMotionWarpTarget(CurrentLockOnTargetActor);
+		if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < ATTACK_DISTANCE)
+		{
+			AddMotionWarpTarget(CurrentLockOnTargetActor);
+		}
+		else
+		{
+			RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
+		}
 	}
 	
 	
@@ -282,6 +292,7 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 // 플레이어의 원거리, 근거리 공격 상태 전환용 함수
 void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 {
+	if (bHasLockOnTarget) return;
 	bIsAiming = Value.Get<bool>();
 	if (bIsAiming)
 	{
@@ -419,7 +430,7 @@ void UFractPlayerAttackComponent::StartLockOn()
 	if (bIsAiming) return;
 	TArray<FHitResult> OutResults;
 	FVector CurrentLocation = Character->GetActorLocation();
-	FCollisionShape Sphere = FCollisionShape::MakeSphere(750.f);
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(1000.f);
 	FCollisionQueryParams IgnoreParams {FName(TEXT("Ignore Collision Params")),
 			false,
 			Character};

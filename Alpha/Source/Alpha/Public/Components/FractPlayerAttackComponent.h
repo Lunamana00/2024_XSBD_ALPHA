@@ -100,7 +100,7 @@ protected:
 	FVector CachedHitLocation;
 
 	UPROPERTY(EditAnywhere)
-	double LockOnBreakDistance = 1000.f;
+	double LockOnBreakDistance = 1500.f;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	float AimFOV = 65.f;
