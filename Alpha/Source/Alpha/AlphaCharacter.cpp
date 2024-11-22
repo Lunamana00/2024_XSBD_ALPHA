@@ -9,6 +9,7 @@
 #include "GameFramework/Controller.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "InputActionValue.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -104,6 +105,8 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 		
 		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
 		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::EndSnipe);
+
+		EnhancedInputComponent->BindAction(ShiftAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Shift);
 	}
 
 	
@@ -154,7 +157,7 @@ void AAlphaCharacter::Look(const FInputActionValue& Value)
 
 void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
 {
-	if (GetCharacterMovement()) {
+	if (GetCharacterMovement() && !(&UCPP_FlightActorComponent::FlyingState)) {
 
 		IsSniping = true;
 
@@ -166,11 +169,25 @@ void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
 
 void AAlphaCharacter::EndSnipe(const FInputActionValue& Value)
 {
-
 		IsSniping = false;
 
 		GetCharacterMovement()->bUseControllerDesiredRotation = false;
 
 		GetCharacterMovement()->bOrientRotationToMovement = true;
+
+}
+
+void AAlphaCharacter::Shift(const FInputActionValue& Value)
+{
+	FVector Velocity = GetVelocity();
+
+	FRotator BaseRotation = GetActorRotation();
+	FVector ForwardVector = BaseRotation.Vector();
+	FVector RightVector = FRotationMatrix(BaseRotation).GetUnitAxis(EAxis::Y);
+	
+	float ForwardSpeed = FVector::DotProduct(Velocity, ForwardVector);
+	float RightSpeed = FVector::DotProduct(Velocity, RightVector);
+
+	float Direction = FMath::Atan2(RightSpeed, ForwardSpeed);
 
 }

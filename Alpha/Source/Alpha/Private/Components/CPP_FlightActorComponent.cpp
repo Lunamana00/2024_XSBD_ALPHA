@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+	// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Components/CPP_FlightActorComponent.h"
@@ -40,8 +40,10 @@ void UCPP_FlightActorComponent::EndFlying()
 {
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
-		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+
 		IsFlying = false;
+
+		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 
 		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 
@@ -121,7 +123,7 @@ void UCPP_FlightActorComponent::PressedSpace()
 			else
 			{
 				StartFlying();
-
+				
 			}
 		}
 	}

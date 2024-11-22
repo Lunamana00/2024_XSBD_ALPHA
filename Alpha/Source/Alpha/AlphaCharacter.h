@@ -45,13 +45,6 @@ class AAlphaCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
-	/** Input Action */
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* StartSnipeAction;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	UInputAction* EndSnipeAction;
-
 public:
 	AAlphaCharacter();
 
@@ -64,11 +57,6 @@ protected:
 
 	/** Called for looking input */
 	void Look(const FInputActionValue& Value);
-			
-	void StartSnipe(const FInputActionValue& Value);
-
-	void EndSnipe(const FInputActionValue& Value);
-
 
 protected:
 	// APawn interface
@@ -85,10 +73,28 @@ public:
 
 	FORCEINLINE FVector2D GetMovementInput() const { return MovementInput; }
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////**************Add Code**************///////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	bool IsSniping;
 
+protected:
+	void StartSnipe(const FInputActionValue& Value);
+
+	void EndSnipe(const FInputActionValue& Value);
+
+	void Shift(const FInputActionValue& Value);
+
 private:
+	//*** 우클릭 추가 부분 ***//
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* StartSnipeAction;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* EndSnipeAction;
 
 	//*** 비행 추가 부분 ***//
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -96,5 +102,8 @@ private:
 
 	UFUNCTION(BlueprintCallable, Category = "Flight")
 	bool GetIsFlying() const;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* ShiftAction;
 };
 
