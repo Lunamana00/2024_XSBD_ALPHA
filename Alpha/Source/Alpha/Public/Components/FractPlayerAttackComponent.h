@@ -7,6 +7,8 @@
 #include "Components/ActorComponent.h"
 #include "FractPlayerAttackComponent.generated.h"
 
+class UNiagaraSystem;
+class UNiagaraComponent;
 DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
 	FOnUpdatedTargetSignature,
 	UFractPlayerAttackComponent, OnUpdatedTargetDelegate,
@@ -46,6 +48,9 @@ protected:
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	bool bIsFlying = false;
 
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	EFractAttackState AttackState = EFractAttackState::EAS_Unoccupied;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|Attacks")
 	TArray<FFractAttack> MeleeAttacks;
 
@@ -63,6 +68,9 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void ResetCombo();
+
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void ResetAttackState();
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AFractProjectile> ProjectileClass;
@@ -96,6 +104,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void SpawnProjectile();
 
+	
+
 	bool bIsRangedAttacking = false;
 	FVector CachedHitLocation;
 
@@ -108,10 +118,21 @@ protected:
 	float DefaultFOV = 90.f;
 
 	FVector DefaultCameraLocation;
-	
-	
+
+	UFUNCTION(BlueprintCallable)
+	void FireGroundSkillEnd();
+	UFUNCTION(BlueprintCallable)
+	void ActivateFireGroundSkill();
+	UFUNCTION(BlueprintCallable)
+	void DeactivateFireGroundSkill();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UNiagaraComponent* FireGroundSkillNiagaraComponent;
+
 	
 
+	
+	
 public:
 
 	UPROPERTY(BlueprintAssignable)
@@ -122,6 +143,9 @@ public:
 	FORCEINLINE FFractAttack* GetNormalAttack();
 	FORCEINLINE FFractSkill* GetSkill();
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE EFractAttackState GetCurrentAttackState() const { return AttackState; }
+	void CancelFireGroundSkill();
 	void UseNormalAttack();
 	void UseSkill();
 	void StartLockOn();
@@ -133,6 +157,8 @@ public:
 	bool bHasLockOnTarget = false;
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	bool bIsAiming = false;
+	
+	
 	
 	
 		

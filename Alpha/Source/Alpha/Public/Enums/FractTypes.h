@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "FractTypes.generated.h"
 
+class UNiagaraSystem;
 class UAnimMontage;
 class UParticleSystem;
 class USoundBase;
@@ -45,7 +46,15 @@ enum class EFractCharacterState : uint8
     ECS_Attacking UMETA(DisplayName = "Attacking"),
     ECS_Dodging UMETA(DisplayName = "Dodging"),
     ECS_Hit UMETA(DisplayName = "Hit"),
-    ECS_UsingSkill UMETA(DisplayName = "UsingSkill")
+};
+
+UENUM(BlueprintType)
+enum class EFractAttackState : uint8
+{
+    EAS_RangedAttacking UMETA(DisplayName = "RangedAttacking"),
+    EAS_MeleeAttacking UMETA(DisplayName = "MeleeAttacking"),
+    EAS_UsingFireGroundSkill UMETA(DisplayName = "Using Fire Ground Skill"),
+    EAS_Unoccupied UMETA(DisplayName = "Unoccupied"),
 };
 
 // 기본 공격 구조체
@@ -124,7 +133,7 @@ struct FFractSkill
     UAnimMontage* SkillMontage;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
-    UParticleSystem* CastEffect;
+    UNiagaraSystem* CastEffectSystem;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
     USoundBase* CastSound;

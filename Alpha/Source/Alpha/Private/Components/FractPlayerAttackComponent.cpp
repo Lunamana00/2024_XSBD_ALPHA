@@ -3,6 +3,9 @@
 #include "Components/FractPlayerAttackComponent.h"
 
 #include "MotionWarpingComponent.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
 #include "RootMotionModifier.h"
 #include "Camera/CameraComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
@@ -130,8 +133,13 @@ void UFractPlayerAttackComponent::BeginPlay()
 // 콤보 리셋용 함수
 void UFractPlayerAttackComponent::ResetCombo()
 {
-	Character->SetState(EFractCharacterState::ECS_Idle);
+	AttackState = EFractAttackState::EAS_Unoccupied;
 	ComboCount = 0;
+}
+
+void UFractPlayerAttackComponent::ResetAttackState()
+{
+	AttackState = EFractAttackState::EAS_Unoccupied;
 }
 
 // 인풋 타겟을 향해 모션 워핑을 하는 함수
@@ -254,6 +262,37 @@ void UFractPlayerAttackComponent::SpawnProjectile()
 	}
 }
 
+
+void UFractPlayerAttackComponent::FireGroundSkillEnd()
+{
+	AttackState = EFractAttackState::EAS_Unoccupied;
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+}
+
+void UFractPlayerAttackComponent::ActivateFireGroundSkill()
+{
+	
+	FireGroundSkillNiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+		GetSkill()->CastEffectSystem,
+		Character->GetFireGroundSkillSceneComponent(),
+		FName("Muzzle"),
+		FVector::ZeroVector,
+		FRotator::ZeroRotator,
+		EAttachLocation::Type::SnapToTarget,
+		true);
+	
+}
+
+void UFractPlayerAttackComponent::DeactivateFireGroundSkill()
+{
+	if (FireGroundSkillNiagaraComponent)
+	{
+		FireGroundSkillNiagaraComponent->Deactivate();
+	}
+	
+}
+
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
 void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
 {
@@ -361,12 +400,22 @@ FFractSkill* UFractPlayerAttackComponent::GetSkill()
 	return nullptr;
 }
 
+void UFractPlayerAttackComponent::CancelFireGroundSkill()
+{
+	if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
+	{
+		AnimInstance->Montage_JumpToSection(FName("End"));
+	}
+	
+}
+
 // 플레이어가 기본 공격을 하는 함수
 void UFractPlayerAttackComponent::UseNormalAttack()
 {
-	if (Character->GetState() == EFractCharacterState::ECS_Idle && !Character->GetCharacterMovement()->IsFalling())
+	if (AttackState == EFractAttackState::EAS_Unoccupied
+		&& !Character->GetCharacterMovement()->IsFalling())
 	{
-		Character->SetState(EFractCharacterState::ECS_Attacking);
+		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, "You are falling");
 		if (const FFractAttack* Attack = GetNormalAttack())
 		{
 			if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
@@ -389,6 +438,7 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 				
 				if (Attack->Range == EFractAttackRange::Melee)
 				{
+					AttackState = EFractAttackState::EAS_MeleeAttacking;
 					if (CurrentTarget)
 					{
 						AddMotionWarpTarget(CurrentTarget);
@@ -396,6 +446,7 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 				}
 				else if (Attack->Range == EFractAttackRange::Ranged)
 				{
+					AttackState = EFractAttackState::EAS_RangedAttacking;
 					FHitResult TraceResult;
 					TraceUnderCrosshairs(TraceResult);
 					CachedHitLocation = TraceResult.ImpactPoint;
@@ -416,8 +467,27 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 // 플레이어가 스킬을 사용하는 함수
 void UFractPlayerAttackComponent::UseSkill()
 {
+	if (AttackState != EFractAttackState::EAS_Unoccupied)
+		return;
 	if (const FFractSkill* Skill = GetSkill())
 	{
+		if (Skill->bIsFlyingSkill)
+		{
+			//Handle Flying Skill
+		}
+		else // 비행 스킬이 아닐 경우
+		{
+			switch (Skill->Element)
+			{
+			case EFractElementType::None: // 임시로 None 추후 fire로 옮기기
+				AttackState = EFractAttackState::EAS_UsingFireGroundSkill;
+				Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+				Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+				break;
+			default:
+				break;
+			}
+		}
 		if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
 		{
 			AnimInstance->Montage_Play(Skill->SkillMontage);
@@ -464,7 +534,7 @@ void UFractPlayerAttackComponent::StartLockOn()
 	{
 		AActor* PotentialTarget = OutResult.GetActor();
 		
-		bool bScreenToWorld = UGameplayStatics::DeprojectScreenToWorld(
+		UGameplayStatics::DeprojectScreenToWorld(
 			UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation,
 			CrosshairWorldPosition, CrosshairWorldDirection);
 		
@@ -473,7 +543,7 @@ void UFractPlayerAttackComponent::StartLockOn()
 			FVector ToTarget = (CastedTarget->GetActorLocation() - CurrentLocation).GetSafeNormal();
 			float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(
 				CrosshairWorldDirection, ToTarget)));
-			if (Angle < SmallestAngle)
+			if (Angle < SmallestAngle && Angle <= 60)
 			{
 				SmallestAngle = Angle;
 				TargetEnemy = CastedTarget;

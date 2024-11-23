@@ -49,6 +49,7 @@ ASeunghwanTestCharacter::ASeunghwanTestCharacter()
 	Attribute = CreateDefaultSubobject<UFractPlayerAttributeComponent>(TEXT("Player Attribute Component"));
 	AttackComponent = CreateDefaultSubobject<UFractPlayerAttackComponent>(TEXT("Player Attack Component"));
 	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("Motion Warping Component"));
+	FireGroundSkillSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("FireGroundSkill SceneComponent"));
 
 	
 
@@ -119,6 +120,7 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, AttackComponent, &UFractPlayerAttackComponent::AimDownSight);
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, AttackComponent, &UFractPlayerAttackComponent::AimDownSight);
 		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::ToggleLockOn);
+		EnhancedInputComponent->BindAction(SkillAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::UseSkill);
 	}
 
 }
@@ -173,7 +175,16 @@ void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)
 
 void ASeunghwanTestCharacter::NormalAttack()
 {
-	AttackComponent->UseNormalAttack();
+	EFractAttackState AttackState = AttackComponent->GetCurrentAttackState();
+	if (AttackState == EFractAttackState::EAS_Unoccupied)
+	{
+		AttackComponent->UseNormalAttack();
+	}
+	else if (AttackState == EFractAttackState::EAS_UsingFireGroundSkill)
+	{
+		AttackComponent->CancelFireGroundSkill();
+	}
+		
 }
 
 void ASeunghwanTestCharacter::SetWeaponCollisionEnabled(ECollisionEnabled::Type CollisionEnabled)

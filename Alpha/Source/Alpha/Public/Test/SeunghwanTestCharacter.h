@@ -78,6 +78,8 @@ private:
 	UInputAction* AimAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* LockOnAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* SkillAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Input)
 	FVector2D MovementInputVector;
@@ -90,8 +92,12 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UMotionWarpingComponent* MotionWarpingComponent;
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
+	USceneComponent* FireGroundSkillSceneComponent;
+
 public:
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
+	FORCEINLINE USceneComponent* GetFireGroundSkillSceneComponent() const { return FireGroundSkillSceneComponent; }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }
