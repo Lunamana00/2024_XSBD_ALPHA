@@ -7,6 +7,15 @@
 #include "Components/ActorComponent.h"
 #include "FractPlayerAttackComponent.generated.h"
 
+class UNiagaraSystem;
+class UNiagaraComponent;
+DECLARE_DYNAMIC_MULTICAST_SPARSE_DELEGATE_OneParam(
+	FOnUpdatedTargetSignature,
+	UFractPlayerAttackComponent, OnUpdatedTargetDelegate,
+	AActor*, NewTargetActorRef
+);
+
+struct FInputActionValue;
 class AFractTestEnemy;
 class AFractProjectile;
 class ASeunghwanTestCharacter;
@@ -24,6 +33,8 @@ public:
 	UFractPlayerAttackComponent();
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
+	
+
 protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
@@ -36,6 +47,9 @@ protected:
 
 	UPROPERTY(VisibleAnywhere, Category = "Combat")
 	bool bIsFlying = false;
+
+	UPROPERTY(VisibleAnywhere, Category = "Combat")
+	EFractAttackState AttackState = EFractAttackState::EAS_Unoccupied;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|Attacks")
 	TArray<FFractAttack> MeleeAttacks;
@@ -55,6 +69,9 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void ResetCombo();
 
+	UFUNCTION(BlueprintCallable, Category = "Combat")
+	void ResetAttackState();
+
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AFractProjectile> ProjectileClass;
 
@@ -69,7 +86,7 @@ protected:
 	UPROPERTY(VisibleDefaultsOnly, Category = "Combat")
 	FVector AttackDirection;
 	
-	void MotionWarpToTarget(const AActor* Target) const;
+	void AddMotionWarpTarget(const AActor* Target) const;
 
 	UPROPERTY()
 	AFractTestEnemy* CurrentTarget = nullptr;
@@ -87,15 +104,66 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Combat")
 	void SpawnProjectile();
 
-public:	
+	
+
+	bool bIsRangedAttacking = false;
+	FVector CachedHitLocation;
+
+	UPROPERTY(EditAnywhere)
+	double LockOnBreakDistance = 1500.f;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float AimFOV = 65.f;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	float DefaultFOV = 90.f;
+
+	FVector DefaultCameraLocation;
+
+	UFUNCTION(BlueprintCallable)
+	void FireGroundSkillEnd();
+	UFUNCTION(BlueprintCallable)
+	void ActivateFireGroundSkill();
+	UFUNCTION(BlueprintCallable)
+	void DeactivateFireGroundSkill();
+	void ApplyFireGroundSkillDamage();
+	FTimerHandle FireGroundSkillDamageTimerHandle;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	UParticleSystemComponent* FireGroundSkillParticleSystemComponent;
+
+	
+
+	
+	
+public:
+
+	UPROPERTY(BlueprintAssignable)
+	FOnUpdatedTargetSignature OnUpdatedTargetDelegate;
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
-	void SwitchRange();
+	void AimDownSight(const FInputActionValue& Value);
 	FORCEINLINE FFractAttack* GetNormalAttack();
 	FORCEINLINE FFractSkill* GetSkill();
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
+	UFUNCTION(BlueprintCallable)
+	FORCEINLINE EFractAttackState GetCurrentAttackState() const { return AttackState; }
+	void CancelFireGroundSkill();
 	void UseNormalAttack();
 	void UseSkill();
+	void StartLockOn();
+	void EndLockOn();
+	void ToggleLockOn();
+	UPROPERTY()
+	AActor* CurrentLockOnTargetActor;
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bHasLockOnTarget = false;
+	UPROPERTY(BlueprintReadOnly, Category = "Combat")
+	bool bIsAiming = false;
+	UPROPERTY()
+	bool bIsCancellingSkill = false;
+	
+	
+	
 	
 		
 };

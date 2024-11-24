@@ -3,12 +3,17 @@
 #include "Components/FractPlayerAttackComponent.h"
 
 #include "MotionWarpingComponent.h"
+#include "NiagaraComponent.h"
+#include "NiagaraFunctionLibrary.h"
+#include "NiagaraSystem.h"
 #include "RootMotionModifier.h"
 #include "Camera/CameraComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/OverlapResult.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Test/FractTestCharacter.h"
 #include "Test/FractTestEnemy.h"
 #include "Test/SeunghwanTestCharacter.h"
@@ -17,6 +22,8 @@
 
 #define TRACE_LENGTH 80000.f
 #define ATTACK_DISTANCE 110.f
+
+
 
 UFractPlayerAttackComponent::UFractPlayerAttackComponent()
 {
@@ -32,32 +39,85 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
-	
 
-	if (AFractTestEnemy* FoundTarget = FindTarget())
+	
+	if (UCameraComponent* Camera = Character->GetFollowCamera())
 	{
-		CurrentTarget = FoundTarget;
-		MotionWarpToTarget(CurrentTarget);
-		bHasTarget = true;
-		bCanRotateToInputDirection = false;
+		if (!bHasLockOnTarget)
+		{
+			float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
+			FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 50.f) : DefaultCameraLocation;
+			float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
+			FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
+			Camera->SetRelativeLocation(NewCamLocation);
+			Camera->SetFieldOfView(NewFOV);
+		}
+	}
+	
+	if (!bHasLockOnTarget)
+	{
+		if (AFractTestEnemy* FoundTarget = FindTarget())
+		{
+			CurrentTarget = FoundTarget;
+			AddMotionWarpTarget(CurrentTarget);
+			bHasTarget = true;
+			bCanRotateToInputDirection = false;
+		}
+		else
+		{
+			if (bHasTarget)
+			{
+				RemoveMotionWarpTarget(FName("AttackTarget")); // Remove only if we previously had a target
+				bHasTarget = false; // No target anymore
+			}
+			CurrentTarget = nullptr;
+			if (bCanRotateToInputDirection)
+			{
+				RotateToInputDirection(DeltaTime);
+			}
+		}
 	}
 	else
 	{
-		if (bHasTarget)
+		if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < ATTACK_DISTANCE)
 		{
-			RemoveMotionWarpTarget(FName("AttackTarget")); // Remove only if we previously had a target
-			bHasTarget = false; // No target anymore
+			AddMotionWarpTarget(CurrentLockOnTargetActor);
 		}
-		CurrentTarget = nullptr;
-		if (bCanRotateToInputDirection)
+		else
 		{
-			RotateToInputDirection(DeltaTime);
+			RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
 		}
 	}
+	
 	
 	DrawDebugLine(GetWorld(), Character->GetActorLocation(),
 		Character->GetActorLocation() + AttackDirection * 100.f,
 		FColor::Red, false, -1, 0, 1.f);
+
+	
+	if (IsValid(CurrentLockOnTargetActor))
+	{
+		FVector CurrentLocation = Character->GetActorLocation();
+		FVector TargetLocation = CurrentLockOnTargetActor->GetActorLocation();
+		double TargetDistance = FVector::Distance(CurrentLocation, TargetLocation);
+
+		if (TargetDistance >= LockOnBreakDistance)
+		{
+			EndLockOn();
+		}
+		else if (IsValid(CurrentLockOnTargetActor))
+		{
+			TargetLocation.Z -= 50.f;
+			FRotator NewRotation = UKismetMathLibrary::FindLookAtRotation(
+				CurrentLocation, TargetLocation);
+			GetWorld()->GetFirstPlayerController()->SetControlRotation(NewRotation);
+		}
+	}
+
+	
+
+	
+	
 }
 
 
@@ -67,6 +127,7 @@ void UFractPlayerAttackComponent::BeginPlay()
 
 	
 	Character = Cast<ASeunghwanTestCharacter>(GetOwner());
+	DefaultCameraLocation = Character->GetFollowCamera()->GetRelativeLocation();
 	
 	
 }
@@ -74,12 +135,17 @@ void UFractPlayerAttackComponent::BeginPlay()
 // 콤보 리셋용 함수
 void UFractPlayerAttackComponent::ResetCombo()
 {
-	Character->SetState(EFractCharacterState::ECS_Idle);
+	AttackState = EFractAttackState::EAS_Unoccupied;
 	ComboCount = 0;
 }
 
+void UFractPlayerAttackComponent::ResetAttackState()
+{
+	AttackState = EFractAttackState::EAS_Unoccupied;
+}
+
 // 인풋 타겟을 향해 모션 워핑을 하는 함수
-void UFractPlayerAttackComponent::MotionWarpToTarget(const AActor* Target) const
+void UFractPlayerAttackComponent::AddMotionWarpTarget(const AActor* Target) const
 {
 	if (!Character || !Target) return;
 
@@ -174,6 +240,114 @@ void UFractPlayerAttackComponent::RotateToInputDirection(float DeltaTime)
 	Character->SetActorRotation(InterpRotation);
 }
 
+
+void UFractPlayerAttackComponent::SpawnProjectile()
+{
+	FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
+    
+	FVector AimDirection = HitLocation - MuzzleLocation;
+	AimDirection = AimDirection.GetSafeNormal();
+	FRotator SpawnRotation = AimDirection.Rotation();
+    
+	if (ProjectileClass && GetWorld())
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = GetOwner();
+		SpawnParams.Instigator = Cast<APawn>(GetOwner());
+        
+		GetWorld()->SpawnActor<AFractProjectile>(
+			ProjectileClass,
+			MuzzleLocation,
+			SpawnRotation,
+			SpawnParams
+		);
+	}
+}
+
+
+void UFractPlayerAttackComponent::FireGroundSkillEnd()
+{
+	AttackState = EFractAttackState::EAS_Unoccupied;
+	bIsCancellingSkill = false;
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+}
+
+void UFractPlayerAttackComponent::ActivateFireGroundSkill()
+{
+	
+	FireGroundSkillParticleSystemComponent = UGameplayStatics::SpawnEmitterAttached(
+		GetSkill()->CastEffectCascade,
+		Character->GetWeapon()->GetWeaponMuzzle(),
+		FName("Muzzle"),
+		FVector::ZeroVector,
+		FRotator(110, 35, 0),
+		FVector(1.0f),
+		EAttachLocation::Type::SnapToTarget,
+		true);
+
+	GetWorld()->GetTimerManager().SetTimer(FireGroundSkillDamageTimerHandle, this,
+		&UFractPlayerAttackComponent::ApplyFireGroundSkillDamage, 0.1f, true);
+	
+}
+
+void UFractPlayerAttackComponent::DeactivateFireGroundSkill()
+{
+	if (FireGroundSkillParticleSystemComponent)
+	{
+		FireGroundSkillParticleSystemComponent->Deactivate();
+	}
+	GetWorld()->GetTimerManager().ClearTimer(FireGroundSkillDamageTimerHandle);
+	
+}
+
+void UFractPlayerAttackComponent::ApplyFireGroundSkillDamage()
+{
+	FVector Start = Character->GetActorLocation() + Character->GetActorForwardVector() * 300.f;
+	FVector End = Character->GetActorLocation() + Character->GetActorForwardVector() * 700.f;
+	FCollisionQueryParams IgnoreParams;
+	IgnoreParams.AddIgnoredActor(Character);
+	TArray<FHitResult> HitResults;
+	FCollisionShape FireGroundSkillBox = FCollisionShape::MakeBox(FVector(80.f, 45.f, 45.f));
+
+	bool bHasFoundTargets = GetWorld()->SweepMultiByChannel(
+		HitResults,
+		Start,
+		End,
+		Character->GetActorQuat(),
+		ECC_GameTraceChannel1,
+		FireGroundSkillBox,
+		IgnoreParams);
+
+	for (const FHitResult HitResult : HitResults)
+	{
+		if (AFractTestEnemy* CastedActor = Cast<AFractTestEnemy>(HitResult.GetActor()))
+		{
+			UGameplayStatics::ApplyDamage(CastedActor, 5.f,
+				Character->GetController(),
+				Character,
+				UDamageType::StaticClass());
+
+			if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(HitResult.GetActor()))
+			{
+				HitInterface->GetHit(HitResult.ImpactPoint);
+			}
+		}
+	}
+
+	FVector CenterPoint = UKismetMathLibrary::VLerp(Start,
+			End, 0.5f);
+	UKismetSystemLibrary::DrawDebugBox(
+		this,
+		CenterPoint,
+		FireGroundSkillBox.GetExtent(),
+		bHasFoundTargets ? FColor::Green : FColor::Red,
+		Character->GetActorRotation(),
+		1.f,
+		2.f
+		);
+}
+
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
 void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
 {
@@ -210,15 +384,22 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 }
 
 // 플레이어의 원거리, 근거리 공격 상태 전환용 함수
-void UFractPlayerAttackComponent::SwitchRange()
+void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 {
-	if (CurrentRange == EFractAttackRange::Melee)
+	if (bHasLockOnTarget || AttackState == EFractAttackState::EAS_UsingFireGroundSkill) return;
+	bIsAiming = Value.Get<bool>();
+	if (bIsAiming)
 	{
 		CurrentRange = EFractAttackRange::Ranged;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
-	else if (CurrentRange == EFractAttackRange::Ranged)
+	else
 	{
 		CurrentRange = EFractAttackRange::Melee;
+		ResetCombo();
+		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
 	}
 }
 
@@ -274,12 +455,23 @@ FFractSkill* UFractPlayerAttackComponent::GetSkill()
 	return nullptr;
 }
 
+void UFractPlayerAttackComponent::CancelFireGroundSkill()
+{
+	if (bIsCancellingSkill) return;
+	if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
+	{
+		bIsCancellingSkill = true;
+		AnimInstance->Montage_JumpToSection(FName("End"));
+	}
+	
+}
+
 // 플레이어가 기본 공격을 하는 함수
 void UFractPlayerAttackComponent::UseNormalAttack()
 {
-	if (Character->GetState() == EFractCharacterState::ECS_Idle)
+	if (AttackState == EFractAttackState::EAS_Unoccupied
+		&& !Character->GetCharacterMovement()->IsFalling())
 	{
-		Character->SetState(EFractCharacterState::ECS_Attacking);
 		if (const FFractAttack* Attack = GetNormalAttack())
 		{
 			if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
@@ -302,57 +494,163 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 				
 				if (Attack->Range == EFractAttackRange::Melee)
 				{
+					AttackState = EFractAttackState::EAS_MeleeAttacking;
 					if (CurrentTarget)
 					{
-						MotionWarpToTarget(CurrentTarget);
+						AddMotionWarpTarget(CurrentTarget);
 					}
+				}
+				else if (Attack->Range == EFractAttackRange::Ranged)
+				{
+					AttackState = EFractAttackState::EAS_RangedAttacking;
+					FHitResult TraceResult;
+					TraceUnderCrosshairs(TraceResult);
+					CachedHitLocation = TraceResult.ImpactPoint;
+					bIsRangedAttacking = true;
 				}
 
 				ComboCount = ComboCount % Attack->AttackMontages.Num();
 				AnimInstance->Montage_Play(Attack->AttackMontages[ComboCount]);
 				ComboCount++;
 			}
-			if (Attack->Range == EFractAttackRange::Ranged)
-			{
-				GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Black, TEXT("Hi"));
-			}
+			
 		}
 	}
 }
 
-void UFractPlayerAttackComponent::SpawnProjectile()
-{
-	FVector MuzzleLocation = Character->GetWeapon()->GetWeaponMuzzle()->GetComponentLocation();
-    
-	FVector AimDirection = (HitLocation - MuzzleLocation).GetSafeNormal();
-	FRotator SpawnRotation = AimDirection.Rotation();
-    
-	if (ProjectileClass && GetWorld())
-	{
-		FActorSpawnParameters SpawnParams;
-		SpawnParams.Owner = GetOwner();
-		SpawnParams.Instigator = Cast<APawn>(GetOwner());
-        
-		GetWorld()->SpawnActor<AFractProjectile>(
-			ProjectileClass,
-			MuzzleLocation,
-			SpawnRotation,
-			SpawnParams
-		);
-	}
-}
+
 
 // 플레이어가 스킬을 사용하는 함수
 void UFractPlayerAttackComponent::UseSkill()
 {
+	if (AttackState != EFractAttackState::EAS_Unoccupied || bIsAiming)
+		return;
 	if (const FFractSkill* Skill = GetSkill())
 	{
+		if (Skill->bIsFlyingSkill)
+		{
+			//Handle Flying Skill
+		}
+		else // 비행 스킬이 아닐 경우
+		{
+			switch (Skill->Element)
+			{
+			case EFractElementType::None: // 임시로 None 추후 fire로 옮기기
+				AttackState = EFractAttackState::EAS_UsingFireGroundSkill;
+				Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+				Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+				break;
+			default:
+				break;
+			}
+		}
 		if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
 		{
 			AnimInstance->Montage_Play(Skill->SkillMontage);
 		}
 	}
 }
+
+void UFractPlayerAttackComponent::StartLockOn()
+{
+	if (bIsAiming) return;
+	TArray<FHitResult> OutResults;
+	FVector CurrentLocation = Character->GetActorLocation();
+	FCollisionShape Sphere = FCollisionShape::MakeSphere(1000.f);
+	FCollisionQueryParams IgnoreParams {FName(TEXT("Ignore Collision Params")),
+			false,
+			Character};
+	bool bHasFoundTarget = GetWorld()->SweepMultiByChannel(
+		OutResults,
+		CurrentLocation,
+		CurrentLocation,
+		FQuat::Identity,
+		ECollisionChannel::ECC_Pawn,
+		Sphere,
+		IgnoreParams
+		);
+
+	if (!bHasFoundTarget) return;
+
+	FVector2D ViewportSize;
+	if (GEngine && GEngine->GameViewport)
+	{
+		GEngine->GameViewport->GetViewportSize(ViewportSize);
+	}
+
+	FVector2D CrosshairLocation(ViewportSize.X / 2, ViewportSize.Y / 2);
+	FVector CrosshairWorldPosition;
+	FVector CrosshairWorldDirection;
+
+	float SmallestAngle = MAX_FLT;
+	AFractTestEnemy* TargetEnemy = nullptr;
+	
+
+	for (const FHitResult& OutResult : OutResults)
+	{
+		AActor* PotentialTarget = OutResult.GetActor();
+		
+		UGameplayStatics::DeprojectScreenToWorld(
+			UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation,
+			CrosshairWorldPosition, CrosshairWorldDirection);
+		
+		if (AFractTestEnemy* CastedTarget = Cast<AFractTestEnemy>(PotentialTarget))
+		{
+			FVector ToTarget = (CastedTarget->GetActorLocation() - CurrentLocation).GetSafeNormal();
+			float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(
+				CrosshairWorldDirection, ToTarget)));
+			if (Angle < SmallestAngle && Angle <= 60)
+			{
+				SmallestAngle = Angle;
+				TargetEnemy = CastedTarget;
+			}
+		}
+	}
+
+	if (!TargetEnemy) return;
+
+	CurrentLockOnTargetActor = TargetEnemy;
+	bHasLockOnTarget = true;
+	
+	GetWorld()->GetFirstPlayerController()->SetIgnoreLookInput(true);
+	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+	Character->GetCameraBoom()->TargetOffset = FVector(0.f, 0.f , 50.f);
+
+	IFractEnemyInterface::Execute_OnSelect(CurrentLockOnTargetActor);
+
+	OnUpdatedTargetDelegate.Broadcast(CurrentLockOnTargetActor);
+}
+
+void UFractPlayerAttackComponent::EndLockOn()
+{
+	IFractEnemyInterface::Execute_OnDeselect(CurrentLockOnTargetActor);
+	RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
+	CurrentLockOnTargetActor = nullptr;
+	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+	Character->GetCameraBoom()->TargetOffset = FVector::ZeroVector;
+	GetWorld()->GetFirstPlayerController()->ResetIgnoreLookInput();
+	bHasLockOnTarget = false;
+	bCanRotateToInputDirection = false;
+	OnUpdatedTargetDelegate.Broadcast(CurrentLockOnTargetActor);
+
+}
+
+void UFractPlayerAttackComponent::ToggleLockOn()
+{
+	if (IsValid(CurrentLockOnTargetActor))
+	{
+		EndLockOn();
+	}
+	else
+	{
+		StartLockOn();
+	}
+}
+
+
+
 
 
 

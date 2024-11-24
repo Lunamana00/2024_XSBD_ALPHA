@@ -54,9 +54,21 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = "Camera")
 	TSubclassOf<UCameraShakeBase> CamShake;
 
+	UPROPERTY()
+	TArray<AActor*> TargetsToIgnore;
+
 public:
 
+	UPROPERTY(EditAnywhere)
+	bool bDebugMode = false;
+	UPROPERTY(EditAnywhere, BlueprintReadWrite)
+	bool bIsAttacking = false;
 	FORCEINLINE USceneComponent* GetWeaponMuzzle() const { return WeaponMuzzle; }
 	FORCEINLINE UBoxComponent* GetWeaponBox() const { return WeaponBox; }
+
+	UFUNCTION(BlueprintCallable)
+	void EmptyIgnoreActorsArray();
+	
+	
 	
 };

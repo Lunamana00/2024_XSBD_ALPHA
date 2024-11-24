@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "Interfaces/FractEnemyInterface.h"
 #include "Interfaces/FractHitInterface.h"
 #include "FractTestEnemy.generated.h"
 
 class UFractAttributeComponent;
 
 UCLASS()
-class ALPHA_API AFractTestEnemy : public ACharacter, public IFractHitInterface
+class ALPHA_API AFractTestEnemy : public ACharacter, public IFractHitInterface, public IFractEnemyInterface
 {
 	GENERATED_BODY()
 
@@ -41,7 +42,8 @@ protected:
 	void PlayHitReactMontage(const FName& SectionName);
 
 public:	
-	
+
+	UFractAttributeComponent* GetAttribute() const { return Attribute; }
 	
 
 };
