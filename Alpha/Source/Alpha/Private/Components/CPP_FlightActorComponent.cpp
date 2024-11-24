@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+	// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Components/CPP_FlightActorComponent.h"
@@ -26,8 +26,13 @@ void UCPP_FlightActorComponent::StartFlying()
 
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
-		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 		IsFlying = true;
+
+		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+
+		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
 }
 
@@ -35,8 +40,15 @@ void UCPP_FlightActorComponent::EndFlying()
 {
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
-		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+
 		IsFlying = false;
+
+		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
+
+		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+
+		Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
+
 		CurrentVelocity = FVector::ZeroVector;
 	}
 }
@@ -105,13 +117,13 @@ void UCPP_FlightActorComponent::PressedSpace()
 
 			if (IsFlying)
 			{
-
 				EndFlying();
 			}
 			else
 			{
+				
 				StartFlying();
-
+				
 			}
 		}
 	}
