@@ -117,11 +117,11 @@ void UCPP_FlightActorComponent::PressedSpace()
 
 			if (IsFlying)
 			{
-
 				EndFlying();
 			}
 			else
 			{
+				
 				StartFlying();
 				
 			}

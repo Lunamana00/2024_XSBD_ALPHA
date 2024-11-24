@@ -10,6 +10,7 @@
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "TimerManager.h"
 #include "InputActionValue.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
@@ -84,32 +85,34 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
-		// Jumping
-		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::PressedSpace);
 		
 		// Moving
 		if (!(&UCPP_FlightActorComponent::FlyingState))
 		{
+			//*** 지상 이동 ***//
 			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Move);
 
-
 			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Look);
+
 		}
 		else 
 		{
+			//*** 공중 이동 ***//
 			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Move);
+
 			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Look);
-		}
 		
-		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
-		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::EndSnipe);
+
+		}
 
 		EnhancedInputComponent->BindAction(ShiftAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Shift);
+		//*** 우클릭 ***//
+		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
+		
+		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::EndSnipe);
 	}
-
-	
 	
 	else
 	{
@@ -155,9 +158,9 @@ void AAlphaCharacter::Look(const FInputActionValue& Value)
 	}
 }
 
-void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)
+void AAlphaCharacter::StartSnipe(const FInputActionValue& Value)	
 {
-	if (GetCharacterMovement() && !(&UCPP_FlightActorComponent::FlyingState)) {
+	if (GetCharacterMovement()) {
 
 		IsSniping = true;
 
@@ -179,15 +182,28 @@ void AAlphaCharacter::EndSnipe(const FInputActionValue& Value)
 
 void AAlphaCharacter::Shift(const FInputActionValue& Value)
 {
-	FVector Velocity = GetVelocity();
+	if (IsRolling || !Controller) return;
 
-	FRotator BaseRotation = GetActorRotation();
-	FVector ForwardVector = BaseRotation.Vector();
-	FVector RightVector = FRotationMatrix(BaseRotation).GetUnitAxis(EAxis::Y);
+	FVector ForwardInput = GetInputAxisValue("MoveForward") * GetActorForwardVector();
+	FVector RightInput = GetInputAxisValue("MoveRight") * GetActorRightVector();
+	RollDirection = FVector2D(ForwardInput.X + RightInput.X, ForwardInput.Y + RightInput.Y).GetSafeNormal();
+
+	if (RollDirection.IsZero()) return;
 	
-	float ForwardSpeed = FVector::DotProduct(Velocity, ForwardVector);
-	float RightSpeed = FVector::DotProduct(Velocity, RightVector);
+	IsRolling = true;
 
-	float Direction = FMath::Atan2(RightSpeed, ForwardSpeed);
+	LaunchCharacter(FVector(RollDirection, 0.f) * RollStrength, true, true);
 
+	GetWorldTimerManager().SetTimer(
+		RollTimerHandle,
+		this,
+		&AAlphaCharacter::StopRolling,
+		RollDuration,
+		false
+	);
+}
+
+void AAlphaCharacter::StopRolling()
+{
+	IsRolling = false;
 }

@@ -86,7 +86,23 @@ protected:
 
 	void EndSnipe(const FInputActionValue& Value);
 
+	//*** 구르기 추가부분 ***//
 	void Shift(const FInputActionValue& Value);
+
+	void StopRolling();
+
+	bool IsRolling = false;
+
+	FVector2D RollDirection;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Roll")
+	float RollStrength = 800.0f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Roll")
+	float RollDuration = 0.7f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Animation")
+	UBlendSpace* RollBlendSpace;
 
 private:
 	//*** 우클릭 추가 부분 ***//
@@ -105,5 +121,8 @@ private:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* ShiftAction;
+
+
+	FTimerHandle RollTimerHandle;
 };
 
