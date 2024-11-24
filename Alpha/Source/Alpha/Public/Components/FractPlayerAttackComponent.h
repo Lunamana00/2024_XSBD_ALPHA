@@ -125,6 +125,8 @@ protected:
 	void ActivateFireGroundSkill();
 	UFUNCTION(BlueprintCallable)
 	void DeactivateFireGroundSkill();
+	void ApplyFireGroundSkillDamage();
+	FTimerHandle FireGroundSkillDamageTimerHandle;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UParticleSystemComponent* FireGroundSkillParticleSystemComponent;
