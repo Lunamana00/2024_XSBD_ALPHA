@@ -2,12 +2,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/SphereComponent.h"
-#include "NiagaraComponent.h"
 #include "NiagaraSystem.h"
+#include "NiagaraComponent.h"
+#include "Components/SphereComponent.h"
+#include "GameFramework/ProjectileMovementComponent.h"
 #include "BossProjectile.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class ALPHA_API ABossProjectile : public AActor
 {
     GENERATED_BODY()
@@ -21,56 +22,42 @@ protected:
 public:
     virtual void Tick(float DeltaTime) override;
 
-    // 발사체 이동 시작
-    void StartMovement(const FVector& Direction, AActor* Target);
-
-    // 충돌 이벤트
-    UFUNCTION()
-    void OnProjectileHit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-        UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
-
-private:
-    // 충돌 컴포넌트
-    UPROPERTY(VisibleAnywhere, Category = "Collision")
+    // 콜리전 컴포넌트
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Collision")
     USphereComponent* CollisionComponent;
 
-    // 이동 속도
-    UPROPERTY(EditAnywhere, Category = "Movement")
-    float Speed = 1000.0f;
+    // 메쉬 컴포넌트
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Mesh")
+    UStaticMeshComponent* MeshComponent;
 
-    // 유도 회전 속도
-    UPROPERTY(EditAnywhere, Category = "Movement")
-    float HomingTurnSpeed = 5.0f;
+    // 투사체 이동 컴포넌트
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Movement")
+    UProjectileMovementComponent* ProjectileMovementComponent;
 
-    // 유도 지속 시간
-    UPROPERTY(EditAnywhere, Category = "Movement")
-    float HomingDuration = 2.0f;
-
-    // 플레이어 충돌 효과
-    UPROPERTY(EditAnywhere, Category = "Effects")
-    UNiagaraSystem* PlayerImpactEffect;
-
-    // 메시 충돌 효과
-    UPROPERTY(EditAnywhere, Category = "Effects")
-    UNiagaraSystem* MeshImpactEffect;
-
-    // 트레일 효과
+    // 이펙트
     UPROPERTY(EditAnywhere, Category = "Effects")
     UNiagaraSystem* TrailEffect;
 
-    // 트레일 컴포넌트
-    UPROPERTY(VisibleAnywhere, Category = "Effects")
+    UPROPERTY(EditAnywhere, Category = "Effects")
+    UNiagaraSystem* LaunchEffect;
+
+private:
     UNiagaraComponent* TrailEffectComponent;
+    UNiagaraComponent* LaunchEffectComponent;
 
-    // 이동 방향
-    FVector MovementDirection;
+    // 타이머 핸들
+    FTimerHandle LaunchEffectTimerHandle;
+    FTimerHandle HomingReductionTimerHandle;
 
-    // 유도 대상
-    AActor* HomingTarget;
+    // 호밍 관련 변수
+    float InitialHomingAcceleration;
+    float ReductionDuration;
+    float ElapsedTime;
 
-    // 유도 여부
-    bool bIsHoming;
+    // 투사체 초기화
+    void InitializeProjectile(AActor* Target);
 
-    // 유도 종료 타이머
-    FTimerHandle HomingTimerHandle;
+    // 이펙트 및 호밍 처리 함수
+    void StopLaunchEffect();
+    void ReduceHoming();
 };

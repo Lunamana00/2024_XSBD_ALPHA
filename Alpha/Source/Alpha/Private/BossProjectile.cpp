@@ -1,107 +1,116 @@
 #include "BossProjectile.h"
-#include "Components/SphereComponent.h"
-#include "Kismet/GameplayStatics.h"
 #include "NiagaraFunctionLibrary.h"
-#include "NiagaraComponent.h"
-#include "GameFramework/Character.h"
+#include "Kismet/GameplayStatics.h"
+#include "TimerManager.h"
 
 ABossProjectile::ABossProjectile()
 {
     PrimaryActorTick.bCanEverTick = true;
 
-    // 충돌 컴포넌트 생성
+    // 콜리전 컴포넌트 설정
     CollisionComponent = CreateDefaultSubobject<USphereComponent>(TEXT("CollisionComponent"));
     CollisionComponent->InitSphereRadius(15.0f);
-    CollisionComponent->SetCollisionProfileName(TEXT("OverlapAllDynamic"));
-    CollisionComponent->OnComponentBeginOverlap.AddDynamic(this, &ABossProjectile::OnProjectileHit);
+    CollisionComponent->SetCollisionProfileName(TEXT("Projectile"));
+    CollisionComponent->SetNotifyRigidBodyCollision(true);
+    CollisionComponent->SetGenerateOverlapEvents(true);
     RootComponent = CollisionComponent;
 
-    // 트레일 이펙트 컴포넌트 생성
-    TrailEffectComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("TrailEffectComponent"));
-    TrailEffectComponent->SetupAttachment(RootComponent);
+    // 메쉬 컴포넌트 설정
+    MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("MeshComponent"));
+    MeshComponent->SetupAttachment(RootComponent);
+
+    // 투사체 이동 컴포넌트 설정
+    ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
+    ProjectileMovementComponent->SetUpdatedComponent(CollisionComponent);
+    ProjectileMovementComponent->InitialSpeed = 400.0f;
+    ProjectileMovementComponent->MaxSpeed = 700.0f;
+    ProjectileMovementComponent->bRotationFollowsVelocity = true;
+    ProjectileMovementComponent->bIsHomingProjectile = true;
+    ProjectileMovementComponent->HomingAccelerationMagnitude = 10000.0f;
+
+    // 초기값 설정
+    InitialHomingAcceleration = 10000.0f;
+    ReductionDuration = 3.0f; // 5초 동안 감소
+    ElapsedTime = 0.0f;
 }
 
 void ABossProjectile::BeginPlay()
 {
     Super::BeginPlay();
 
-    // 트레일 이펙트 시작
-    if (TrailEffect && TrailEffectComponent)
+    // 발사 이펙트 재생
+    if (LaunchEffect)
     {
-        TrailEffectComponent->SetAsset(TrailEffect);
-        TrailEffectComponent->Activate();
+        LaunchEffectComponent = UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+            GetWorld(), LaunchEffect, GetActorLocation(), GetActorRotation());
+
+        if (LaunchEffectComponent)
+        {
+            // 콜리전 무시 설정
+            LaunchEffectComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+        }
     }
 
-    // 유도 지속 시간 설정
-    GetWorld()->GetTimerManager().SetTimer(HomingTimerHandle, [this]()
-        {
-            bIsHoming = false; // 유도 종료
-        }, HomingDuration, false);
+    // 발사 이펙트 1초 후 꺼짐
+    GetWorldTimerManager().SetTimer(LaunchEffectTimerHandle, this, &ABossProjectile::StopLaunchEffect, 1.0f, false);
+
+    // 트레일 이펙트 생성
+    if (TrailEffect)
+    {
+        TrailEffectComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
+            TrailEffect, MeshComponent, NAME_None, FVector::ZeroVector, FRotator::ZeroRotator,
+            EAttachLocation::KeepRelativeOffset, true);
+    }
+
+    // 플레이어를 타겟으로 설정
+    AActor* PlayerPawn = UGameplayStatics::GetPlayerPawn(GetWorld(), 0);
+    if (PlayerPawn)
+    {
+        InitializeProjectile(PlayerPawn);
+    }
+
+    // 호밍 감소 시작
+    GetWorldTimerManager().SetTimer(HomingReductionTimerHandle, this, &ABossProjectile::ReduceHoming, 0.1f, true);
 }
 
 void ABossProjectile::Tick(float DeltaTime)
 {
     Super::Tick(DeltaTime);
+}
 
-    if (bIsHoming && HomingTarget)
+void ABossProjectile::InitializeProjectile(AActor* Target)
+{
+    if (ProjectileMovementComponent && Target)
     {
-        FVector TargetDirection = (HomingTarget->GetActorLocation() - GetActorLocation()).GetSafeNormal();
-        MovementDirection = FMath::VInterpTo(MovementDirection, TargetDirection, DeltaTime, HomingTurnSpeed);
-    }
-
-    if (!MovementDirection.IsZero())
-    {
-        FVector NewLocation = GetActorLocation() + MovementDirection * Speed * DeltaTime;
-        SetActorLocation(NewLocation);
-        SetActorRotation(MovementDirection.Rotation());
+        USceneComponent* TargetRootComponent = Target->GetRootComponent();
+        if (TargetRootComponent)
+        {
+            ProjectileMovementComponent->HomingTargetComponent = TargetRootComponent;
+        }
     }
 }
 
-void ABossProjectile::StartMovement(const FVector& Direction, AActor* Target)
+void ABossProjectile::StopLaunchEffect()
 {
-    MovementDirection = Direction.GetSafeNormal();
-    HomingTarget = Target;
+        // 이펙트 비활성화 및 제거
+        LaunchEffectComponent->Deactivate();
+        LaunchEffectComponent->DestroyComponent();
+        LaunchEffectComponent = nullptr;
+
 }
 
-void ABossProjectile::OnProjectileHit(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor,
-    UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+
+void ABossProjectile::ReduceHoming()
 {
-    if (OtherActor && OtherActor != this && OtherComp)
+    ElapsedTime += 0.1f;
+
+    // 새로운 호밍 가속도 계산
+    float NewHomingAcceleration = FMath::Lerp(InitialHomingAcceleration, 0.0f, ElapsedTime / ReductionDuration);
+    ProjectileMovementComponent->HomingAccelerationMagnitude = FMath::Max(NewHomingAcceleration, 0.0f);
+
+    // 호밍 감소 완료 후 타이머 정지
+    if (ElapsedTime >= ReductionDuration)
     {
-        if (OtherActor->IsA(ACharacter::StaticClass()))
-        {
-            // 플레이어 충돌: A 이펙트
-            if (PlayerImpactEffect)
-            {
-                UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-                    GetWorld(),
-                    PlayerImpactEffect,
-                    GetActorLocation(),
-                    FRotator::ZeroRotator
-                );
-            }
-        }
-        else if (OtherComp->IsA(UStaticMeshComponent::StaticClass()) || OtherComp->IsA(USkeletalMeshComponent::StaticClass()))
-        {
-            // 메시 충돌: B 이펙트
-            if (MeshImpactEffect)
-            {
-                UNiagaraFunctionLibrary::SpawnSystemAtLocation(
-                    GetWorld(),
-                    MeshImpactEffect,
-                    GetActorLocation(),
-                    FRotator::ZeroRotator
-                );
-            }
-        }
-
-        // 트레일 제거
-        if (TrailEffectComponent)
-        {
-            TrailEffectComponent->DestroyComponent();
-        }
-
-        // 발사체 파괴
-        Destroy();
+        GetWorldTimerManager().ClearTimer(HomingReductionTimerHandle);
     }
 }
