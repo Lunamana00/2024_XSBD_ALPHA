@@ -49,7 +49,6 @@ ASeunghwanTestCharacter::ASeunghwanTestCharacter()
 	Attribute = CreateDefaultSubobject<UFractPlayerAttributeComponent>(TEXT("Player Attribute Component"));
 	AttackComponent = CreateDefaultSubobject<UFractPlayerAttackComponent>(TEXT("Player Attack Component"));
 	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("Motion Warping Component"));
-	FireGroundSkillSceneComponent = CreateDefaultSubobject<USceneComponent>(TEXT("FireGroundSkill SceneComponent"));
 
 	
 

@@ -90,6 +90,9 @@ struct FFractSkill
 {
     GENERATED_BODY()
 
+    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+    bool bIsNiagara = true;
+
     // 기본 정보
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Skill Info")
     FText SkillName;
@@ -133,8 +136,12 @@ struct FFractSkill
     UAnimMontage* SkillMontage;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
-    UNiagaraSystem* CastEffectSystem;
+    UNiagaraSystem* CastEffectNiagara;
+
+    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
+    UParticleSystem* CastEffectCascade;
 
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "FX")
     USoundBase* CastSound;
+    
 };

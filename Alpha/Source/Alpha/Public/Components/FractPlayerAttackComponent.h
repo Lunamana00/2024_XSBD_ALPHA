@@ -125,9 +125,9 @@ protected:
 	void ActivateFireGroundSkill();
 	UFUNCTION(BlueprintCallable)
 	void DeactivateFireGroundSkill();
-
+	
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
-	UNiagaraComponent* FireGroundSkillNiagaraComponent;
+	UParticleSystemComponent* FireGroundSkillParticleSystemComponent;
 
 	
 
@@ -157,6 +157,8 @@ public:
 	bool bHasLockOnTarget = false;
 	UPROPERTY(BlueprintReadOnly, Category = "Combat")
 	bool bIsAiming = false;
+	UPROPERTY()
+	bool bIsCancellingSkill = false;
 	
 	
 	

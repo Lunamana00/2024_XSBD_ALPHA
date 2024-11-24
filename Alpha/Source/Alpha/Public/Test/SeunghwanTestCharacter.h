@@ -92,12 +92,8 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UMotionWarpingComponent* MotionWarpingComponent;
 
-	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
-	USceneComponent* FireGroundSkillSceneComponent;
-
 public:
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
-	FORCEINLINE USceneComponent* GetFireGroundSkillSceneComponent() const { return FireGroundSkillSceneComponent; }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }

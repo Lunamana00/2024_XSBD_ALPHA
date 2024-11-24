@@ -266,6 +266,7 @@ void UFractPlayerAttackComponent::SpawnProjectile()
 void UFractPlayerAttackComponent::FireGroundSkillEnd()
 {
 	AttackState = EFractAttackState::EAS_Unoccupied;
+	bIsCancellingSkill = false;
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
 }
@@ -273,12 +274,13 @@ void UFractPlayerAttackComponent::FireGroundSkillEnd()
 void UFractPlayerAttackComponent::ActivateFireGroundSkill()
 {
 	
-	FireGroundSkillNiagaraComponent = UNiagaraFunctionLibrary::SpawnSystemAttached(
-		GetSkill()->CastEffectSystem,
-		Character->GetFireGroundSkillSceneComponent(),
+	FireGroundSkillParticleSystemComponent = UGameplayStatics::SpawnEmitterAttached(
+		GetSkill()->CastEffectCascade,
+		Character->GetWeapon()->GetWeaponMuzzle(),
 		FName("Muzzle"),
 		FVector::ZeroVector,
-		FRotator::ZeroRotator,
+		FRotator(110, 35, 0),
+		FVector(1.0f),
 		EAttachLocation::Type::SnapToTarget,
 		true);
 	
@@ -286,9 +288,9 @@ void UFractPlayerAttackComponent::ActivateFireGroundSkill()
 
 void UFractPlayerAttackComponent::DeactivateFireGroundSkill()
 {
-	if (FireGroundSkillNiagaraComponent)
+	if (FireGroundSkillParticleSystemComponent)
 	{
-		FireGroundSkillNiagaraComponent->Deactivate();
+		FireGroundSkillParticleSystemComponent->Deactivate();
 	}
 	
 }
@@ -402,8 +404,10 @@ FFractSkill* UFractPlayerAttackComponent::GetSkill()
 
 void UFractPlayerAttackComponent::CancelFireGroundSkill()
 {
+	if (bIsCancellingSkill) return;
 	if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
 	{
+		bIsCancellingSkill = true;
 		AnimInstance->Montage_JumpToSection(FName("End"));
 	}
 	
@@ -415,7 +419,6 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 	if (AttackState == EFractAttackState::EAS_Unoccupied
 		&& !Character->GetCharacterMovement()->IsFalling())
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, "You are falling");
 		if (const FFractAttack* Attack = GetNormalAttack())
 		{
 			if (UAnimInstance* AnimInstance = Character->GetMesh()->GetAnimInstance())
