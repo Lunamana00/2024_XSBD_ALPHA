@@ -112,9 +112,11 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 				CurrentLocation, TargetLocation);
 			GetWorld()->GetFirstPlayerController()->SetControlRotation(NewRotation);
 		}
-
-		
 	}
+
+	
+
+	
 	
 }
 
@@ -283,6 +285,9 @@ void UFractPlayerAttackComponent::ActivateFireGroundSkill()
 		FVector(1.0f),
 		EAttachLocation::Type::SnapToTarget,
 		true);
+
+	GetWorld()->GetTimerManager().SetTimer(FireGroundSkillDamageTimerHandle, this,
+		&UFractPlayerAttackComponent::ApplyFireGroundSkillDamage, 0.1f, true);
 	
 }
 
@@ -292,7 +297,55 @@ void UFractPlayerAttackComponent::DeactivateFireGroundSkill()
 	{
 		FireGroundSkillParticleSystemComponent->Deactivate();
 	}
+	GetWorld()->GetTimerManager().ClearTimer(FireGroundSkillDamageTimerHandle);
 	
+}
+
+void UFractPlayerAttackComponent::ApplyFireGroundSkillDamage()
+{
+	FVector Start = Character->GetActorLocation() + Character->GetActorForwardVector() * 300.f;
+	FVector End = Character->GetActorLocation() + Character->GetActorForwardVector() * 700.f;
+	FCollisionQueryParams IgnoreParams;
+	IgnoreParams.AddIgnoredActor(Character);
+	TArray<FHitResult> HitResults;
+	FCollisionShape FireGroundSkillBox = FCollisionShape::MakeBox(FVector(80.f, 45.f, 45.f));
+
+	bool bHasFoundTargets = GetWorld()->SweepMultiByChannel(
+		HitResults,
+		Start,
+		End,
+		Character->GetActorQuat(),
+		ECC_GameTraceChannel1,
+		FireGroundSkillBox,
+		IgnoreParams);
+
+	for (const FHitResult HitResult : HitResults)
+	{
+		if (AFractTestEnemy* CastedActor = Cast<AFractTestEnemy>(HitResult.GetActor()))
+		{
+			UGameplayStatics::ApplyDamage(CastedActor, 5.f,
+				Character->GetController(),
+				Character,
+				UDamageType::StaticClass());
+
+			if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(HitResult.GetActor()))
+			{
+				HitInterface->GetHit(HitResult.ImpactPoint);
+			}
+		}
+	}
+
+	FVector CenterPoint = UKismetMathLibrary::VLerp(Start,
+			End, 0.5f);
+	UKismetSystemLibrary::DrawDebugBox(
+		this,
+		CenterPoint,
+		FireGroundSkillBox.GetExtent(),
+		bHasFoundTargets ? FColor::Green : FColor::Red,
+		Character->GetActorRotation(),
+		1.f,
+		2.f
+		);
 }
 
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
@@ -333,7 +386,7 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 // 플레이어의 원거리, 근거리 공격 상태 전환용 함수
 void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 {
-	if (bHasLockOnTarget) return;
+	if (bHasLockOnTarget || AttackState == EFractAttackState::EAS_UsingFireGroundSkill) return;
 	bIsAiming = Value.Get<bool>();
 	if (bIsAiming)
 	{
@@ -470,7 +523,7 @@ void UFractPlayerAttackComponent::UseNormalAttack()
 // 플레이어가 스킬을 사용하는 함수
 void UFractPlayerAttackComponent::UseSkill()
 {
-	if (AttackState != EFractAttackState::EAS_Unoccupied)
+	if (AttackState != EFractAttackState::EAS_Unoccupied || bIsAiming)
 		return;
 	if (const FFractSkill* Skill = GetSkill())
 	{

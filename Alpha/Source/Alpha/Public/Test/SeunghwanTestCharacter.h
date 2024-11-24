@@ -3,10 +3,13 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "DiffUtils.h"
+#include "Chaos/Deformable/ChaosDeformableCollisionsProxy.h"
 #include "GameFramework/Character.h"
 #include "Enums/FractTypes.h"
 #include "SeunghwanTestCharacter.generated.h"
 
+class UBoxComponent;
 class USpringArmComponent;
 class UCameraComponent;
 class UInputMappingContext;
@@ -92,6 +95,7 @@ private:
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category = Attack, meta = (AllowPrivateAccess = "true"))
 	UMotionWarpingComponent* MotionWarpingComponent;
 
+
 public:
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
 
@@ -118,5 +122,6 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
 
 };

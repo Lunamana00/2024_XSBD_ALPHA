@@ -12,6 +12,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Weapons/FractPlayerWeapon.h"
+#include "Components/BoxComponent.h"
 
 // Sets default values
 ASeunghwanTestCharacter::ASeunghwanTestCharacter()
