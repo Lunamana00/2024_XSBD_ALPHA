@@ -7,6 +7,7 @@
 #include "Chaos/Deformable/ChaosDeformableCollisionsProxy.h"
 #include "GameFramework/Character.h"
 #include "Enums/FractTypes.h"
+#include "Components/CPP_FlightActorComponent.h"
 #include "SeunghwanTestCharacter.generated.h"
 
 class UBoxComponent;
@@ -123,5 +124,12 @@ public:
 	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	//Jong Add
+protected:
+	//*** 비행 추가 부분 ***//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCPP_FlightActorComponent* FlightComponent;
 
+	UFUNCTION(BlueprintCallable, Category = "Flight")
+	bool GetIsFlying() const;
 };

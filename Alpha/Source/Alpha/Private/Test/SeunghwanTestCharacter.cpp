@@ -13,6 +13,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Weapons/FractPlayerWeapon.h"
 #include "Components/BoxComponent.h"
+#include "Components/CPP_FlightActorComponent.h"
+
 
 // Sets default values
 ASeunghwanTestCharacter::ASeunghwanTestCharacter()
@@ -50,8 +52,8 @@ ASeunghwanTestCharacter::ASeunghwanTestCharacter()
 	Attribute = CreateDefaultSubobject<UFractPlayerAttributeComponent>(TEXT("Player Attribute Component"));
 	AttackComponent = CreateDefaultSubobject<UFractPlayerAttackComponent>(TEXT("Player Attack Component"));
 	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("Motion Warping Component"));
+	FlightComponent = CreateDefaultSubobject<UCPP_FlightActorComponent>(TEXT("FlightComponent"));
 
-	
 
 }
 
@@ -107,8 +109,8 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Move);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &ASeunghwanTestCharacter::StopMoving);
@@ -121,6 +123,9 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, AttackComponent, &UFractPlayerAttackComponent::AimDownSight);
 		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::ToggleLockOn);
 		EnhancedInputComponent->BindAction(SkillAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::UseSkill);
+	
+		// Flying
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::PressedSpace);
 	}
 
 }
@@ -219,5 +224,12 @@ void ASeunghwanTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool b
 	if (AttackComponent->GetCurrentTarget())
 		return;
 	GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = bAllowRotation;
+}
+
+//Flying
+
+bool ASeunghwanTestCharacter::GetIsFlying() const
+{
+	return FlightComponent ? FlightComponent->FlyingState() : false;
 }
 

@@ -23,10 +23,12 @@ UCPP_FlightActorComponent::UCPP_FlightActorComponent()
 
 void UCPP_FlightActorComponent::StartFlying()
 {
-
+	
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
 		IsFlying = true;
+
+
 
 		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
@@ -42,6 +44,8 @@ void UCPP_FlightActorComponent::EndFlying()
 	{
 
 		IsFlying = false;
+
+		Character->SetupPlayerInputComponent(Character->InputComponent);
 
 		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
 
@@ -121,7 +125,6 @@ void UCPP_FlightActorComponent::PressedSpace()
 			}
 			else
 			{
-				
 				StartFlying();
 				
 			}
