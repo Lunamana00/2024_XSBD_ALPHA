@@ -36,7 +36,7 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
+	
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
 
@@ -410,7 +410,8 @@ FFractAttack* UFractPlayerAttackComponent::GetNormalAttack()
 	{
 		for (int32 i = 0; i < MeleeAttacks.Num(); i++)
 		{
-			if (MeleeAttacks[i].Element == Character->GetAttribute()->GetElementType())
+			if (MeleeAttacks[i].Element == Character->GetAttribute()->GetElementType() &&
+				MeleeAttacks[i].bIsFlyingAttack == Character->GetIsFlying())
 			{
 				return &MeleeAttacks[i];
 			}
@@ -421,7 +422,8 @@ FFractAttack* UFractPlayerAttackComponent::GetNormalAttack()
 	{
 		for (int32 i = 0; i < RangedAttacks.Num(); i++)
 		{
-			if (RangedAttacks[i].Element == Character->GetAttribute()->GetElementType())
+			if (RangedAttacks[i].Element == Character->GetAttribute()->GetElementType() &&
+				RangedAttacks[i].bIsFlyingAttack == Character->GetIsFlying())
 			{
 				return &RangedAttacks[i];
 			}
@@ -434,7 +436,7 @@ FFractAttack* UFractPlayerAttackComponent::GetNormalAttack()
 // 플레이어의 상태에 따라 적절한 스킬을 리턴하는 함수
 FFractSkill* UFractPlayerAttackComponent::GetSkill()
 {
-	if (bIsFlying)
+	if (Character->GetIsFlying())
 	{
 		for (int32 i = 0; i < AerialSkills.Num(); i++)
 		{

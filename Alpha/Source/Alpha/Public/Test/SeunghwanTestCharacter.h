@@ -126,10 +126,11 @@ public:
 
 	//Jong Add
 protected:
-	//*** ºñÇà Ãß°¡ ºÎºÐ ***//
+	//*** ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ ï¿½Îºï¿½ ***//
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCPP_FlightActorComponent* FlightComponent;
 
+public:
 	UFUNCTION(BlueprintCallable, Category = "Flight")
 	bool GetIsFlying() const;
 };
