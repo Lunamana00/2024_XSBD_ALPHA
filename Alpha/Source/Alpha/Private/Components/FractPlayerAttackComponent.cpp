@@ -355,6 +355,16 @@ void UFractPlayerAttackComponent::ApplyFireGroundSkillDamage()
 	// 	);
 }
 
+void UFractPlayerAttackComponent::OnGroundSkillCooldownEnd()
+{
+	bIsGroundSkillOnCooldown = false;
+}
+
+void UFractPlayerAttackComponent::OnAerialSkillCooldownEnd()
+{
+	bIsAerialSkillOnCooldown = false;
+}
+
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
 void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
 {
@@ -546,8 +556,19 @@ void UFractPlayerAttackComponent::UseSkill()
 {
 	if (AttackState != EFractAttackState::EAS_Unoccupied || bIsAiming)
 		return;
-	if (const FFractSkill* Skill = GetSkill())
+	if (FFractSkill* Skill = GetSkill())
 	{
+		if (Skill->bIsFlyingSkill && bIsAerialSkillOnCooldown) return;
+		if (!Skill->bIsFlyingSkill && bIsGroundSkillOnCooldown) return; 
+
+		Skill->bIsFlyingSkill ? bIsAerialSkillOnCooldown = true : bIsGroundSkillOnCooldown = true;
+		GetWorld()->GetTimerManager().SetTimer(
+			Skill->bIsFlyingSkill ? AerialSkillTimerHandle : GroundSkillTimerHandle,
+			this, 
+			Skill->bIsFlyingSkill ? &UFractPlayerAttackComponent::OnAerialSkillCooldownEnd : &UFractPlayerAttackComponent::OnGroundSkillCooldownEnd,
+			Skill->Cooldown,
+			false);
+		
 		if (Skill->bIsFlyingSkill)
 		{
 			//Handle Flying Skill

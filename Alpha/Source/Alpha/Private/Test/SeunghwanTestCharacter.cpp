@@ -165,6 +165,15 @@ void ASeunghwanTestCharacter::StopMoving()
 
 void ASeunghwanTestCharacter::Dodge()
 {
+	if (bIsDodgeOnCooldown) return;
+	bIsDodgeOnCooldown = true; 
+	GetWorld()->GetTimerManager().SetTimer(
+		DodgeTimerHandle,
+		this,
+		&ASeunghwanTestCharacter::OnDodgeCooldownEnd,
+		DodgeCooldown,
+		false);
+	
 	if (AttackComponent->bHasLockOnTarget)
 	{
 		FVector InputVector = GetActorForwardVector() * MovementInputVector.Y + GetActorRightVector() * MovementInputVector.X;
@@ -182,6 +191,11 @@ void ASeunghwanTestCharacter::Dodge()
 	}
 	
 	
+}
+
+void ASeunghwanTestCharacter::OnDodgeCooldownEnd()
+{
+	bIsDodgeOnCooldown = false;
 }
 
 void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)

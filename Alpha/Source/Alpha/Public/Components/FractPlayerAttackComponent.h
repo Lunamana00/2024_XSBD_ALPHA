@@ -134,7 +134,19 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat|UI")
 	UUserWidget* CrosshairWidget;
 
-	
+
+	FTimerHandle GroundSkillTimerHandle;
+	FTimerHandle AerialSkillTimerHandle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	bool bIsGroundSkillOnCooldown = false;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	bool bIsAerialSkillOnCooldown = false;
+
+	UFUNCTION()
+	void OnGroundSkillCooldownEnd();
+	UFUNCTION()
+	void OnAerialSkillCooldownEnd();
 	
 public:
 

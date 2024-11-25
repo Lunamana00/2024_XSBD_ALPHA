@@ -76,6 +76,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* BackwardDodgeMontage;
 
+	FTimerHandle DodgeTimerHandle;
+	bool bIsDodgeOnCooldown = false;
+	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
+	float DodgeCooldown = 2.f;
+	void OnDodgeCooldownEnd();
+
 private:
 	
 	UPROPERTY(VisibleAnywhere, Category = Attribute)
