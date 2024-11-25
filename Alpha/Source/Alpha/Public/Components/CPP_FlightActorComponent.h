@@ -9,6 +9,8 @@
 #include "CPP_FlightActorComponent.generated.h"
 
 
+class ASeunghwanTestCharacter;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ALPHA_API UCPP_FlightActorComponent : public UActorComponent
 {
@@ -34,7 +36,7 @@ public:
 
 	bool FlyingState();
 
-
+	
 
 protected:
 	// Called when the game starts
@@ -52,6 +54,9 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Flight")
 	float RotationSpeed = 100.0f;
+
+	UPROPERTY()
+	ASeunghwanTestCharacter* SeunghwanTestCharacter;
 
 public:	
 	// Called every frame

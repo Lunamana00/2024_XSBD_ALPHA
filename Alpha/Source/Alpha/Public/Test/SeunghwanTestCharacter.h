@@ -124,6 +124,8 @@ public:
 	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	FORCEINLINE class UFractPlayerAttackComponent* GetAttackComponent() const { return AttackComponent; }
+
 	//Jong Add
 protected:
 	//*** ���� �߰� �κ� ***//

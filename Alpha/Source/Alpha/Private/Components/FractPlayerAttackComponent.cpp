@@ -281,13 +281,15 @@ void UFractPlayerAttackComponent::ActivateFireGroundSkill()
 		Character->GetWeapon()->GetWeaponMuzzle(),
 		FName("Muzzle"),
 		FVector::ZeroVector,
-		FRotator(110, 35, 0),
+		FRotator(35, 0, 0),
 		FVector(1.0f),
-		EAttachLocation::Type::SnapToTarget,
+		EAttachLocation::Type::SnapToTargetIncludingScale,
 		true);
 
 	GetWorld()->GetTimerManager().SetTimer(FireGroundSkillDamageTimerHandle, this,
 		&UFractPlayerAttackComponent::ApplyFireGroundSkillDamage, 0.1f, true);
+	
+	
 	
 }
 

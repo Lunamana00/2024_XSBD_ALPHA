@@ -2,15 +2,17 @@
 
 
 #include "Components/CPP_FlightActorComponent.h"
+
+#include "Components/FractPlayerAttackComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
 #include "GameFramework/PlayerController.h"
 #include "Math/Vector.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "Test/SeunghwanTestCharacter.h"
 
 
-
-// Sets default values for this component's properties
+	// Sets default values for this component's properties
 UCPP_FlightActorComponent::UCPP_FlightActorComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
@@ -23,19 +25,24 @@ UCPP_FlightActorComponent::UCPP_FlightActorComponent()
 
 void UCPP_FlightActorComponent::StartFlying()
 {
-	
-	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
+	if (SeunghwanTestCharacter->GetAttackComponent()->GetCurrentAttackState() == EFractAttackState::EAS_Unoccupied)
 	{
-		IsFlying = true;
+		if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
+		{
+			IsFlying = true;
 
 
 
-		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
+			Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
 
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
+			Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 
-		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+			Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
+		}
 	}
+		
+	
+	
 }
 
 void UCPP_FlightActorComponent::EndFlying()
@@ -147,7 +154,7 @@ bool UCPP_FlightActorComponent::FlyingState()
 void UCPP_FlightActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
-	
+	SeunghwanTestCharacter = Cast<ASeunghwanTestCharacter>(GetOwner());
 }
 
 
@@ -157,7 +164,7 @@ void UCPP_FlightActorComponent::TickComponent(float DeltaTime, ELevelTick TickTy
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (IsFlying && GetOwner())
 	{
-		// ºñÇà ÁßÀÌ¶ó¸é ÀÔ·ÂµÈ ¼Óµµ¸¦ ±âÁØÀ¸·Î ÀÌµ¿ Ã³¸®
+		// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ì¶ï¿½ï¿½ ï¿½Ô·Âµï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ìµï¿½ Ã³ï¿½ï¿½
 		AActor* Owner = GetOwner();
 		Owner->AddActorWorldOffset(CurrentVelocity * DeltaTime, true);
 	}
