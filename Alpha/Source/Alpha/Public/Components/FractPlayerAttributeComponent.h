@@ -31,5 +31,7 @@ public:
 	void UseStamina(const float StaminaAmount);
 	void UseMana(const float ManaAmount);
 	void ChangeElementType(EFractElementType NewType);
+	virtual void BeginPlay() override;
+
 	
 };

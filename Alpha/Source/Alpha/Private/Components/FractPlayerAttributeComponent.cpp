@@ -29,3 +29,10 @@ void UFractPlayerAttributeComponent::ChangeElementType(EFractElementType NewType
 {
 	ElementType = NewType;
 }
+
+void UFractPlayerAttributeComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	CurrentStamina = MaxStamina;
+	CurrentMana = MaxMana;
+}

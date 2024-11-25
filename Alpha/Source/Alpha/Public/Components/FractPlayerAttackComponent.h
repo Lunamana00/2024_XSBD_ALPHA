@@ -78,7 +78,7 @@ protected:
 	FVector HitLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	float AutoTargetRange = 300.f;
+	float AutoTargetRange = 150.f;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AutoTargetAngle = 90.f;
@@ -131,7 +131,8 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UParticleSystemComponent* FireGroundSkillParticleSystemComponent;
 
-	
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|UI")
+	UUserWidget* CrosshairWidget;
 
 	
 	

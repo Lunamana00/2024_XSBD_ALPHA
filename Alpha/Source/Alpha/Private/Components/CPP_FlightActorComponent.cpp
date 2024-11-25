@@ -1,8 +1,9 @@
-	// Fill out your copyright notice in the Description page of Project Settings.
+// Fill out your copyright notice in the Description page of Project Settings.
 
 
 #include "Components/CPP_FlightActorComponent.h"
 
+#include "EnhancedInputSubsystems.h"
 #include "Components/FractPlayerAttackComponent.h"
 #include "GameFramework/Actor.h"
 #include "GameFramework/Character.h"
@@ -12,15 +13,13 @@
 #include "Test/SeunghwanTestCharacter.h"
 
 
-	// Sets default values for this component's properties
+// Sets default values for this component's properties
 UCPP_FlightActorComponent::UCPP_FlightActorComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
 	PrimaryComponentTick.bCanEverTick = true;
 	IsFlying = false;
-
-	CurrentVelocity = FVector::ZeroVector;
 }
 
 void UCPP_FlightActorComponent::StartFlying()
@@ -30,14 +29,7 @@ void UCPP_FlightActorComponent::StartFlying()
 		if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 		{
 			IsFlying = true;
-
-
-
 			Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Flying);
-
-			Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-
-			Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 		}
 	}
 		
@@ -49,104 +41,52 @@ void UCPP_FlightActorComponent::EndFlying()
 {
 	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
 	{
-
 		IsFlying = false;
-
-		Character->SetupPlayerInputComponent(Character->InputComponent);
-
 		Character->GetCharacterMovement()->SetMovementMode(EMovementMode::MOVE_Walking);
-
-		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
-
-		Character->GetCharacterMovement()->bUseControllerDesiredRotation = false;
-
-		CurrentVelocity = FVector::ZeroVector;
 	}
 }
 
-void UCPP_FlightActorComponent::MoveUp(const FInputActionValue& Value)
-{
-	float Amount = Value.Get<float>();
-	CurrentVelocity.Z = Amount * FlightSpeed;
-}
 
-void UCPP_FlightActorComponent::Move(const FInputActionValue& Value)
-{
-	FVector2D Movementvector = Value.Get<FVector2D>();
-	ACharacter* Character = Cast<ACharacter>(GetOwner());
 
-	if (GetOwner())
-	{
-		const FRotator Rotation =Character->Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-		const FRotator PitchRotation(Rotation.Pitch, 0, 0);
-
-		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-
-		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-		const FVector UpwardDirection = FRotationMatrix(PitchRotation).GetUnitAxis(EAxis::X);
-
-		Character->AddMovementInput(ForwardDirection, Movementvector.Y);
-		Character->AddMovementInput(RightDirection,Movementvector.X);
-		Character->AddMovementInput(UpwardDirection, Movementvector.Y*1.0f);
-	
-	}
-}
-
-void UCPP_FlightActorComponent::Look(const FInputActionValue& Value)
-{
-	FVector2D LookAxisVector = Value.Get<FVector2D>();
-	ACharacter* Character = Cast<ACharacter>(GetOwner());
-	FRotator ControlRotation = Character->Controller->GetControlRotation();
-
-	// Apply yaw and pitch input to the controller based on the LookAxisVector
-	Character->AddControllerYawInput(LookAxisVector.X);
-	Character->AddControllerPitchInput(LookAxisVector.Y);
-
-	// Adjust the player's forward vector to align with the camera's direction
-	FVector ForwardDirection = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::X);
-	FVector RightDirection = FRotationMatrix(ControlRotation).GetUnitAxis(EAxis::Y);
-}
-
-void UCPP_FlightActorComponent::PressedSpace()
-{
-	if (ACharacter* Character = Cast<ACharacter>(GetOwner()))
-	{
-		if (!IsPressedSpace)
-		{
-			IsPressedSpace = true;
-
-			Character->Jump();
-
-			GetWorld()->GetTimerManager().SetTimer(SpacePressTimerHandle, this, &UCPP_FlightActorComponent::ResetSpace, 0.3f, false);
-		}
-		else
-		{
-			IsPressedSpace = false;
-			GetWorld()->GetTimerManager().ClearTimer(SpacePressTimerHandle);
-
-			if (IsFlying)
-			{
-				EndFlying();
-			}
-			else
-			{
-				StartFlying();
-				
-			}
-		}
-	}
-}
-
-void UCPP_FlightActorComponent::ResetSpace()
-{
-	IsPressedSpace = false;
-}
 
 bool UCPP_FlightActorComponent::FlyingState()
 {
 	return IsFlying;
+}
+
+void UCPP_FlightActorComponent::StartFlightMode()
+{
+	StartFlying();
+	if (APlayerController* PlayerController = Cast<APlayerController>(SeunghwanTestCharacter->GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->AddMappingContext(FlightMappingContext, 10);
+		}
+	}
+	
+}
+
+void UCPP_FlightActorComponent::EndFlightMode()
+{
+	EndFlying();
+	if (APlayerController* PlayerController = Cast<APlayerController>(SeunghwanTestCharacter->GetController()))
+	{
+		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
+		{
+			Subsystem->RemoveMappingContext(FlightMappingContext);
+		}
+	}
+	
+}
+
+void UCPP_FlightActorComponent::FlyUpDown(const FInputActionValue& Value)
+{
+	float InputValue = Value.Get<float>();
+	if (IsFlying)
+	{
+		SeunghwanTestCharacter->AddMovementInput(FVector(0, 0, InputValue * UpDownSpeed));
+	}
 }
 
 
@@ -162,11 +102,17 @@ void UCPP_FlightActorComponent::BeginPlay()
 void UCPP_FlightActorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-	if (IsFlying && GetOwner())
+
+	if (IsFlying)
 	{
-		// ���� ���̶�� �Էµ� �ӵ��� �������� �̵� ó��
-		AActor* Owner = GetOwner();
-		Owner->AddActorWorldOffset(CurrentVelocity * DeltaTime, true);
+		FFindFloorResult FloorResult;
+		SeunghwanTestCharacter->GetCharacterMovement()->FindFloor(
+			SeunghwanTestCharacter->GetActorLocation(), FloorResult, false);
+    
+		if (FloorResult.bBlockingHit)
+		{
+			EndFlightMode();
+			SeunghwanTestCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
+		}
 	}
 }
-

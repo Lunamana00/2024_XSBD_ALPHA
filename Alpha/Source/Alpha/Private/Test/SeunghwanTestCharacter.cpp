@@ -2,6 +2,8 @@
 
 
 #include "Test/SeunghwanTestCharacter.h"
+
+#include "AITypes.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "MotionWarpingComponent.h"
@@ -114,7 +116,8 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Move);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &ASeunghwanTestCharacter::StopMoving);
-
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Started, this, &ASeunghwanTestCharacter::Dodge);
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Look);
 		// Attacking
@@ -125,48 +128,60 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(SkillAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::UseSkill);
 	
 		// Flying
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::PressedSpace);
+		EnhancedInputComponent->BindAction(StartFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::StartFlightMode);
+		EnhancedInputComponent->BindAction(EndFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::EndFlightMode);
+		EnhancedInputComponent->BindAction(FlyUpDownAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::FlyUpDown);
 	}
 
 }
 
 void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 {
-	if (GetIsFlying()) {
-		FlightComponent->Move(Value);
+	FVector2D MovementVector = Value.Get<FVector2D>();
+	MovementInputVector = MovementVector;
 
-	}
-	else {
-		FVector2D MovementVector = Value.Get<FVector2D>();
-		MovementInputVector = MovementVector;
+	if (Controller != nullptr)
+	{
+		// find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw, 0);
 
-		if (Controller != nullptr)
-		{
-			// find out which way is forward
-			const FRotator Rotation = Controller->GetControlRotation();
-			const FRotator YawRotation(0, Rotation.Yaw, 0);
+		// get forward vector
+		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 
-			// get forward vector
-			const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		// get right vector 
+		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
-			// get right vector 
-			const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
-
-			// add movement 
-			AddMovementInput(ForwardDirection, MovementVector.Y);
-			AddMovementInput(RightDirection, MovementVector.X);
-		}
-		else
-		{
-			GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Controller Null");
-		}
-
+		// add movement 
+		AddMovementInput(ForwardDirection, MovementVector.Y);
+		AddMovementInput(RightDirection, MovementVector.X);
 	}
 }
 
 void ASeunghwanTestCharacter::StopMoving()
 {
 	MovementInputVector = FVector2D::ZeroVector;
+}
+
+void ASeunghwanTestCharacter::Dodge()
+{
+	if (AttackComponent->bHasLockOnTarget)
+	{
+		FVector InputVector = GetActorForwardVector() * MovementInputVector.Y + GetActorRightVector() * MovementInputVector.X;
+	}
+	else
+	{
+		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+		{
+			if (!GetIsFlying())
+			{
+				AnimInstance->Montage_Play(ForwardDodgeMontage);
+			}
+			
+		}
+	}
+	
+	
 }
 
 void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)

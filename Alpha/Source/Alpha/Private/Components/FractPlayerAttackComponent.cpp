@@ -7,6 +7,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "NiagaraSystem.h"
 #include "RootMotionModifier.h"
+#include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/OverlapResult.h"
@@ -43,56 +44,60 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	
 	if (UCameraComponent* Camera = Character->GetFollowCamera())
 	{
+		float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
+		FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 80.f) : DefaultCameraLocation;
+		float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
+		FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
+		Camera->SetRelativeLocation(NewCamLocation);
+		Camera->SetFieldOfView(NewFOV);
+	}
+	if (Character->GetIsFlying())
+	{
+		
+	}
+	else // Character is not flying (grounded)
+	{
 		if (!bHasLockOnTarget)
 		{
-			float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
-			FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 50.f) : DefaultCameraLocation;
-			float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
-			FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
-			Camera->SetRelativeLocation(NewCamLocation);
-			Camera->SetFieldOfView(NewFOV);
-		}
-	}
-	
-	if (!bHasLockOnTarget)
-	{
-		if (AFractTestEnemy* FoundTarget = FindTarget())
-		{
-			CurrentTarget = FoundTarget;
-			AddMotionWarpTarget(CurrentTarget);
-			bHasTarget = true;
-			bCanRotateToInputDirection = false;
-		}
-		else
-		{
-			if (bHasTarget)
+			if (AFractTestEnemy* FoundTarget = FindTarget())
 			{
-				RemoveMotionWarpTarget(FName("AttackTarget")); // Remove only if we previously had a target
-				bHasTarget = false; // No target anymore
+				CurrentTarget = FoundTarget;
+				AddMotionWarpTarget(CurrentTarget);
+				bHasTarget = true;
+				bCanRotateToInputDirection = false;
 			}
-			CurrentTarget = nullptr;
-			if (bCanRotateToInputDirection)
+			else
 			{
-				RotateToInputDirection(DeltaTime);
+				if (bHasTarget)
+				{
+					RemoveMotionWarpTarget(FName("AttackTarget")); // Remove only if we previously had a target
+					bHasTarget = false; // No target anymore
+				}
+				CurrentTarget = nullptr;
+				if (bCanRotateToInputDirection)
+				{
+					RotateToInputDirection(DeltaTime);
+				}
 			}
 		}
-	}
-	else
-	{
-		if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < ATTACK_DISTANCE)
+		else // If we have a lock on target
 		{
-			AddMotionWarpTarget(CurrentLockOnTargetActor);
-		}
-		else
-		{
-			RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
+			if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < ATTACK_DISTANCE)
+			{
+				AddMotionWarpTarget(CurrentLockOnTargetActor);
+			}
+			else
+			{
+				RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
+			}
 		}
 	}
 	
 	
-	DrawDebugLine(GetWorld(), Character->GetActorLocation(),
-		Character->GetActorLocation() + AttackDirection * 100.f,
-		FColor::Red, false, -1, 0, 1.f);
+	
+	// DrawDebugLine(GetWorld(), Character->GetActorLocation(),
+	// 	Character->GetActorLocation() + AttackDirection * 100.f,
+	// 	FColor::Red, false, -1, 0, 1.f);
 
 	
 	if (IsValid(CurrentLockOnTargetActor))
@@ -206,7 +211,7 @@ AFractTestEnemy* UFractPlayerAttackComponent::FindTarget()
 			
 			ToTarget.Z = 0; 
 			float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(AttackDirection, ToTarget.GetSafeNormal())));
-			DrawDebugLine(GetWorld(), CharacterLocation, CharacterLocation + ToTarget * 100.f, FColor::Blue, false, -1, 0, 10.f);
+			// DrawDebugLine(GetWorld(), CharacterLocation, CharacterLocation + ToTarget * 100.f, FColor::Blue, false, -1, 0, 10.f);
 			if (Angle <= AutoTargetAngle && Angle < SmallestAngle)
 			{
 				Target =  Enemy;
@@ -216,7 +221,7 @@ AFractTestEnemy* UFractPlayerAttackComponent::FindTarget()
 	}
 	if (Target)
 	{
-		DrawDebugSphere(GetWorld(), Target->GetActorLocation(), 100.f, 24, FColor::Red, false, -1, 0, 0.5f);
+		// DrawDebugSphere(GetWorld(), Target->GetActorLocation(), 100.f, 24, FColor::Red, false, -1, 0, 0.5f);
 	}
 	
 	return Target;
@@ -281,7 +286,7 @@ void UFractPlayerAttackComponent::ActivateFireGroundSkill()
 		Character->GetWeapon()->GetWeaponMuzzle(),
 		FName("Muzzle"),
 		FVector::ZeroVector,
-		FRotator(35, 0, 0),
+		FRotator(-80, -30, 10),
 		FVector(1.0f),
 		EAttachLocation::Type::SnapToTargetIncludingScale,
 		true);
@@ -339,15 +344,15 @@ void UFractPlayerAttackComponent::ApplyFireGroundSkillDamage()
 
 	FVector CenterPoint = UKismetMathLibrary::VLerp(Start,
 			End, 0.5f);
-	UKismetSystemLibrary::DrawDebugBox(
-		this,
-		CenterPoint,
-		FireGroundSkillBox.GetExtent(),
-		bHasFoundTargets ? FColor::Green : FColor::Red,
-		Character->GetActorRotation(),
-		1.f,
-		2.f
-		);
+	// UKismetSystemLibrary::DrawDebugBox(
+	// 	this,
+	// 	CenterPoint,
+	// 	FireGroundSkillBox.GetExtent(),
+	// 	bHasFoundTargets ? FColor::Green : FColor::Red,
+	// 	Character->GetActorRotation(),
+	// 	1.f,
+	// 	2.f
+	// 	);
 }
 
 // 화면의 크로스헤어를 향해 Line Trace하는 함수
@@ -380,7 +385,7 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 		else
 		{
 			HitLocation = TraceHitResult.ImpactPoint;
-			DrawDebugSphere(GetWorld(), TraceHitResult.ImpactPoint, 12.f, 12, FColor::Red);
+			// DrawDebugSphere(GetWorld(), TraceHitResult.ImpactPoint, 12.f, 12, FColor::Red);
 		}
 	}
 }
@@ -388,16 +393,28 @@ void UFractPlayerAttackComponent::TraceUnderCrosshairs(FHitResult& TraceHitResul
 // 플레이어의 원거리, 근거리 공격 상태 전환용 함수
 void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 {
-	if (bHasLockOnTarget || AttackState == EFractAttackState::EAS_UsingFireGroundSkill) return;
+	if (AttackState != EFractAttackState::EAS_Unoccupied && AttackState != EFractAttackState::EAS_RangedAttacking) return;
+	if (bHasLockOnTarget)
+	{
+		EndLockOn();
+	}
 	bIsAiming = Value.Get<bool>();
 	if (bIsAiming)
 	{
+		if (CrosshairWidget)
+		{
+			CrosshairWidget->AddToViewport();
+		}
 		CurrentRange = EFractAttackRange::Ranged;
 		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	}
 	else
 	{
+		if (CrosshairWidget)
+		{
+			CrosshairWidget->RemoveFromParent();
+		}
 		CurrentRange = EFractAttackRange::Melee;
 		ResetCombo();
 		Character->GetCharacterMovement()->bOrientRotationToMovement = true;

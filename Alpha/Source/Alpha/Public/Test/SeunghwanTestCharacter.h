@@ -45,6 +45,9 @@ class ALPHA_API ASeunghwanTestCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* DodgeAction;
+
 public:
 	ASeunghwanTestCharacter();
 	virtual void Tick(float DeltaTime) override;
@@ -61,6 +64,17 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void StopMoving();
+
+	void Dodge();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* ForwardDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* RightDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* LeftDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* BackwardDodgeMontage;
 
 private:
 	
@@ -84,6 +98,15 @@ private:
 	UInputAction* LockOnAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* SkillAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* StartFlightModeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* EndFlightModeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* FlightSpacebarOneShotAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* FlyUpDownAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Input)
 	FVector2D MovementInputVector;
