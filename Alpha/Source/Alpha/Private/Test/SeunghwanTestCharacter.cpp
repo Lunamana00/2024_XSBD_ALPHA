@@ -15,6 +15,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Weapons/FractPlayerWeapon.h"
 #include "Components/BoxComponent.h"
+#include "CPP_UI.h"
+#include "Blueprint/UserWidget.h"
 #include "Components/CPP_FlightActorComponent.h"
 
 
@@ -85,6 +87,15 @@ void ASeunghwanTestCharacter::BeginPlay()
 			"RightWeaponSocket");
 	}
 	
+	if (PlayerUIClass)
+	{
+		PlayerUI = CreateWidget<UCPP_UI>(GetWorld(), PlayerUIClass);
+
+		if (PlayerUI)
+		{
+			PlayerUI->AddToViewport();
+		}
+	}
 }
 
 // Called every frame
@@ -309,6 +320,20 @@ void ASeunghwanTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool b
 }
 
 //Flying
+
+float ASeunghwanTestCharacter::GetCurrentDodgeCooldown() const
+{
+	if (bIsDodgeOnCooldown)
+	{
+		return GetWorld()->GetTimerManager().GetTimerRemaining(DodgeTimerHandle);
+	}
+	return 0.0f;
+}
+
+float ASeunghwanTestCharacter::GetDodgeMaxCooldown()
+{
+	return DodgeCooldown;
+}
 
 bool ASeunghwanTestCharacter::GetIsFlying() const
 {
