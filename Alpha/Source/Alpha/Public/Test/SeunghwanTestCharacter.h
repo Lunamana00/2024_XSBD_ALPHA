@@ -77,6 +77,9 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* BackwardDodgeMontage;
 
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* DeathMontage;
+
 	FTimerHandle DodgeTimerHandle;
 	bool bIsDodgeOnCooldown = false;
 	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
@@ -169,6 +172,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE class UFractPlayerAttackComponent* GetAttackComponent() const { return AttackComponent; }
+	UFUNCTION(BlueprintCallable)
+	void Die();
+	UFUNCTION(BlueprintCallable)
+	void Respawn();
 
 	//Jong Add
 	UFUNCTION(BlueprintCallable, Category = "Dodge")

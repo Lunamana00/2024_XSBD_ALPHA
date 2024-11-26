@@ -106,6 +106,11 @@ void ASeunghwanTestCharacter::Tick(float DeltaTime)
 	{
 		Attribute->HealHealth(RestoreHealthPerSecond * DeltaTime);
 	}
+
+	if (!Attribute->IsAlive())
+	{
+		Die();
+	}
 	
 
 }
@@ -325,6 +330,19 @@ void ASeunghwanTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool b
 }
 
 //Flying
+
+void ASeunghwanTestCharacter::Die()
+{
+	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+	{
+		AnimInstance->Montage_Play(DeathMontage);
+	}
+	APlayerController* PC = Cast<APlayerController>(GetController());
+	if (PC)
+	{
+		DisableInput(PC);
+	}
+}
 
 float ASeunghwanTestCharacter::GetCurrentDodgeCooldown() const
 {
