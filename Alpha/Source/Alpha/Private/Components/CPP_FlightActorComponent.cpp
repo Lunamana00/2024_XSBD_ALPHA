@@ -98,7 +98,7 @@ void UCPP_FlightActorComponent::ToggleFlightBoostMode()
 void UCPP_FlightActorComponent::StartFlightBoostMode()
 {
 	bIsBoostFlying = true;
-	SeunghwanTestCharacter->GetCharacterMovement()->MaxFlySpeed = 1400.f;
+	SeunghwanTestCharacter->GetCharacterMovement()->MaxFlySpeed = 2100.f;
 }
 
 void UCPP_FlightActorComponent::EndFlightBoostMode()

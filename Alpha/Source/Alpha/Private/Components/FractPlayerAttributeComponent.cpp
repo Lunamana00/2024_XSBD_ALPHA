@@ -85,5 +85,9 @@ void UFractPlayerAttributeComponent::TickComponent(float DeltaTime, enum ELevelT
 				Character->GetFlightComponent()->EndFlightBoostMode();
 			}
 		}
+		else
+		{
+			RestoreBoostStamina(10 * DeltaTime); //나중에 변수화하기
+		}
 	}
 }
