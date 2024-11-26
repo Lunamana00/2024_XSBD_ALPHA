@@ -33,8 +33,10 @@ public:
 
 	void ToggleFlightBoostMode();
 
+	UFUNCTION(BlueprintCallable)
 	void StartFlightBoostMode();
 
+	UFUNCTION(BlueprintCallable)
 	void EndFlightBoostMode();
 
 	void FlyUpDown(const FInputActionValue& Value);

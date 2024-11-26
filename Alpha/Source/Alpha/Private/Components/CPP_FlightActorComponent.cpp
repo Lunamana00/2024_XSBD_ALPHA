@@ -82,7 +82,7 @@ void UCPP_FlightActorComponent::EndFlightMode()
 
 void UCPP_FlightActorComponent::ToggleFlightBoostMode()
 {
-	if (IsFlying)
+	if (IsFlying && Cast<ASeunghwanTestCharacter>(GetOwner())->bIsInFlyArea)
 	{
 		if (bIsBoostFlying)
 		{

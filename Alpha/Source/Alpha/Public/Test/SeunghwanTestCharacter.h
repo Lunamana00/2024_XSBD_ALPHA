@@ -136,7 +136,7 @@ private:
 
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flight")
-	bool bIsInFlyArea = false;
+	bool bIsInFlyArea = true;
 
 	UFUNCTION(BlueprintCallable, Category = Attribute)
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
