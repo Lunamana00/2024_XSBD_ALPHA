@@ -20,7 +20,7 @@ class UFractPlayerAttackComponent;
 class AFractPlayerWeapon;
 class UFractPlayerAttributeComponent;
 class UMotionWarpingComponent;
-
+class UCPP_UI;
 
 UCLASS()
 class ALPHA_API ASeunghwanTestCharacter : public ACharacter
@@ -166,6 +166,11 @@ public:
 	FORCEINLINE class UFractPlayerAttackComponent* GetAttackComponent() const { return AttackComponent; }
 
 	//Jong Add
+	UFUNCTION(BlueprintCallable, Category = "Dodge")
+	float GetCurrentDodgeCooldown() const;
+
+	float GetDodgeMaxCooldown();
+
 protected:
 	//*** ���� �߰� �κ� ***//
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
@@ -177,4 +182,10 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Flight")
 	UCPP_FlightActorComponent* GetFlightComponent() const { return FlightComponent; };
+
+	UPROPERTY(BlueprintReadOnly, Category = "UI")
+	UCPP_UI* PlayerUI;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "UI")
+	TSubclassOf<UUserWidget> PlayerUIClass;
 };

@@ -177,8 +177,6 @@ public:
 	UPROPERTY()
 	bool bIsCancellingSkill = false;
 	
-	
-	
-	
-		
+	float GetCurrentSkillCooldown();
+			
 };

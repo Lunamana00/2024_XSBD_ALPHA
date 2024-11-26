@@ -691,6 +691,12 @@ void UFractPlayerAttackComponent::ToggleLockOn()
 	}
 }
 
+float UFractPlayerAttackComponent::GetCurrentSkillCooldown()
+{
+	if (!GetWorld()) return 0.0f;
+	return GetWorld()->GetTimerManager().GetTimerRemaining(GroundSkillTimerHandle);
+}
+
 
 
 

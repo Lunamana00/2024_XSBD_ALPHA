@@ -44,7 +44,8 @@ public:
 	void ChangeElementType(EFractElementType NewType);
 	virtual void BeginPlay() override;
 	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-	
+	float GetCurrentStaminaPercent() const { return CurrentStamina / MaxStamina; }
+
 
 	
 };
