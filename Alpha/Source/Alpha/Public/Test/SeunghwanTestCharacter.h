@@ -164,4 +164,7 @@ protected:
 public:
 	UFUNCTION(BlueprintCallable, Category = "Flight")
 	bool GetIsFlying() const;
+
+	UFUNCTION()
+	UCPP_FlightActorComponent* GetFlightComponent() const { return FlightComponent; };
 };

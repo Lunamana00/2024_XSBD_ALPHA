@@ -102,17 +102,4 @@ void UCPP_FlightActorComponent::BeginPlay()
 void UCPP_FlightActorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
-
-	if (IsFlying)
-	{
-		FFindFloorResult FloorResult;
-		SeunghwanTestCharacter->GetCharacterMovement()->FindFloor(
-			SeunghwanTestCharacter->GetActorLocation(), FloorResult, false);
-    
-		if (FloorResult.bBlockingHit)
-		{
-			EndFlightMode();
-			SeunghwanTestCharacter->GetCharacterMovement()->SetMovementMode(MOVE_Walking);
-		}
-	}
 }
