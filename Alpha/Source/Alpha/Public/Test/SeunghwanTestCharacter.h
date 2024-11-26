@@ -176,6 +176,7 @@ public:
 	void Die();
 	UFUNCTION(BlueprintCallable)
 	void Respawn();
+	bool bIsDying = false;
 
 	//Jong Add
 	UFUNCTION(BlueprintCallable, Category = "Dodge")

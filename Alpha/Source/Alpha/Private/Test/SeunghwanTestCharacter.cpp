@@ -18,6 +18,7 @@
 #include "CPP_UI.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/CPP_FlightActorComponent.h"
+#include <Kismet/GameplayStatics.h>
 
 
 // Sets default values
@@ -102,13 +103,14 @@ void ASeunghwanTestCharacter::BeginPlay()
 void ASeunghwanTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	if (Attribute->GetHealthPercent() != 1.f)
+	if (Attribute->GetHealthPercent() < 1.f && Attribute->GetHealthPercent() > 0.f)
 	{
 		Attribute->HealHealth(RestoreHealthPerSecond * DeltaTime);
 	}
 
-	if (!Attribute->IsAlive())
+	if (!Attribute->IsAlive() && !bIsDying)
 	{
+		bIsDying = true;
 		Die();
 	}
 	
@@ -333,14 +335,47 @@ void ASeunghwanTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool b
 
 void ASeunghwanTestCharacter::Die()
 {
-	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
-	{
-		AnimInstance->Montage_Play(DeathMontage);
-	}
 	APlayerController* PC = Cast<APlayerController>(GetController());
 	if (PC)
 	{
 		DisableInput(PC);
+	}
+
+	FTimerHandle RespawnTimerHandle;
+	GetWorld()->GetTimerManager().SetTimer(
+		RespawnTimerHandle,
+		this,
+		&ASeunghwanTestCharacter::Respawn,
+		5.0f,  
+		false
+	);
+}
+
+void ASeunghwanTestCharacter::Respawn()
+{
+	AActor* RespawnPoint = nullptr;
+	TArray<AActor*> FoundActors;
+	UGameplayStatics::GetAllActorsWithTag(GetWorld(), FName("RespawnPoint"), FoundActors);
+
+	// Get the first (and only) respawn point
+	if (FoundActors.Num() > 0)
+	{
+		RespawnPoint = FoundActors[0];
+	}
+
+	if (RespawnPoint)
+	{
+		SetActorLocation(RespawnPoint->GetActorLocation());
+		SetActorRotation(RespawnPoint->GetActorRotation());
+
+		Attribute->HealHealth(100.f);
+		bIsDying = false;
+
+		APlayerController* PC = Cast<APlayerController>(GetController());
+		if (PC)
+		{
+			EnableInput(PC);
+		}
 	}
 }
 
