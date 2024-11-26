@@ -35,12 +35,19 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	UFUNCTION(BlueprintCallable)
 	void ReceiveDamage(const float DamageAmount);
+	UFUNCTION(BlueprintCallable)
 	void HealHealth(const float HealAmount);
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE float GetHealthPercent() const { return CurrentHealth / MaxHealth; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE float GetBaseDamage() const { return BaseDamage; }
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EFractElementType GetElementType() const { return ElementType; }
+	UFUNCTION(BlueprintCallable)
 	bool IsAlive() const;
 	
 		

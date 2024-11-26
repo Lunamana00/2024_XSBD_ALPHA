@@ -132,13 +132,17 @@ private:
 
 
 public:
+
+	UFUNCTION(BlueprintCallable, Category = Attribute)
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
 
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE AFractPlayerWeapon* GetWeapon() const { return Weapon; }
 
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EFractCharacterState GetState() const { return CharacterState; }
-	
+
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE void SetState(const EFractCharacterState State) { CharacterState = State; }
 	
 	UFUNCTION(BluePrintCallable)
@@ -158,18 +162,19 @@ public:
 	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	UFUNCTION(BlueprintCallable)
 	FORCEINLINE class UFractPlayerAttackComponent* GetAttackComponent() const { return AttackComponent; }
 
 	//Jong Add
 protected:
 	//*** ���� �߰� �κ� ***//
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Components", meta = (AllowPrivateAccess = "true"))
 	UCPP_FlightActorComponent* FlightComponent;
 
 public:
 	UFUNCTION(BlueprintCallable, Category = "Flight")
 	bool GetIsFlying() const;
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Flight")
 	UCPP_FlightActorComponent* GetFlightComponent() const { return FlightComponent; };
 };

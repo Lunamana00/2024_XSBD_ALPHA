@@ -18,11 +18,13 @@ class ALPHA_API AFractTestEnemy : public ACharacter, public IFractHitInterface, 
 public:
 	
 	AFractTestEnemy();
+	UFUNCTION(BlueprintCallable)
 	virtual float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 	virtual void Tick(float DeltaTime) override;
 	void DirectionalHitReact(const FVector& ImpactPoint);
 
 	// 공격 맞는 함수 오버라이드
+	UFUNCTION(BlueprintCallable)
 	virtual void GetHit(const FVector& ImpactPoint) override;
 
 	
@@ -39,10 +41,11 @@ protected:
 	
 	virtual void BeginPlay() override;
 
+	UFUNCTION(BlueprintCallable)
 	void PlayHitReactMontage(const FName& SectionName);
 
 public:	
-
+	UFUNCTION(BlueprintCallable)
 	UFractAttributeComponent* GetAttribute() const { return Attribute; }
 	
 
