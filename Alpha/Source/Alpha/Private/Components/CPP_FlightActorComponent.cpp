@@ -80,6 +80,34 @@ void UCPP_FlightActorComponent::EndFlightMode()
 	
 }
 
+void UCPP_FlightActorComponent::ToggleFlightBoostMode()
+{
+	if (IsFlying)
+	{
+		if (bIsBoostFlying)
+		{
+			EndFlightBoostMode();
+		}
+		else
+		{
+			StartFlightBoostMode();
+		}
+	}
+}
+
+void UCPP_FlightActorComponent::StartFlightBoostMode()
+{
+	bIsBoostFlying = true;
+	SeunghwanTestCharacter->GetCharacterMovement()->MaxFlySpeed = 1400.f;
+}
+
+void UCPP_FlightActorComponent::EndFlightBoostMode()
+{
+	bIsBoostFlying = false;
+	SeunghwanTestCharacter->GetCharacterMovement()->MaxFlySpeed = 700.f;
+}
+
+
 void UCPP_FlightActorComponent::FlyUpDown(const FInputActionValue& Value)
 {
 	float InputValue = Value.Get<float>();

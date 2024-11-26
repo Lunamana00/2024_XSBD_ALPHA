@@ -102,6 +102,10 @@ void ASeunghwanTestCharacter::BeginPlay()
 void ASeunghwanTestCharacter::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+	if (Attribute->GetHealthPercent() != 1.f)
+	{
+		Attribute->HealHealth(RestoreHealthPerSecond * DeltaTime);
+	}
 	
 
 }
@@ -142,6 +146,7 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(StartFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::StartFlightMode);
 		EnhancedInputComponent->BindAction(EndFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::EndFlightMode);
 		EnhancedInputComponent->BindAction(FlyUpDownAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::FlyUpDown);
+		EnhancedInputComponent->BindAction(FlightBoostModeAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::ToggleFlightBoostMode);
 	}
 
 }

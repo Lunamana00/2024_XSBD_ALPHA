@@ -31,6 +31,12 @@ public:
 
 	void EndFlightMode();
 
+	void ToggleFlightBoostMode();
+
+	void StartFlightBoostMode();
+
+	void EndFlightBoostMode();
+
 	void FlyUpDown(const FInputActionValue& Value);
 
 	
@@ -54,5 +60,8 @@ protected:
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "Flight")
+	bool bIsBoostFlying;
 
 };

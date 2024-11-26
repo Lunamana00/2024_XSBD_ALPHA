@@ -178,5 +178,14 @@ public:
 	bool bIsCancellingSkill = false;
 	
 	float GetCurrentSkillCooldown();
+	UPROPERTY()
+	UAudioComponent* FireGroundSkillAudioComponent;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	USoundBase* FireGroundSkillSound;
+
+	UFUNCTION(BlueprintCallable)
+	void PlayFireGroundSkillSound();
+	UFUNCTION(BlueprintCallable)
+	void StopFireGroundSkillSound();
 			
 };

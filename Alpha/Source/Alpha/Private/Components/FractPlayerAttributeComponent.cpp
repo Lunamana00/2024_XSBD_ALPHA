@@ -21,9 +21,19 @@ void UFractPlayerAttributeComponent::UseStamina(const float StaminaAmount)
 	CurrentStamina = FMath::Clamp(CurrentStamina - StaminaAmount, 0.f, MaxStamina);
 }
 
+void UFractPlayerAttributeComponent::UseBoostStamina(const float BoostStaminaAmount)
+{
+	CurrentBoostStamina = FMath::Clamp(CurrentBoostStamina - BoostStaminaAmount, 0.f, MaxBoostStamina);
+}
+
 void UFractPlayerAttributeComponent::RestoreStamina(const float StaminaAmount)
 {
 	CurrentStamina = FMath::Clamp(CurrentStamina + StaminaAmount, 0.f, MaxStamina);
+}
+
+void UFractPlayerAttributeComponent::RestoreBoostStamina(const float BoostStaminaAmount)
+{
+	CurrentBoostStamina = FMath::Clamp(CurrentBoostStamina + BoostStaminaAmount, 0.f, MaxBoostStamina);
 }
 
 
@@ -54,12 +64,25 @@ void UFractPlayerAttributeComponent::TickComponent(float DeltaTime, enum ELevelT
 	{
 		RestoreStamina(StaminaRestorePerSecond * DeltaTime);
 	}
-	else if (Character && Character->GetIsFlying())
+	else if (Character && Character->GetIsFlying() && !Character->bIsInFlyArea)
 	{
 		UseStamina(FlightStaminaUsePerSecond * DeltaTime);
+		
 		if (CurrentStamina <= 0.f)
 		{
 			Character->GetFlightComponent()->EndFlightMode();
+		}
+	}
+	else if (Character && Character->GetIsFlying() && Character->bIsInFlyArea)
+	{
+		if (Character->GetFlightComponent()->bIsBoostFlying)
+		{
+			UseBoostStamina(10 * DeltaTime); // 나중에 변수화하기
+
+			if (CurrentBoostStamina <= 0.f)
+			{
+				Character->GetFlightComponent()->EndFlightBoostMode();
+			}
 		}
 	}
 }

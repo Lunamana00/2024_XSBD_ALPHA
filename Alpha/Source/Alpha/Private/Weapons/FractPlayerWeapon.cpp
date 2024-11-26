@@ -2,6 +2,8 @@
 
 
 #include "Weapons/FractPlayerWeapon.h"
+
+#include "NiagaraFunctionLibrary.h"
 #include "Sound/SoundCue.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/DamageEvents.h"
@@ -153,6 +155,18 @@ void AFractPlayerWeapon::Tick(float DeltaTime)
 				HitSoundCue,
 				WeaponHit.ImpactPoint
 			);
+			if (FireHitNiagaraSystem)
+			{
+				UNiagaraFunctionLibrary::SpawnSystemAtLocation(
+				this,
+				FireHitNiagaraSystem,
+				WeaponHit.ImpactPoint,
+				FRotator(0, 0, 0),
+				FVector(1.f),
+				true
+				);
+			}
+			
 
 			if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(WeaponHit.GetActor()))
 			{

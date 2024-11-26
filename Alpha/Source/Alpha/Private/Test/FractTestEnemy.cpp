@@ -24,7 +24,6 @@ AFractTestEnemy::AFractTestEnemy()
 float AFractTestEnemy::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 	class AController* EventInstigator, AActor* DamageCauser)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, FString::Printf(TEXT("Damage: %f"), DamageAmount));
 	if (Attribute)
 	{
 		Attribute->ReceiveDamage(DamageAmount);

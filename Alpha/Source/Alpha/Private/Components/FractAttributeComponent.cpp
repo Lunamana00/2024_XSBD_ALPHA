@@ -34,7 +34,6 @@ void UFractAttributeComponent::TickComponent(float DeltaTime, ELevelTick TickTyp
 
 void UFractAttributeComponent::ReceiveDamage(const float DamageAmount)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 1.f, FColor::Red, "Receive");
 	CurrentHealth = FMath::Clamp(CurrentHealth - DamageAmount, 0.f, MaxHealth);
 }
 

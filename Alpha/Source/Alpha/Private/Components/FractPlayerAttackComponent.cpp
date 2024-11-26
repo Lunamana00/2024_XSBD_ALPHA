@@ -9,6 +9,7 @@
 #include "RootMotionModifier.h"
 #include "Blueprint/UserWidget.h"
 #include "Camera/CameraComponent.h"
+#include "Components/AudioComponent.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/OverlapResult.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -695,6 +696,29 @@ float UFractPlayerAttackComponent::GetCurrentSkillCooldown()
 {
 	if (!GetWorld()) return 0.0f;
 	return GetWorld()->GetTimerManager().GetTimerRemaining(GroundSkillTimerHandle);
+}
+
+void UFractPlayerAttackComponent::PlayFireGroundSkillSound()
+{
+	FireGroundSkillAudioComponent = UGameplayStatics::SpawnSoundAttached(
+		FireGroundSkillSound,
+		Character->GetWeapon()->GetWeaponMuzzle(),
+		NAME_None,
+		FVector(0, 0, 0),
+		FRotator(0, 0, 0),
+		EAttachLocation::Type::SnapToTarget,
+		true
+		);
+}
+
+void UFractPlayerAttackComponent::StopFireGroundSkillSound()
+{
+	if (FireGroundSkillAudioComponent)
+	{
+		FireGroundSkillAudioComponent->StopDelayed(0.5f);
+		FireGroundSkillAudioComponent = nullptr;
+	}
+	
 }
 
 

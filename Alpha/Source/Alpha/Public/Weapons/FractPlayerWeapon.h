@@ -72,6 +72,9 @@ public:
 	UPROPERTY(EditDefaultsOnly, Category = Audio)
 	class USoundCue* HitSoundCue;
 	
+	UPROPERTY(EditDefaultsOnly)
+	class UNiagaraSystem* FireHitNiagaraSystem;
+	
 	
 	
 };

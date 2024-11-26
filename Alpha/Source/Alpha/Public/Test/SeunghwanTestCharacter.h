@@ -3,8 +3,6 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "DiffUtils.h"
-#include "Chaos/Deformable/ChaosDeformableCollisionsProxy.h"
 #include "GameFramework/Character.h"
 #include "Enums/FractTypes.h"
 #include "Components/CPP_FlightActorComponent.h"
@@ -67,6 +65,9 @@ protected:
 
 	void Dodge();
 
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite)
+	float RestoreHealthPerSecond = 1.5f;
+
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
 	UAnimMontage* ForwardDodgeMontage;
 	UPROPERTY(EditDefaultsOnly, Category = "Animation")
@@ -114,6 +115,8 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* EndFlightModeAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* FlightBoostModeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* FlightSpacebarOneShotAction;
 	
 	UPROPERTY(EditDefaultsOnly, Category = Input)
@@ -132,6 +135,8 @@ private:
 
 
 public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Flight")
+	bool bIsInFlyArea = false;
 
 	UFUNCTION(BlueprintCallable, Category = Attribute)
 	FORCEINLINE UFractPlayerAttributeComponent* GetAttribute() const { return Attribute; }
