@@ -81,6 +81,11 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
 	float DodgeCooldown = 2.f;
 	void OnDodgeCooldownEnd();
+	void StopDodge();
+	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
+	float DodgeSpeed = 1500.f;
+	bool bCanMoveInput = true;
+
 
 private:
 	

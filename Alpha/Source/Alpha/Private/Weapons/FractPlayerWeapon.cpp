@@ -2,7 +2,7 @@
 
 
 #include "Weapons/FractPlayerWeapon.h"
-
+#include "Sound/SoundCue.h"
 #include "Components/FractPlayerAttributeComponent.h"
 #include "Engine/DamageEvents.h"
 #include "Interfaces/FractHitInterface.h"
@@ -147,6 +147,12 @@ void AFractPlayerWeapon::Tick(float DeltaTime)
 			
 			UGameplayStatics::PlayWorldCameraShake(GetWorld(), CamShake, GetActorLocation(),
 	 		0, 1000.f, 1.f, false);
+
+			UGameplayStatics::PlaySoundAtLocation(
+				this,
+				HitSoundCue,
+				WeaponHit.ImpactPoint
+			);
 
 			if (IFractHitInterface* HitInterface = Cast<IFractHitInterface>(WeaponHit.GetActor()))
 			{

@@ -46,14 +46,14 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	{
 		float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
 		FVector CamTargetLocation = bIsAiming ? DefaultCameraLocation + FVector(0.f, 50.f, 80.f) : DefaultCameraLocation;
-		float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 15.f);
+		float NewFOV = FMath::FInterpTo(Camera->FieldOfView, TargetFOV, DeltaTime, 10.f);
 		FVector NewCamLocation = FMath::VInterpTo(Camera->GetRelativeLocation(), CamTargetLocation, DeltaTime, 15.f);
 		Camera->SetRelativeLocation(NewCamLocation);
 		Camera->SetFieldOfView(NewFOV);
 	}
 	if (Character->GetIsFlying())
 	{
-		
+		// Add Flying State Motion Warping
 	}
 	else // Character is not flying (grounded)
 	{
@@ -411,7 +411,7 @@ void UFractPlayerAttackComponent::AimDownSight(const FInputActionValue& Value)
 	bIsAiming = Value.Get<bool>();
 	if (bIsAiming)
 	{
-		if (CrosshairWidget)
+		if (CrosshairWidget && !CrosshairWidget->IsInViewport())
 		{
 			CrosshairWidget->AddToViewport();
 		}

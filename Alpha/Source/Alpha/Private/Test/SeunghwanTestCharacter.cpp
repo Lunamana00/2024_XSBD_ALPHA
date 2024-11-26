@@ -137,6 +137,7 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 
 void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 {
+	if (!bCanMoveInput) return;
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	MovementInputVector = MovementVector;
 
@@ -165,7 +166,10 @@ void ASeunghwanTestCharacter::StopMoving()
 
 void ASeunghwanTestCharacter::Dodge()
 {
-	if (bIsDodgeOnCooldown) return;
+	if (bIsDodgeOnCooldown || GetIsFlying() || AttackComponent->bIsAiming || 
+		AttackComponent->GetCurrentAttackState() != EFractAttackState::EAS_Unoccupied) return;
+	AttackComponent->SetCurrentAttackState(EFractAttackState::EAS_Dodging);
+	bCanMoveInput = false;
 	bIsDodgeOnCooldown = true; 
 	GetWorld()->GetTimerManager().SetTimer(
 		DodgeTimerHandle,
@@ -174,20 +178,56 @@ void ASeunghwanTestCharacter::Dodge()
 		DodgeCooldown,
 		false);
 	
+	FVector BaseForwardVector;
+	FVector BaseRightVector;
 	if (AttackComponent->bHasLockOnTarget)
 	{
-		FVector InputVector = GetActorForwardVector() * MovementInputVector.Y + GetActorRightVector() * MovementInputVector.X;
+		BaseForwardVector = GetActorForwardVector();
+		BaseRightVector = GetActorRightVector();
 	}
 	else
 	{
-		if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+		BaseForwardVector = FollowCamera->GetForwardVector();
+		BaseRightVector = FollowCamera->GetRightVector();
+		BaseForwardVector.Z = 0;
+		BaseRightVector.Z = 0;
+		BaseForwardVector = BaseForwardVector.GetSafeNormal();
+		BaseRightVector = BaseRightVector.GetSafeNormal();
+	}
+	FVector InputVector = (BaseForwardVector * MovementInputVector.Y + BaseRightVector * MovementInputVector.X).GetSafeNormal();
+	float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(GetActorForwardVector(), InputVector)));
+	FVector CrossProduct = FVector::CrossProduct(GetActorForwardVector(), InputVector).GetSafeNormal();
+	if (CrossProduct.Z < 0) Angle *= -1;
+	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+	{
+
+		if (Angle >= 135 && Angle <= -135)
 		{
-			if (!GetIsFlying())
-			{
-				AnimInstance->Montage_Play(ForwardDodgeMontage);
-			}
-			
+			AnimInstance->Montage_Play(BackwardDodgeMontage);
 		}
+		else if (Angle > -135 && Angle < -45)
+		{
+			AnimInstance->Montage_Play(LeftDodgeMontage);
+		}
+		else if (Angle >= -45 && Angle <= 45)
+		{
+			AnimInstance->Montage_Play(ForwardDodgeMontage);
+		}
+		else if (Angle > 45 && Angle < 135)
+		{
+			AnimInstance->Montage_Play(RightDodgeMontage);
+		}
+		bCanMoveInput = false;
+		GetCharacterMovement()->GroundFriction = 0.f;
+		GetCharacterMovement()->Velocity = InputVector * DodgeSpeed + GetCharacterMovement()->Velocity.Z;
+		FTimerHandle StopDodgeHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			StopDodgeHandle,
+			this,
+			&ASeunghwanTestCharacter::StopDodge,
+			0.5f,
+			false
+		);
 	}
 	
 	
@@ -196,6 +236,13 @@ void ASeunghwanTestCharacter::Dodge()
 void ASeunghwanTestCharacter::OnDodgeCooldownEnd()
 {
 	bIsDodgeOnCooldown = false;
+}
+
+void ASeunghwanTestCharacter::StopDodge()
+{
+	bCanMoveInput = true;
+	AttackComponent->SetCurrentAttackState(EFractAttackState::EAS_Unoccupied);
+	GetCharacterMovement()->GroundFriction = 8.f;
 }
 
 void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)

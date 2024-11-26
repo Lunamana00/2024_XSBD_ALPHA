@@ -68,6 +68,9 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void EmptyIgnoreActorsArray();
+
+	UPROPERTY(EditDefaultsOnly, Category = Audio)
+	class USoundCue* HitSoundCue;
 	
 	
 	

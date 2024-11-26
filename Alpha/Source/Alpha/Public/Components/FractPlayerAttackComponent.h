@@ -160,6 +160,7 @@ public:
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EFractAttackState GetCurrentAttackState() const { return AttackState; }
+	void SetCurrentAttackState(const EFractAttackState& InAttackState) { AttackState = InAttackState; }
 	void CancelFireGroundSkill();
 	void UseNormalAttack();
 	void UseSkill();
