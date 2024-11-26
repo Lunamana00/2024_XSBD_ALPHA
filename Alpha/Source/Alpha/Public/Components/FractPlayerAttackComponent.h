@@ -78,7 +78,7 @@ protected:
 	FVector HitLocation;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
-	float AutoTargetRange = 300.f;
+	float AutoTargetRange = 150.f;
 
 	UPROPERTY(EditAnywhere, Category = "Combat")
 	float AutoTargetAngle = 90.f;
@@ -131,9 +131,22 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Combat")
 	UParticleSystemComponent* FireGroundSkillParticleSystemComponent;
 
-	
+	UPROPERTY(EditDefaultsOnly, Category = "Combat|UI")
+	UUserWidget* CrosshairWidget;
 
-	
+
+	FTimerHandle GroundSkillTimerHandle;
+	FTimerHandle AerialSkillTimerHandle;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	bool bIsGroundSkillOnCooldown = false;
+	UPROPERTY(EditDefaultsOnly, Category = "Combat")
+	bool bIsAerialSkillOnCooldown = false;
+
+	UFUNCTION()
+	void OnGroundSkillCooldownEnd();
+	UFUNCTION()
+	void OnAerialSkillCooldownEnd();
 	
 public:
 
@@ -147,6 +160,7 @@ public:
 	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EFractAttackState GetCurrentAttackState() const { return AttackState; }
+	void SetCurrentAttackState(const EFractAttackState& InAttackState) { AttackState = InAttackState; }
 	void CancelFireGroundSkill();
 	void UseNormalAttack();
 	void UseSkill();

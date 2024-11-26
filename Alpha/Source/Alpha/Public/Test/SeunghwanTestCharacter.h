@@ -7,6 +7,7 @@
 #include "Chaos/Deformable/ChaosDeformableCollisionsProxy.h"
 #include "GameFramework/Character.h"
 #include "Enums/FractTypes.h"
+#include "Components/CPP_FlightActorComponent.h"
 #include "SeunghwanTestCharacter.generated.h"
 
 class UBoxComponent;
@@ -44,6 +45,9 @@ class ALPHA_API ASeunghwanTestCharacter : public ACharacter
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	UInputAction* LookAction;
 
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
+	UInputAction* DodgeAction;
+
 public:
 	ASeunghwanTestCharacter();
 	virtual void Tick(float DeltaTime) override;
@@ -60,6 +64,28 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	void StopMoving();
+
+	void Dodge();
+
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* ForwardDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* RightDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* LeftDodgeMontage;
+	UPROPERTY(EditDefaultsOnly, Category = "Animation")
+	UAnimMontage* BackwardDodgeMontage;
+
+	FTimerHandle DodgeTimerHandle;
+	bool bIsDodgeOnCooldown = false;
+	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
+	float DodgeCooldown = 2.f;
+	void OnDodgeCooldownEnd();
+	void StopDodge();
+	UPROPERTY(EditDefaultsOnly, Category = "Dodge")
+	float DodgeSpeed = 1500.f;
+	bool bCanMoveInput = true;
+
 
 private:
 	
@@ -83,6 +109,15 @@ private:
 	UInputAction* LockOnAction;
 	UPROPERTY(EditDefaultsOnly, Category = Input)
 	UInputAction* SkillAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* StartFlightModeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* EndFlightModeAction;
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* FlightSpacebarOneShotAction;
+	
+	UPROPERTY(EditDefaultsOnly, Category = Input)
+	UInputAction* FlyUpDownAction;
 
 	UPROPERTY(VisibleDefaultsOnly, Category = Input)
 	FVector2D MovementInputVector;
@@ -123,5 +158,18 @@ public:
 	
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
+	FORCEINLINE class UFractPlayerAttackComponent* GetAttackComponent() const { return AttackComponent; }
 
+	//Jong Add
+protected:
+	//*** ���� �߰� �κ� ***//
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components", meta = (AllowPrivateAccess = "true"))
+	UCPP_FlightActorComponent* FlightComponent;
+
+public:
+	UFUNCTION(BlueprintCallable, Category = "Flight")
+	bool GetIsFlying() const;
+
+	UFUNCTION()
+	UCPP_FlightActorComponent* GetFlightComponent() const { return FlightComponent; };
 };

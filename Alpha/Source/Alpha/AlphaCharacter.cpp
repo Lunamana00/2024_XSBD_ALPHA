@@ -86,29 +86,12 @@ void AAlphaCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent)) {
 
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, FlightComponent, &UCPP_FlightActorComponent::PressedSpace);
 		
-		// Moving
-		if (!(&UCPP_FlightActorComponent::FlyingState))
-		{
-			//*** Áö»ó ÀÌµ¿ ***//
-			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Move);
-
-			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Look);
-
-		}
-		else 
-		{
-			//*** °øÁß ÀÌµ¿ ***//
-			EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Move);
-
-			EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::Look);
 		
-
-		}
+		
 
 		EnhancedInputComponent->BindAction(ShiftAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::Shift);
-		//*** ¿ìÅ¬¸¯ ***//
+		//*** ï¿½ï¿½Å¬ï¿½ï¿½ ***//
 		EnhancedInputComponent->BindAction(StartSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::StartSnipe);
 		
 		EnhancedInputComponent->BindAction(EndSnipeAction, ETriggerEvent::Triggered, this, &AAlphaCharacter::EndSnipe);

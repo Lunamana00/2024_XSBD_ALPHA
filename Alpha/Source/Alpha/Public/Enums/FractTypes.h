@@ -55,6 +55,7 @@ enum class EFractAttackState : uint8
     EAS_MeleeAttacking UMETA(DisplayName = "MeleeAttacking"),
     EAS_UsingFireGroundSkill UMETA(DisplayName = "Using Fire Ground Skill"),
     EAS_Unoccupied UMETA(DisplayName = "Unoccupied"),
+    EAS_Dodging UMETA(DisplayName = "Dodging"),
 };
 
 // 기본 공격 구조체

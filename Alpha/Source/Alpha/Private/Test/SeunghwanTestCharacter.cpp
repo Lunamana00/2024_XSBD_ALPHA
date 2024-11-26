@@ -2,6 +2,8 @@
 
 
 #include "Test/SeunghwanTestCharacter.h"
+
+#include "AITypes.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
 #include "MotionWarpingComponent.h"
@@ -13,6 +15,8 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Weapons/FractPlayerWeapon.h"
 #include "Components/BoxComponent.h"
+#include "Components/CPP_FlightActorComponent.h"
+
 
 // Sets default values
 ASeunghwanTestCharacter::ASeunghwanTestCharacter()
@@ -50,8 +54,8 @@ ASeunghwanTestCharacter::ASeunghwanTestCharacter()
 	Attribute = CreateDefaultSubobject<UFractPlayerAttributeComponent>(TEXT("Player Attribute Component"));
 	AttackComponent = CreateDefaultSubobject<UFractPlayerAttackComponent>(TEXT("Player Attack Component"));
 	MotionWarpingComponent = CreateDefaultSubobject<UMotionWarpingComponent>(TEXT("Motion Warping Component"));
+	FlightComponent = CreateDefaultSubobject<UCPP_FlightActorComponent>(TEXT("FlightComponent"));
 
-	
 
 }
 
@@ -107,12 +111,13 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 	if (UEnhancedInputComponent* EnhancedInputComponent = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		// Jumping
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
-		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		//EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Move);
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Completed, this, &ASeunghwanTestCharacter::StopMoving);
-
+		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
+		EnhancedInputComponent->BindAction(DodgeAction, ETriggerEvent::Started, this, &ASeunghwanTestCharacter::Dodge);
 		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ASeunghwanTestCharacter::Look);
 		// Attacking
@@ -121,15 +126,21 @@ void ASeunghwanTestCharacter::SetupPlayerInputComponent(UInputComponent* PlayerI
 		EnhancedInputComponent->BindAction(AimAction, ETriggerEvent::Completed, AttackComponent, &UFractPlayerAttackComponent::AimDownSight);
 		EnhancedInputComponent->BindAction(LockOnAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::ToggleLockOn);
 		EnhancedInputComponent->BindAction(SkillAction, ETriggerEvent::Started, AttackComponent, &UFractPlayerAttackComponent::UseSkill);
+	
+		// Flying
+		EnhancedInputComponent->BindAction(StartFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::StartFlightMode);
+		EnhancedInputComponent->BindAction(EndFlightModeAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::EndFlightMode);
+		EnhancedInputComponent->BindAction(FlyUpDownAction, ETriggerEvent::Triggered, FlightComponent, &UCPP_FlightActorComponent::FlyUpDown);
 	}
 
 }
 
 void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 {
+	if (!bCanMoveInput) return;
 	FVector2D MovementVector = Value.Get<FVector2D>();
 	MovementInputVector = MovementVector;
-	
+
 	if (Controller != nullptr)
 	{
 		// find out which way is forward
@@ -138,7 +149,7 @@ void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 
 		// get forward vector
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	
+
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
@@ -146,16 +157,92 @@ void ASeunghwanTestCharacter::Move(const FInputActionValue& Value)
 		AddMovementInput(ForwardDirection, MovementVector.Y);
 		AddMovementInput(RightDirection, MovementVector.X);
 	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, "Controller Null");
-	}
-	
 }
 
 void ASeunghwanTestCharacter::StopMoving()
 {
 	MovementInputVector = FVector2D::ZeroVector;
+}
+
+void ASeunghwanTestCharacter::Dodge()
+{
+	if (bIsDodgeOnCooldown || GetIsFlying() || AttackComponent->bIsAiming || 
+		AttackComponent->GetCurrentAttackState() != EFractAttackState::EAS_Unoccupied) return;
+	AttackComponent->SetCurrentAttackState(EFractAttackState::EAS_Dodging);
+	bCanMoveInput = false;
+	bIsDodgeOnCooldown = true; 
+	GetWorld()->GetTimerManager().SetTimer(
+		DodgeTimerHandle,
+		this,
+		&ASeunghwanTestCharacter::OnDodgeCooldownEnd,
+		DodgeCooldown,
+		false);
+	
+	FVector BaseForwardVector;
+	FVector BaseRightVector;
+	if (AttackComponent->bHasLockOnTarget)
+	{
+		BaseForwardVector = GetActorForwardVector();
+		BaseRightVector = GetActorRightVector();
+	}
+	else
+	{
+		BaseForwardVector = FollowCamera->GetForwardVector();
+		BaseRightVector = FollowCamera->GetRightVector();
+		BaseForwardVector.Z = 0;
+		BaseRightVector.Z = 0;
+		BaseForwardVector = BaseForwardVector.GetSafeNormal();
+		BaseRightVector = BaseRightVector.GetSafeNormal();
+	}
+	FVector InputVector = (BaseForwardVector * MovementInputVector.Y + BaseRightVector * MovementInputVector.X).GetSafeNormal();
+	float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(GetActorForwardVector(), InputVector)));
+	FVector CrossProduct = FVector::CrossProduct(GetActorForwardVector(), InputVector).GetSafeNormal();
+	if (CrossProduct.Z < 0) Angle *= -1;
+	if (UAnimInstance* AnimInstance = GetMesh()->GetAnimInstance())
+	{
+
+		if (Angle >= 135 && Angle <= -135)
+		{
+			AnimInstance->Montage_Play(BackwardDodgeMontage);
+		}
+		else if (Angle > -135 && Angle < -45)
+		{
+			AnimInstance->Montage_Play(LeftDodgeMontage);
+		}
+		else if (Angle >= -45 && Angle <= 45)
+		{
+			AnimInstance->Montage_Play(ForwardDodgeMontage);
+		}
+		else if (Angle > 45 && Angle < 135)
+		{
+			AnimInstance->Montage_Play(RightDodgeMontage);
+		}
+		bCanMoveInput = false;
+		GetCharacterMovement()->GroundFriction = 0.f;
+		GetCharacterMovement()->Velocity = InputVector * DodgeSpeed + GetCharacterMovement()->Velocity.Z;
+		FTimerHandle StopDodgeHandle;
+		GetWorld()->GetTimerManager().SetTimer(
+			StopDodgeHandle,
+			this,
+			&ASeunghwanTestCharacter::StopDodge,
+			0.5f,
+			false
+		);
+	}
+	
+	
+}
+
+void ASeunghwanTestCharacter::OnDodgeCooldownEnd()
+{
+	bIsDodgeOnCooldown = false;
+}
+
+void ASeunghwanTestCharacter::StopDodge()
+{
+	bCanMoveInput = true;
+	AttackComponent->SetCurrentAttackState(EFractAttackState::EAS_Unoccupied);
+	GetCharacterMovement()->GroundFriction = 8.f;
 }
 
 void ASeunghwanTestCharacter::Look(const FInputActionValue& Value)
@@ -219,5 +306,12 @@ void ASeunghwanTestCharacter::SetAllowPhysicsRotationDuringAnimRootMotion(bool b
 	if (AttackComponent->GetCurrentTarget())
 		return;
 	GetCharacterMovement()->bAllowPhysicsRotationDuringAnimRootMotion = bAllowRotation;
+}
+
+//Flying
+
+bool ASeunghwanTestCharacter::GetIsFlying() const
+{
+	return FlightComponent ? FlightComponent->FlyingState() : false;
 }
 

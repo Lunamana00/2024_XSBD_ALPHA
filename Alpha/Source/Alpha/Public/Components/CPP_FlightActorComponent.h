@@ -9,6 +9,9 @@
 #include "CPP_FlightActorComponent.generated.h"
 
 
+class UInputMappingContext;
+class ASeunghwanTestCharacter;
+
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 class ALPHA_API UCPP_FlightActorComponent : public UActorComponent
 {
@@ -22,19 +25,15 @@ public:
 
 	void EndFlying();
 
-	void MoveUp(const FInputActionValue& Value);
-
-	void Move(const FInputActionValue& Value);
-
-	void Look(const FInputActionValue& Value);
-
-	void PressedSpace();
-
-	void ResetSpace();
-
 	bool FlyingState();
 
+	void StartFlightMode();
 
+	void EndFlightMode();
+
+	void FlyUpDown(const FInputActionValue& Value);
+
+	
 
 protected:
 	// Called when the game starts
@@ -43,20 +42,17 @@ protected:
 	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "Flight")
 	bool IsFlying;
 
-	bool IsPressedSpace;
+	UPROPERTY(EditAnyWhere, BlueprintReadWrite, Category = "Flight")
+	float UpDownSpeed = 2.5f;
 
-	FTimerHandle SpacePressTimerHandle;
+	UPROPERTY()
+	ASeunghwanTestCharacter* SeunghwanTestCharacter;
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Flight")
-	float FlightSpeed = 600.0f;
-
-	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Flight")
-	float RotationSpeed = 100.0f;
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	UInputMappingContext* FlightMappingContext;
 
 public:	
 	// Called every frame
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	FVector CurrentVelocity;
 
 };
