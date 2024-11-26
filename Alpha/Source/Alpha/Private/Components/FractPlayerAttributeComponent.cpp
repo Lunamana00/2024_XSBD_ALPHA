@@ -53,6 +53,7 @@ void UFractPlayerAttributeComponent::BeginPlay()
 	Super::BeginPlay();
 	CurrentStamina = MaxStamina;
 	CurrentMana = MaxMana;
+	CurrentBoostStamina = MaxBoostStamina;
 	Character = Cast<ASeunghwanTestCharacter>(GetOwner());
 }
 
