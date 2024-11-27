@@ -142,7 +142,7 @@ void AFractPlayerWeapon::Tick(float DeltaTime)
 	
 	for (const FHitResult& WeaponHit : WeaponHits)
 	{
-		if (AFractTestEnemy* TargetEnemy = Cast<AFractTestEnemy>(WeaponHit.GetActor()))
+		if (ACharacter* TargetEnemy = Cast<ACharacter>(WeaponHit.GetActor()))
 		{
 
 			if (TargetsToIgnore.Contains(TargetEnemy)) continue;

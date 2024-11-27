@@ -60,7 +60,7 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	{
 		if (!bHasLockOnTarget)
 		{
-			if (AFractTestEnemy* FoundTarget = FindTarget())
+			if (ACharacter* FoundTarget = FindTarget())
 			{
 				CurrentTarget = FoundTarget;
 				AddMotionWarpTarget(CurrentTarget);
@@ -83,7 +83,7 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 		}
 		else // If we have a lock on target
 		{
-			if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < ATTACK_DISTANCE)
+			if (FVector::Distance(Character->GetActorLocation(), CurrentLockOnTargetActor->GetActorLocation()) < AutoTargetRange)
 			{
 				AddMotionWarpTarget(CurrentLockOnTargetActor);
 			}
@@ -169,12 +169,19 @@ void UFractPlayerAttackComponent::AddMotionWarpTarget(const AActor* Target) cons
 	FRotator TargetRotation = ToTarget.Rotation();
 	
 	FMotionWarpingTarget WarpTarget;
+	FVector WarpLocation;
 	WarpTarget.Name = FName("AttackTarget");
 	
-	FVector WarpLocation = (DistanceToTarget > AttackDistance) 
-		? TargetLocation - ToTarget.GetSafeNormal() * AttackDistance 
-		: CharacterLocation;
-
+	if (DistanceToTarget >= ATTACK_DISTANCE * 0.7f && DistanceToTarget <= ATTACK_DISTANCE)
+	{
+		WarpLocation = CharacterLocation;  // Stay where we are
+	}
+	else
+	{
+		// Position ourselves ATTACK_DISTANCE units away from the target
+		WarpLocation = TargetLocation - (ToTarget.GetSafeNormal() * ATTACK_DISTANCE);
+	}
+	WarpLocation.Z = TargetLocation.Z - 10.f;
 	WarpTarget.Location = WarpLocation;
 	WarpTarget.Rotation = TargetRotation;
 
@@ -183,7 +190,7 @@ void UFractPlayerAttackComponent::AddMotionWarpTarget(const AActor* Target) cons
 
 // 플레이어 주변의 적을 구체로 오버랩해서 범위 내의 적들 중 각도가 작은 적을 리턴함.
 // return 값이 AFractTestEnemy* 이므로 추후 수정을 해야 함.
-AFractTestEnemy* UFractPlayerAttackComponent::FindTarget()
+ACharacter* UFractPlayerAttackComponent::FindTarget()
 {
 	if (!Character) return nullptr;
 
@@ -201,12 +208,12 @@ AFractTestEnemy* UFractPlayerAttackComponent::FindTarget()
 		QueryParams
 	);
 
-	AFractTestEnemy* Target = nullptr;
+	ACharacter* Target = nullptr;
 	float SmallestAngle = FLT_MAX;
 	
 	for (const FOverlapResult& Result : OverlapResults)
 	{
-		if (AFractTestEnemy* Enemy = Cast<AFractTestEnemy>(Result.GetActor()))
+		if (ACharacter* Enemy = Cast<ACharacter>(Result.GetActor()))
 		{
 			FVector ToTarget = Enemy->GetActorLocation() - CharacterLocation;
 			
@@ -327,9 +334,9 @@ void UFractPlayerAttackComponent::ApplyFireGroundSkillDamage()
 		FireGroundSkillBox,
 		IgnoreParams);
 
-	for (const FHitResult HitResult : HitResults)
+	for (const FHitResult& HitResult : HitResults)
 	{
-		if (AFractTestEnemy* CastedActor = Cast<AFractTestEnemy>(HitResult.GetActor()))
+		if (ACharacter* CastedActor = Cast<ACharacter>(HitResult.GetActor()))
 		{
 			UGameplayStatics::ApplyDamage(CastedActor, 5.f,
 				Character->GetController(),
@@ -626,7 +633,7 @@ void UFractPlayerAttackComponent::StartLockOn()
 	FVector CrosshairWorldDirection;
 
 	float SmallestAngle = MAX_FLT;
-	AFractTestEnemy* TargetEnemy = nullptr;
+	ACharacter* TargetEnemy = nullptr;
 	
 
 	for (const FHitResult& OutResult : OutResults)
@@ -637,7 +644,7 @@ void UFractPlayerAttackComponent::StartLockOn()
 			UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation,
 			CrosshairWorldPosition, CrosshairWorldDirection);
 		
-		if (AFractTestEnemy* CastedTarget = Cast<AFractTestEnemy>(PotentialTarget))
+		if (ACharacter* CastedTarget = Cast<ACharacter>(PotentialTarget))
 		{
 			FVector ToTarget = (CastedTarget->GetActorLocation() - CurrentLocation).GetSafeNormal();
 			float Angle = FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(
@@ -660,14 +667,14 @@ void UFractPlayerAttackComponent::StartLockOn()
 	Character->GetCharacterMovement()->bUseControllerDesiredRotation = true;
 	Character->GetCameraBoom()->TargetOffset = FVector(0.f, 0.f , 50.f);
 
-	IFractEnemyInterface::Execute_OnSelect(CurrentLockOnTargetActor);
+	/*IFractEnemyInterface::Execute_OnSelect(CurrentLockOnTargetActor);*/
 
 	OnUpdatedTargetDelegate.Broadcast(CurrentLockOnTargetActor);
 }
 
 void UFractPlayerAttackComponent::EndLockOn()
 {
-	IFractEnemyInterface::Execute_OnDeselect(CurrentLockOnTargetActor);
+	/*IFractEnemyInterface::Execute_OnDeselect(CurrentLockOnTargetActor);*/
 	RemoveMotionWarpTarget(FName(TEXT("AttackTarget")));
 	CurrentLockOnTargetActor = nullptr;
 	Character->GetCharacterMovement()->bOrientRotationToMovement = true;
