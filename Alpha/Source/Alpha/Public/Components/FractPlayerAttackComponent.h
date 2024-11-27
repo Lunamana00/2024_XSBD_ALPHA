@@ -89,9 +89,9 @@ protected:
 	void AddMotionWarpTarget(const AActor* Target) const;
 
 	UPROPERTY()
-	AFractTestEnemy* CurrentTarget = nullptr;
+	ACharacter* CurrentTarget = nullptr;
 
-	AFractTestEnemy* FindTarget();
+	ACharacter* FindTarget();
 	void RemoveMotionWarpTarget(FName WarpTargetName) const;
 	void RotateToInputDirection(float DeltaTime);
 
@@ -157,7 +157,7 @@ public:
 	void AimDownSight(const FInputActionValue& Value);
 	FORCEINLINE FFractAttack* GetNormalAttack();
 	FORCEINLINE FFractSkill* GetSkill();
-	FORCEINLINE AFractTestEnemy* GetCurrentTarget() const { return CurrentTarget; }
+	FORCEINLINE ACharacter* GetCurrentTarget() const { return CurrentTarget; }
 	UFUNCTION(BlueprintCallable)
 	FORCEINLINE EFractAttackState GetCurrentAttackState() const { return AttackState; }
 	UFUNCTION(BlueprintCallable)
