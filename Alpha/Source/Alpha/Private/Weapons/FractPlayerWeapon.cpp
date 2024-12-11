@@ -11,7 +11,7 @@
 #include "Kismet/GameplayStatics.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/KismetSystemLibrary.h"
-#include "PhysicsEngine/ShapeElem.h"
+#include "PhysicszEngine/ShapeElem.h"
 #include "Test/FractTestCharacter.h"
 #include "Test/FractTestEnemy.h"
 #include "Test/SeunghwanTestCharacter.h"
