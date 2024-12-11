@@ -16,7 +16,6 @@ class ALPHA_API UFractPlayerAttributeComponent : public UFractAttributeComponent
 	GENERATED_BODY()
 
 private:
-
 	UPROPERTY(EditAnywhere, Category="Attributes")
 	float CurrentStamina;
 	UPROPERTY(EditAnywhere, Category="Attributes")
