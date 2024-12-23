@@ -40,9 +40,9 @@ private:
 	ASeunghwanTestCharacter* Character;
 
 public:
-	FORCEINLINE float GetCurrentStamina() const;
-	FORCEINLINE float GetCurrentMana() const;
-	FORCEINLINE float GetCurrentBoostStamina() const { return CurrentBoostStamina; };
+	float GetCurrentStamina() const;
+	float GetCurrentMana() const;
+	float GetCurrentBoostStamina() const { return CurrentBoostStamina; };
 	void UseStamina(const float StaminaAmount);
 	void UseBoostStamina(const float BoostStaminaAmount);
 	void RestoreStamina(const float StaminaAmount);

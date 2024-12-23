@@ -42,7 +42,7 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	FHitResult HitResult;
 	TraceUnderCrosshairs(HitResult);
 
-	
+	// 에임할 때 카메라 줌인 줌 아웃
 	if (UCameraComponent* Camera = Character->GetFollowCamera())
 	{
 		float TargetFOV = bIsAiming ? AimFOV : DefaultFOV;
@@ -55,6 +55,7 @@ void UFractPlayerAttackComponent::TickComponent(float DeltaTime, enum ELevelTick
 	if (Character->GetIsFlying())
 	{
 		// Add Flying State Motion Warping
+		// 날 때 공격 모션 워핑 관련 로직 처리하기
 	}
 	else // Character is not flying (grounded)
 	{
