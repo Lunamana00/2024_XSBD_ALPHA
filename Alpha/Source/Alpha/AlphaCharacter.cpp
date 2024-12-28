@@ -13,11 +13,9 @@
 #include "TimerManager.h"
 #include "InputActionValue.h"
 
-DEFINE_LOG_CATEGORY(LogTemplateCharacter);
-
 //////////////////////////////////////////////////////////////////////////
 // AAlphaCharacter
-
+DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 AAlphaCharacter::AAlphaCharacter()
 {
 	// Set size for collision capsule
