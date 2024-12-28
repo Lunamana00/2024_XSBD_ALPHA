@@ -41,13 +41,13 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void HealHealth(const float HealAmount);
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE float GetCurrentHealth() const { return CurrentHealth; }
+	float GetCurrentHealth() const { return CurrentHealth; }
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE float GetHealthPercent() const { return CurrentHealth / MaxHealth; }
+	float GetHealthPercent() const { return CurrentHealth / MaxHealth; }
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE float GetBaseDamage() const { return BaseDamage; }
+	float GetBaseDamage() const { return BaseDamage; }
 	UFUNCTION(BlueprintCallable)
-	FORCEINLINE EFractElementType GetElementType() const { return ElementType; }
+	EFractElementType GetElementType() const { return ElementType; }
 	UFUNCTION(BlueprintCallable)
 	bool IsAlive() const;
 	
