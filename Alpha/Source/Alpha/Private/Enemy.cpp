@@ -9,10 +9,11 @@ AEnemy::AEnemy()
 	PrimaryActorTick.bCanEverTick = true;
 
 	// 기본값 초기화
-	Health = 100.0f;
-	MaxHealth = 100.0f;
-	MovementSpeed = 300.0f;
-	Damage = 100.0f;
+	Health = 0.0f;
+	MaxHealth = 0.0f;
+	MovementSpeed = 0.0f;
+	Damage = 0.0f;
+	EnemyType = EEnemyType::None;
 
 	// 이동 속도 초기화
 	GetCharacterMovement()->MaxWalkSpeed = MovementSpeed;
