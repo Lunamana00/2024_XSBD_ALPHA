@@ -88,15 +88,15 @@ void ASeunghwanTestCharacter::BeginPlay()
 			"RightWeaponSocket");
 	}
 	
-	if (PlayerUIClass)
-	{
-		PlayerUI = CreateWidget<UCPP_UI>(GetWorld(), PlayerUIClass);
-
-		if (PlayerUI)
-		{
-			PlayerUI->AddToViewport();
-		}
-	}
+	// if (PlayerUIClass)
+	// {
+	// 	PlayerUI = CreateWidget<UCPP_UI>(GetWorld(), PlayerUIClass);
+	//
+	// 	if (PlayerUI)
+	// 	{
+	// 		PlayerUI->AddToViewport();
+	// 	}
+	// }
 }
 
 // Called every frame

@@ -93,7 +93,7 @@ protected:
 
 private:
 	
-	UPROPERTY(VisibleAnywhere, Category = Attribute)
+	UPROPERTY(BlueprintReadOnly, Category = Attribute, meta = (AllowPrivateAccess = "true"))
 	UFractPlayerAttributeComponent* Attribute;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Attack, meta = (AllowPrivateAccess = "true"))
